@@ -1,0 +1,3 @@
+[submodule "cubical"]
+	path = cubical
+	url = https://github.com/agda/cubical.git

@@ -1,0 +1,6 @@
+name: cqts-course-0.1
+include:
+  cubical
+  .
+depend:
+flags: --cubical 
