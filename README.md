@@ -44,6 +44,21 @@ emacs
 ```
 then navigate to one of the lecture files, and hit `C-c C-l` to load it.
 
+## Alternative: Install Agda and VSCode on Mac
+
+Install Homebrew from https://brew.sh/ , then run
+``` shell
+brew install agda git
+```
+
+Install VSCode from https://code.visualstudio.com/ , and then the
+agda-mode extension from
+https://marketplace.visualstudio.com/items?itemName=banacorn.agda-mode
+
+If your key combinations (like `C-c C-c`) don't work, you may need to
+apply the temporary fix described in
+https://github.com/banacorn/agda-mode-vscode/issues/132#issuecomment-1368880358
+
 ## Alternative on Mac: Install Adga and Emacs using Brew
 
 Install Homebrew from https://brew.sh/
@@ -76,39 +91,32 @@ stack config set resolver nightly-2023-05-17
 stack install Agda-2.6.3
 ```
 
-Install Emacs from http://ftpmirror.gnu.org/emacs/windows by choosing
-the latest version (at time of writing, `emacs-28.2-installer.exe`).
-
-Open Emacs, and open your init file, by pressing `C-x C-f` and typing
-`~/.emacs`. Add the following lines:
-
-``` emacs-lisp
-(load-file (let ((coding-system-for-read 'utf-8))
-                (shell-command-to-string "agda-mode locate")))
-
-(add-to-list 'auto-mode-alist '("\\.lagda.md\\'" . agda2-mode))
-```
+Install VSCode from https://code.visualstudio.com/ , and then the
+agda-mode extension from
+https://marketplace.visualstudio.com/items?itemName=banacorn.agda-mode
 
 
-# Using Emacs
+<!-- Install Emacs from http://ftpmirror.gnu.org/emacs/windows by choosing -->
+<!-- the latest version (at time of writing, `emacs-28.2-installer.exe`). -->
 
-Most Emacs keybindings involve holding down Control or Meta (Alt) and
-pressing other keys. Opening a file has the keybinding `C-x C-f`, so
-to open a file, hold down Control then press `x` followed by `f`, you
-do not have to let go of Control between.
+<!-- Open Emacs, and open your init file, by pressing `C-x C-f` and typing -->
+<!-- `~/.emacs`. Add the following lines: -->
 
-## General editing:
+<!-- ``` emacs-lisp -->
+<!-- (load-file (let ((coding-system-for-read 'utf-8)) -->
+<!--                 (shell-command-to-string "agda-mode locate"))) -->
 
-* `C-x C-f`: Open a file
-* `C-x C-s`: Save the current file
-* `C-x C-b`: See all the things ("buffers") you have open
-* `C-x b`: Choose a buffer to switch to
-* `C-_`: Undo
-* `M-_`: Redo
+<!-- (add-to-list 'auto-mode-alist '("\\.lagda.md\\'" . agda2-mode)) -->
+<!-- ``` -->
 
-## Agda specific:
+# Using agda-mode
 
-Navigation:
+Most Agda keybindings involve holding down Control or Meta
+(a.k.a. Alt) and pressing other keys. Loading and checking an Agda
+file has the keybinding `C-c C-l`, so to open a file, hold down
+Control then press `c` followed by `l`, you do not have to let go of
+Control between.
+
 * `C-c C-l`: Load and check the file
 * `M-.`: Jump to the definition of whatever your cursor is on
 * `C-c C-f`: Move to next goal (forward)
@@ -118,6 +126,18 @@ Navigation:
 * `C-c C-r`: Refine goal (Add a `λ` if the goal is a function, add a
   `,` if the goal is a pair, etc. Not always the right move!)
 * `C-c C-.`: Show the goal type, context and inferred type
+
+## General editing:
+
+If you are using Emacs, then most of the useful keybindings will also
+be of that form.
+
+* `C-x C-f`: Open a file
+* `C-x C-s`: Save the current file
+* `C-x C-b`: See all the things ("buffers") you have open
+* `C-x b`: Choose a buffer to switch to
+* `C-_`: Undo
+* `M-_`: Redo
 
 # Attribution
 
