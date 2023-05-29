@@ -13,19 +13,42 @@ git submodule update --init
 ```
 
 To edit Agda files, you will need to install Agda and an editor that
-supports `agda-mode`: Emacs, VSCode or Atom.
+supports `agda-mode`: VSCode, Emacs or Atom.
 
 ### Installing Agda
 
-We are using Agda version 2.6.3, the homework exercise files may not
-work with earlier versions. Watch out for the available version if you
-are installing Agda via a package manager.
+Below we provide some different options for installing Agda, depending
+on what system you are on.
+
+Watch out for the available version if you are installing Agda via a
+package manager. We are using Agda version 2.6.3, the homework
+exercise files may not work with earlier versions.
+
+#### Via Homebrew on Mac
+
+Install Homebrew from https://brew.sh/ , then run
+``` shell
+brew install agda
+```
+At the time of writing this installs the correct version of Agda, but
+it may not in the future!
+
+#### Via Stack on Windows
+
+Install Stack from https://docs.haskellstack.org/en/stable/install_and_upgrade/
+
+Open PowerShell, and use Stack to install the correct version of Agda:
+``` shell
+stack config set resolver nightly-2023-05-17
+stack install Agda-2.6.3
+```
 
 #### Via Nix on Mac and Linux
 
-We have provided a Nix shard that will install the correct version of
-Agda. This will also install a copy of Emacs, if you would like to use
-that as your editor.
+If installing Agda via `brew` did not work, we have also provided a
+Nix shard that will install the correct version of Agda. This will
+also install a copy of Emacs, if you would like to use that as your
+editor.
 
 First, install the Nix package manager:
 
@@ -39,7 +62,7 @@ Mac:
 sh <(curl -L https://nixos.org/nix/install)
 ```
 
-Now we need to enable Nix flakes
+Now we need to enable Nix flakes:
 ``` shell
 mkdir -p ~/.config/nix
 echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
@@ -49,37 +72,12 @@ For a fun series of blog posts on Nix and how to use it, [click this
 link](https://ianthehenry.com/posts/how-to-learn-nix/). We won't need
 any heavy lifting here, we're just using Nix to install Agda easily.
 
-Now, when you want to work in Agda with emacs on this project,
+Now, when you want to work in Agda with Emacs on this project,
 navigate to the directory that you cloned this in and run
 ``` shell
 nix develop
 ```
-
-This might take a while the first time. Then you can run
-``` shell
-emacs
-```
-then navigate to one of the lecture files, and hit `C-c C-l` to load it.
-
-#### Via Homebrew on Mac
-
-If you already use `brew` to install software, using it to install
-Agda is likely to be easier.
-
-Install Homebrew from https://brew.sh/ , then run
-``` shell
-brew install agda
-```
-
-#### Via Stack on Windows
-
-Install Stack from https://docs.haskellstack.org/en/stable/install_and_upgrade/
-
-Open PowerShell, and use Stack to install the correct version of Agda:
-``` shell
-stack config set resolver nightly-2023-05-17
-stack install Agda-2.6.3
-```
+This might take a while the first time.
 
 ### Installing VSCode
 
@@ -95,19 +93,16 @@ Depending on how you installed Agda, you may need to tell VSCode where
 the `agda` executable is located. This is under `Preferences >
 Extensions`, and then the `Agda Mode > Connection: Agda Path` option.
 
-### Alternative: Installing Emacs on Mac
+### Installing Emacs on Mac
 
 On Mac, you can use Homebrew to install Emacs.
-
-Install Homebrew from https://brew.sh/ if you haven't already.
-
 ``` shell
 brew tap d12frosted/emacs-plus
 brew install emacs-plus
 agda-mode setup
 ```
 
-Now try running `emacs` in the terminal. If a nice `emacs` window
+Now try running `emacs` in the terminal. If a nice Emacs window
 doesn't appear, run
 ``` shell
 brew link --overwrite emacs-plus
@@ -121,6 +116,10 @@ literate Agda files are recognised correctly.
 
 ## Using `agda-mode`
 
+Test your installation by navigating to the first homework file
+(`1--Type-Theory/1-1--Types-and-Functions.lagda.md`), and loading it
+into Agda as follows:
+
 Regardless of whether you are using Emacs or VSCode, most Agda
 keybindings involve holding down Control or Meta (a.k.a. Alt) and
 pressing other keys. Loading and checking an Agda file has the
@@ -128,7 +127,8 @@ keybinding `C-c C-l`, so to load the current file into Agda, hold down
 Control then press `c` followed by `l`, you do not have to let go of
 Control in between.
 
-Here are some of the more useful keys:
+Here are some of the more useful keys, that will be explained as we
+work through the exercises:
 
 * `C-c C-l`: Load and check the file
 * `M-.`: Jump to the definition of whatever your cursor is on
