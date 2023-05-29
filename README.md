@@ -1,14 +1,31 @@
-# Getting Started
+# CQTS Summer School 2023 on Cubical Type Theory
 
-To get the cubical library:
+## Getting Started
+
+Fork this repository to your own account, by pressing the "Fork"
+button in the upper right.
+
+Once you have cloned your fork locally, run the following to fetch the
+exact version of the `cubical` Agda library we are using.
+
 ``` shell
 git submodule update --init
 ```
 
-## Installing Agda and Emacs with Nix
+To edit Agda files, you will need to install Agda and an editor that
+supports `agda-mode`: Emacs, VSCode or Atom.
 
-This is the recommended way to install this course if you do not
-already have Agda 2.6.3 installed.
+### Installing Agda
+
+We are using Agda version 2.6.3, the homework exercise files may not
+work with earlier versions. Watch out for the available version if you
+are installing Agda via a package manager.
+
+#### Via Nix on Mac and Linux
+
+We have provided a Nix shard that will install the correct version of
+Agda. This will also install a copy of Emacs, if you would like to use
+that as your editor.
 
 First, install the Nix package manager:
 
@@ -44,12 +61,27 @@ emacs
 ```
 then navigate to one of the lecture files, and hit `C-c C-l` to load it.
 
-## Alternative: Install Agda and VSCode on Mac
+#### Via Homebrew on Mac
+
+If you already use `brew` to install software, using it to install
+Agda is likely to be easier.
 
 Install Homebrew from https://brew.sh/ , then run
 ``` shell
-brew install agda git
+brew install agda
 ```
+
+#### Via Stack on Windows
+
+Install Stack from https://docs.haskellstack.org/en/stable/install_and_upgrade/
+
+Open PowerShell, and use Stack to install the correct version of Agda:
+``` shell
+stack config set resolver nightly-2023-05-17
+stack install Agda-2.6.3
+```
+
+### Installing VSCode
 
 Install VSCode from https://code.visualstudio.com/ , and then the
 agda-mode extension from
@@ -59,13 +91,19 @@ If your key combinations (like `C-c C-c`) don't work, you may need to
 apply the temporary fix described in
 https://github.com/banacorn/agda-mode-vscode/issues/132#issuecomment-1368880358
 
-## Alternative on Mac: Install Adga and Emacs using Brew
+Depending on how you installed Agda, you may need to tell VSCode where
+the `agda` executable is located. This is under `Preferences >
+Extensions`, and then the `Agda Mode > Connection: Agda Path` option.
 
-Install Homebrew from https://brew.sh/
+### Alternative: Installing Emacs on Mac
+
+On Mac, you can use Homebrew to install Emacs.
+
+Install Homebrew from https://brew.sh/ if you haven't already.
 
 ``` shell
 brew tap d12frosted/emacs-plus
-brew install agda git emacs-plus
+brew install emacs-plus
 agda-mode setup
 ```
 
@@ -81,41 +119,16 @@ literate Agda files are recognised correctly.
 (add-to-list 'auto-mode-alist '("\\.lagda.md\\'" . agda2-mode))
 ```
 
-## Alternative on Windows: Install Adga using Stack
+## Using `agda-mode`
 
-Install Stack from https://docs.haskellstack.org/en/stable/install_and_upgrade/
-
-Open PowerShell, and use Stack to install Agda:
-``` shell
-stack config set resolver nightly-2023-05-17
-stack install Agda-2.6.3
-```
-
-Install VSCode from https://code.visualstudio.com/ , and then the
-agda-mode extension from
-https://marketplace.visualstudio.com/items?itemName=banacorn.agda-mode
-
-
-<!-- Install Emacs from http://ftpmirror.gnu.org/emacs/windows by choosing -->
-<!-- the latest version (at time of writing, `emacs-28.2-installer.exe`). -->
-
-<!-- Open Emacs, and open your init file, by pressing `C-x C-f` and typing -->
-<!-- `~/.emacs`. Add the following lines: -->
-
-<!-- ``` emacs-lisp -->
-<!-- (load-file (let ((coding-system-for-read 'utf-8)) -->
-<!--                 (shell-command-to-string "agda-mode locate"))) -->
-
-<!-- (add-to-list 'auto-mode-alist '("\\.lagda.md\\'" . agda2-mode)) -->
-<!-- ``` -->
-
-# Using agda-mode
-
-Most Agda keybindings involve holding down Control or Meta
-(a.k.a. Alt) and pressing other keys. Loading and checking an Agda
-file has the keybinding `C-c C-l`, so to open a file, hold down
+Regardless of whether you are using Emacs or VSCode, most Agda
+keybindings involve holding down Control or Meta (a.k.a. Alt) and
+pressing other keys. Loading and checking an Agda file has the
+keybinding `C-c C-l`, so to load the current file into Agda, hold down
 Control then press `c` followed by `l`, you do not have to let go of
-Control between.
+Control in between.
+
+Here are some of the more useful keys:
 
 * `C-c C-l`: Load and check the file
 * `M-.`: Jump to the definition of whatever your cursor is on
@@ -127,10 +140,10 @@ Control between.
   `,` if the goal is a pair, etc. Not always the right move!)
 * `C-c C-.`: Show the goal type, context and inferred type
 
-## General editing:
+### General editing:
 
-If you are using Emacs, then most of the useful keybindings will also
-be of that form.
+If you are using Emacs, then most keybindings used in the editor are
+also of that form. For example:
 
 * `C-x C-f`: Open a file
 * `C-x C-s`: Save the current file
@@ -139,7 +152,7 @@ be of that form.
 * `C-_`: Undo
 * `M-_`: Redo
 
-# Attribution
+## Attribution
 
 This course was written by David Jaz Myers and Mitchell Riley.
 
