@@ -388,18 +388,18 @@ the pair `p`.
 `curry` and `uncurry` can ge generalised to work with dependent pairs
 and functions.
 
-mvrnote: exercise?
-
 ```
 uncurry : {A : Type} → {B : A → Type} → {C : (x : A) → B x → Type}
   → ((x : A) → (y : B x) → C x y)
   → (p : Σ[ x ∈ A ] B x) → C (fst p) (snd p)
-uncurry f p = f (fst p) (snd p)
+-- Exercise
+uncurry f p = {!!}
 
 curry : {A : Type} → {B : A → Type} → {C : (x : A) → B x → Type}
   → ((p : Σ[ x ∈ A ] B x) → C (fst p) (snd p))
   → (x : A) → (y : B x) → C x y
-curry f x y = f (x , y)
+-- Exercise
+curry f x y = {!!}
 ```
 
 Finally in this section, we have the "universal mapping property" of

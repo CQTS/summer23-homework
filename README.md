@@ -89,6 +89,8 @@ If your key combinations (like `C-c C-c`) don't work, you may need to
 apply the temporary fix described in
 https://github.com/banacorn/agda-mode-vscode/issues/132#issuecomment-1368880358
 
+The most important commands are (C-c C-,) (C-c C-c) (C-c space) (C-c C-.)  
+
 Depending on how you installed Agda, you may need to tell VSCode where
 the `agda` executable is located. This is under `Preferences >
 Extensions`, and then the `Agda Mode > Connection: Agda Path` option.
