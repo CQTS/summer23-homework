@@ -72,8 +72,7 @@ the logical "or" by case splitting only on the variable `x`:
 ```
 _or_ : Bool → Bool → Bool
 -- Exercise:
-true or y = {!!}
-false or y = {!!}
+x or y = {!!}
 ```
 
 Here is the definition of logical implication. There is a strange
