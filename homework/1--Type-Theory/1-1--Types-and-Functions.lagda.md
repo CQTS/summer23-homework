@@ -80,8 +80,8 @@ A function `f : A → B` may be thought of in two ways:
 Here is our first Agda function: the identity function of type `ℕ → ℕ`.
 ```
 idℕ : ℕ → ℕ
-idℕ x = x
-```
+idℕ x = x 
+``` 
 
 Functions are defined by placing a fresh variable name to the left of
 the `=` sign, which can then be used on the right. So here, idℕ
@@ -209,7 +209,7 @@ compose : {A : Type} {B : Type} {C : Type}
     → (A → B)
     → (A → C)
 -- Exercise:
-compose g f = {!!}
+compose g f a = g (f a)
 ```
 
 Agda considers definitions with underscores specially, and lets us
@@ -226,7 +226,7 @@ flip : {A B C : Type}
      → (A → B → C)
      → (B → A → C)
 -- Exercise:
-flip = {!!}
+flip f = λ a b → f b a 
 
 -- Should use the provided function on the argument twice.
 apply-twice : {A : Type}
@@ -234,7 +234,7 @@ apply-twice : {A : Type}
      → A
      → A
 -- Exercise:
-apply-twice = {!!}
+apply-twice f a = f (f a)  
 ```
 
 * Pen and paper exercise: Check that `f ∘ id` and `id ∘ f` act the
@@ -340,7 +340,7 @@ curry× f x y = f (x , y)
 uncurry× : {A B C : Type}
   → (A → (B → C))
   → ((A × B) → C)
-uncurry× f p = f (fst p) (snd p)
+uncurry× f p = f (fst p) (snd p) 
 ```
 
 There is nothing special about functions of two arguments here, try
@@ -351,13 +351,13 @@ curry3 : {A B C D : Type}
   → (((A × B) × C) → D)
   → (A → B → C → D)
 -- Exercise:
-curry3 f = {!!}
+curry3 f a b c =  f ((a , b) , c)
 
 uncurry3 : {A B C D : Type}
   → (A → B → C → D)
   → (((A × B) × C) → D)
 -- Exercise:
-uncurry3 f = {!!}
+uncurry3 f p = f (fst (fst p)) (snd (fst p)) (snd p)
 ```
 
 Just as type theory generalises function types to dependent function
@@ -412,7 +412,7 @@ functions `C → A` and `C → B`.
       → (C → B)
       → (C → A × B)
 -- Exercise:
-×-ump = {!!}
+×-ump f g = λ c → (f c , g c)
 ```
 
 We will have a lot to say about universal properties in this course.
@@ -436,3 +436,4 @@ idℓ : ∀ {ℓ} {A : Type ℓ} → A → A
 idℓ x = x
 ```
 But we won't need to make use of this for a while.
+ 
