@@ -42,7 +42,7 @@ not false = true
 ```
 
 Induction may seem like an odd name if you are used to "proof by
-induction" from your discrete math course, but we will see below that
+induction" from your discrete math course, but we will see in the next lecture that
 the induction principle for `ℕ` is basically the induction you are
 used to.
 
@@ -64,7 +64,7 @@ and `y` are `true`.
 ```
 _and_ : Bool → Bool → Bool
 -- Exercise:
-x and y = ?
+x and y = {!!}
 ```
 
 You don't have to split on all variables at once. Give a definition of
@@ -72,8 +72,8 @@ the logical "or" by case splitting only on the variable `x`:
 ```
 _or_ : Bool → Bool → Bool
 -- Exercise:
-true or y = ?
-false or y = ?
+true or y = {!!}
+false or y = {!!}
 ```
 
 Here is the definition of logical implication. There is a strange
