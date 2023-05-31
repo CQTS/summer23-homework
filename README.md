@@ -72,12 +72,23 @@ For a fun series of blog posts on Nix and how to use it, [click this
 link](https://ianthehenry.com/posts/how-to-learn-nix/). We won't need
 any heavy lifting here, we're just using Nix to install Agda easily.
 
-Now, when you want to work in Agda with Emacs on this project,
+Now, when you want to work in Agda with Emacs or VSCode on this project,
 navigate to the directory that you cloned this in and run
 ``` shell
 nix develop
 ```
 This might take a while the first time.
+
+Then in the same shell environment (terminal), you can start emacs or VSCode
+To start emacs
+``` shell
+emacs
+```
+
+To start VSCode
+``` shell 
+code .
+```
 
 ### Installing VSCode
 
