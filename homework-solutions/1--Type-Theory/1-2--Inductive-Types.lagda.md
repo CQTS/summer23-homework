@@ -66,7 +66,7 @@ _and_ : Bool → Bool → Bool
 -- Exercise:
 -- x and y = {!!}
 true and x = x
-false and _ = false
+false and x = false
 ```
 
 You don't have to split on all variables at once. Give a definition of
