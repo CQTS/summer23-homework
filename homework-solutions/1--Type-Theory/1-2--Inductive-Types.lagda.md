@@ -1,6 +1,6 @@
 # Homework 1-2: Inductive Types
 ```
-module homework.1--Type-Theory.1-2--Inductive-Types where
+module homework-solutions.1--Type-Theory.1-2--Inductive-Types where
 
 open import Cubical.Foundations.Prelude
 open import homework.1--Type-Theory.1-1--Types-and-Functions
