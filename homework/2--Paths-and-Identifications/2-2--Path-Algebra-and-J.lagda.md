@@ -171,7 +171,7 @@ module _ {A : Type ℓ} {B : A → Type ℓ'}
           → x ≡ y
   ΣPathP' eq i = fst eq i , snd eq i
 
-  Exercise:
+  -- Exercise:
   PathPΣ' : x ≡ y
           → Σ[ p ∈ (fst x ≡ fst y) ] PathP {!!} {!!} {!!}
   PathPΣ' eq = (λ i → fst (eq i)) , (λ i → snd (eq i))
@@ -192,8 +192,8 @@ module _ {A : I → Type ℓ} {B : (i : I) → A i → Type ℓ'}
          → PathP (λ i → Σ (A i) (B i)) x y
   ΣPathP eq i = fst eq i , snd eq i
 
-  Exercise:
-  ΣPathP : PathP (λ i → Σ (A i) (B i)) x y
+  -- Exercise:
+  PathPΣ : PathP (λ i → Σ (A i) (B i)) x y
          → Σ[ p ∈ PathP {!!} {!!} {!!} ] PathP {!!} {!!} {!!}
   PathPΣ eq = (λ i → fst (eq i)) , (λ i → snd (eq i))
 ```
@@ -336,7 +336,7 @@ below.
 ```
 connectionEx1 : (p : x ≡ y) → Square p refl refl (sym p)
 -- Exercise
-connectionEx1 p i j = ?
+connectionEx1 p i j = {!!}
 ```
             p
         y - - - > y
@@ -348,7 +348,7 @@ connectionEx1 p i j = ?
 ```
 connectionEx2 : (p : x ≡ y) → Square (sym p) refl refl p
 -- Exercise
-connectionEx2 p i j = ?
+connectionEx2 p i j = {!!}
 ```
 
 Our definition of ℤ is a little janky and off kilter --- we treat the
@@ -370,21 +370,21 @@ isomorphic to the ones we had before.
 ```
 ℤ'→ℤ : ℤ' → ℤ
 -- Exercise
-ℤ'→ℤ z = ?
+ℤ'→ℤ z = {!!}
 
 ℤ→ℤ' : ℤ → ℤ'
 -- Exercise
-ℤ→ℤ' z = ?
+ℤ→ℤ' z = {!!}
 
 ℤIsoℤ' : Iso ℤ ℤ'
 -- Exercise
 ℤIsoℤ' = iso ℤ→ℤ' ℤ'→ℤ s r
   where
     s : section ℤ→ℤ' ℤ'→ℤ
-    s z = ?
+    s z = {!!}
 
     r : retract ℤ→ℤ' ℤ'→ℤ
-    r z = ?
+    r z = {!!}
 ```
 
 
@@ -445,17 +445,17 @@ iff→Iso p s r = iso (fst p) (snd p) s r
 ≡Iso≡Bool a b = iff→Iso (≡iff≡Bool a b) (s a b) (r a b)
   where
     s : (x y : Bool) → section (fst (≡iff≡Bool x y)) (snd (≡iff≡Bool x y))
-    s p = ?
+    s p = {!!}
 
     r : (x y : Bool) → retract (fst (≡iff≡Bool x y)) (snd (≡iff≡Bool x y))
     r true y p =  J motive refl p
       where
         motive : ∀ z q → Type
-        motive z q = ?
+        motive z q = {!!}
     r false y p = J motive refl p
       where
         motive : ∀ z q → Type
-        motive z q = ?
+        motive z q = {!!}
 ```
 
 We similarly promote `≡iff≡ℕ` to an isomorphism, but it will be easier
@@ -496,7 +496,7 @@ then it should be easy to map out of it.
 ```
 -- Exercise:
 decodeℕ : (n m : ℕ) → codeℕ n m → n ≡ m
-decodeℕ n m c = ?
+decodeℕ n m c = {!!}
 ```
 
 Then we prove that `encode` and `decode` form an isomorphism. This
@@ -514,10 +514,10 @@ case.
 ≡Iso≡ℕ n m = iso (encodeℕ n m) (decodeℕ n m) (s n m) (r n m)
   where
     s : (x y : ℕ) → section (encodeℕ x y) (decodeℕ x y)
-    s x y p = ?
+    s x y p = {!!}
 
     r : (x y : ℕ) → retract (encodeℕ x y) (decodeℕ x y)
-    r x y p = ?
+    r x y p = {!!}
 ```
 
 Let's do the encode-decode method again, but for coproducts.
@@ -528,23 +528,23 @@ Let's do the encode-decode method again, but for coproducts.
 ≡Iso≡⊎ {A = A} {B = B} x y = iso (encode x y) (decode x y) (s x y) (r x y)
   where
     codeRefl : (c : A ⊎ B) → c ≡⊎ c
-    codeRefl c = ?
+    codeRefl c = {!!}
 
     encode : (x y : A ⊎ B) → x ≡ y → x ≡⊎ y
-    encode x y p = ?
+    encode x y p = {!!}
 
     encodeRefl : (c : A ⊎ B)  → encode c c refl ≡ codeRefl c
-    encodeRefl c = ?
+    encodeRefl c = {!!}
 
     decode : (x y : A ⊎ B) → x ≡⊎ y → x ≡ y
-    decode x y p = ?
+    decode x y p = {!!}
 
     decodeRefl : (c : A ⊎ B) → decode c c (codeRefl c) ≡ refl
-    decodeRefl c p = ?
+    decodeRefl c p = {!!}
 
     s : (x y : A ⊎ B) → section (encode x y) (decode x y)
-    s x y = ?
+    s x y = {!!}
 
     r : (x y : A ⊎ B) → retract (encode x y) (decode x y)
-    r x y = ?
+    r x y = {!!}
 ```
