@@ -1,15 +1,15 @@
-module homework.Library.Univalence where
+module homework-solutions.Library.Univalence where
 
 open import Cubical.Core.Primitives public
 open import Cubical.Core.Glue public
 open import Cubical.Foundations.Prelude using (cong)
 open import Cubical.Foundations.Function using (_∘_)
 
-open import homework.1--Type-Theory.1-2--Inductive-Types
-open import homework.1--Type-Theory.1-1--Types-and-Functions hiding (_∘_)
-open import homework.2--Paths-and-Identifications.2-1--Paths hiding (cong)
-open import homework.2--Paths-and-Identifications.2-2--Path-Algebra-and-J
-open import homework.2--Paths-and-Identifications.2-4--Composition-and-Filling
+open import homework-solutions.1--Type-Theory.1-2--Inductive-Types
+open import homework-solutions.1--Type-Theory.1-1--Types-and-Functions hiding (_∘_)
+open import homework-solutions.2--Paths-and-Identifications.2-1--Paths hiding (cong)
+open import homework-solutions.2--Paths-and-Identifications.2-2--Path-Algebra-and-J
+open import homework-solutions.2--Paths-and-Identifications.2-4--Composition-and-Filling
 
 private
   variable

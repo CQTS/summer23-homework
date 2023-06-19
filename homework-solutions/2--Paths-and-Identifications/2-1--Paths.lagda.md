@@ -5,9 +5,9 @@ module homework-solutions.2--Paths-and-Identifications.2-1--Paths where
 open import Cubical.Core.Primitives public
 open import Cubical.Data.Sigma.Base
 
-open import homework.1--Type-Theory.1-1--Types-and-Functions
-open import homework.1--Type-Theory.1-2--Inductive-Types
-open import homework.1--Type-Theory.1-3--Propositions-as-Types
+open import homework-solutions.1--Type-Theory.1-1--Types-and-Functions
+open import homework-solutions.1--Type-Theory.1-2--Inductive-Types
+open import homework-solutions.1--Type-Theory.1-3--Propositions-as-Types
 ```
 
 Aside: This block lets us refer to some arbitrary types `A`, `B`, ... and
@@ -623,3 +623,49 @@ inr b1 ≡⊎ inr b2 = b1 ≡ b2
     fro (inr b) (inl a) = ∅-rec
     fro (inr b1) (inr b2) = cong inr
 ```
+
+
+
+
+## Computing the paths in the integers
+
+```
+_≡ℤ_ : ℤ → ℤ → Type
+pos n ≡ℤ pos m = n ≡ℕ m
+pos n ≡ℤ negsuc m = ∅
+negsuc n ≡ℤ pos m = ∅
+negsuc n ≡ℤ negsuc m = n ≡ℕ m
+
+≡ℤ-refl : {a : ℤ} → a ≡ℤ a
+≡ℤ-refl {pos n} = ≡ℕ-refl n
+≡ℤ-refl {negsuc n} = ≡ℕ-refl n
+
+≡iff≡ℤ : (a b : ℤ) → (a ≡ b) iffP (a ≡ℤ b)
+≡iff≡ℤ a b = (to a b) , (fro a b)
+  where
+    to : (x y : ℤ) → (x ≡ y) → (x ≡ℤ y)
+    to x y p = subst (x ≡ℤ_) p (≡ℤ-refl {x})
+  
+    fro : (x y : ℤ) → (x ≡ℤ y) → (x ≡ y)
+    fro (pos n) (pos m) p = cong pos (≡iff≡ℕ n m .snd p)
+    fro (negsuc n) (negsuc m) p = cong negsuc (≡iff≡ℕ n m .snd p)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
