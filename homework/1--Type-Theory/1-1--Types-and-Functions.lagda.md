@@ -1,4 +1,6 @@
+
 # Homework 1-1: Types and Functions
+
 
 ```
 module homework.1--Type-Theory.1-1--Types-and-Functions where
@@ -107,6 +109,8 @@ cursor on the symbol to find out what it takes to write: look at the "to
 input:" line of the resulting window. Try this out by figuring out how
 to write ⊗.
 
+
+
 We can write functions of multiple arguments by giving functions of
 single arguments that themselves return functions. This technique is
 called "currying" after the computer scientist Haskell Curry (whose
@@ -209,9 +213,9 @@ compose : {A : Type} {B : Type} {C : Type}
     → (A → B)
     → (A → C)
 -- Exercise:
-compose g f = {!!}
-```
+compose g f = λ a → g (f a)
 
+```
 Agda considers definitions with underscores specially, and lets us
 refer to such a definition in to ways: either the normal way, that is,
 `_∘_ g f`, or with the arguments replacing the underscores: `g ∘ f`.
@@ -226,15 +230,14 @@ flip : {A B C : Type}
      → (A → B → C)
      → (B → A → C)
 -- Exercise:
-flip = {!!}
-
+flip f g a = f a g
 -- Should use the provided function on the argument twice.
 apply-twice : {A : Type}
      → (A → A)
      → A
      → A
 -- Exercise:
-apply-twice = {!!}
+apply-twice f  x = f (f x)
 ```
 
 * Pen and paper exercise: Check that `f ∘ id` and `id ∘ f` act the
@@ -306,7 +309,6 @@ using the in-built funtions `fst` and `snd`.
 ```
 my-fst× : {A : Type} → {B : Type} → (A × B) → A
 my-fst× p = fst p
-
 my-snd× : {A : Type} → {B : Type} → (A × B) → B
 my-snd× p = snd p
 ```
@@ -335,14 +337,13 @@ pair, to a function that returns a function, and vice versa.
 curry× : {A B C : Type}
   → ((A × B) → C)
   → (A → (B → C))
-curry× f x y = f (x , y)
+curry× f x y = f ( x , y)
 
 uncurry× : {A B C : Type}
   → (A → (B → C))
   → ((A × B) → C)
-uncurry× f p = f (fst p) (snd p)
+uncurry× f p = f (fst(p)) (snd(p))
 ```
-
 There is nothing special about functions of two arguments here, try
 writing similar functions for a function of three arguments:
 
@@ -351,13 +352,13 @@ curry3 : {A B C D : Type}
   → (((A × B) × C) → D)
   → (A → B → C → D)
 -- Exercise:
-curry3 f = {!!}
+curry3 f a b c = f ((a , b), c)
 
 uncurry3 : {A B C D : Type}
   → (A → B → C → D)
   → (((A × B) × C) → D)
 -- Exercise:
-uncurry3 f = {!!}
+uncurry3 f t = f (fst(fst t)) (snd (fst t)) (snd t)
 ```
 
 Just as type theory generalises function types to dependent function
@@ -388,18 +389,18 @@ the pair `p`.
 `curry` and `uncurry` can ge generalised to work with dependent pairs
 and functions.
 
+mvrnote: exercise?
+
 ```
 uncurry : {A : Type} → {B : A → Type} → {C : (x : A) → B x → Type}
   → ((x : A) → (y : B x) → C x y)
   → (p : Σ[ x ∈ A ] B x) → C (fst p) (snd p)
--- Exercise
-uncurry f p = {!!}
+uncurry f p = f (fst p) (snd p)
 
 curry : {A : Type} → {B : A → Type} → {C : (x : A) → B x → Type}
   → ((p : Σ[ x ∈ A ] B x) → C (fst p) (snd p))
   → (x : A) → (y : B x) → C x y
--- Exercise
-curry f x y = {!!}
+curry f x y = f (x , y)
 ```
 
 Finally in this section, we have the "universal mapping property" of
@@ -412,7 +413,7 @@ functions `C → A` and `C → B`.
       → (C → B)
       → (C → A × B)
 -- Exercise:
-×-ump = {!!}
+×-ump f g c = (f c , g c)
 ```
 
 We will have a lot to say about universal properties in this course.
@@ -436,3 +437,4 @@ idℓ : ∀ {ℓ} {A : Type ℓ} → A → A
 idℓ x = x
 ```
 But we won't need to make use of this for a while.
+ 
