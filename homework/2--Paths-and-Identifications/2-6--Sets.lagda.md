@@ -269,8 +269,12 @@ compIso {A = A} {C = C} i j = iso fun inv rightInv leftInv
   leftInv : retract fun inv
   leftInv a = cong (Iso.inv i) (Iso.leftInv j (Iso.fun i a)) ∙ Iso.leftInv i a
 
+
+
 invIso : Iso A B → Iso B A
 invIso f = iso (Iso.inv f) (Iso.fun f) (Iso.leftInv f) (Iso.rightInv f)
+
+
 
 ΣPathTransport :{B : A → Type ℓ'} (a b : Σ A B) → Type _
 ΣPathTransport {B = B} a b =
