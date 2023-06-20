@@ -30,15 +30,18 @@ propositions --- specifically, the proposition that `x` equals `y`.
 ```
 isSetBool : (x y : Bool) → isProp (x ≡ y)
 isSetBool x y =
-  let ≡BoolPath≡ = sym $ isoToPath (≡Iso≡Bool x y)
-  in subst isProp ≡BoolPath≡ (isProp-≡Bool x y)
+  let 
+    f = Iso.fun (≡Iso≡Bool x y)
+    g = Iso.inv (≡Iso≡Bool x y)
+    r = Iso.leftInv (≡Iso≡Bool x y)
+  in isPropRetract f g r (isProp-≡Bool x y)
 
 isSetℕ : (x y : ℕ) → isProp (x ≡ y)
 isSetℕ x y =
   let ≡ℕPath≡ = sym $ isoToPath (≡Iso≡ℕ x y)
   in subst isProp ≡ℕPath≡ (isProp-≡ℕ x y)
 ```
-
+ 
 We will call a type `A` for which `x ≡ y` is a proposition for any `x`
 and `y : A` a *set*, with the idea that a set is a type where
 identifying two elements (via paths) is a proposition --- namely, the
@@ -56,7 +59,7 @@ properties we showed for propositions.
 The type `⊤` is a one-element set, and the empty type `∅` is a set.
 ```
 isSet⊤ : isSet ⊤
-isSet⊤ x y = isContr→isProp $ isContrisContr≡ isContr⊤ x y
+isSet⊤ x y = isContr→isProp (isContrisContr≡ isContr⊤ x y)
 
 isSet∅ : isSet ∅
 isSet∅ ()
@@ -91,8 +94,8 @@ Hint: Here is the cube we want to fill.
             /   |               /   |
           /     | refl        /     |
         a - - - - - - - - > a       |
-        ^       |           ^       |                    ^   j
-        |       |           |       |                  k | /
+        ^       |           ^       |  p                 ^   j
+        |       | p         |       |                  k | /
         |       |           |       |                    ∙ — >
         |       |           |       |                      i
         |       a - - - - - | - - > a
@@ -111,6 +114,17 @@ isProp→isSet-faces h a b p q i j k (j = i1) = h a b k
 isProp→isSet : isProp A → isSet A
 -- Exercise
 isProp→isSet h a b p q i j = hcomp (isProp→isSet-faces h a b p q i j) a
+
+isProp→isSet' : isProp A → isSet A
+isProp→isSet' h a b =
+
+  let 
+    isContrA = Prop-with-point-isContr h a
+    isContra≡b = isContrisContr≡ isContrA a b
+  in isContr→isProp isContra≡b
+
+-- _ : isProp→isSet → isProp→isSet'
+-- _ = refl  
 ```
 
 We can use the fact that propositions are closed under retract to

@@ -13,7 +13,7 @@ module homework.2--Paths-and-Identifications.2-5--Propositions where
 open import Cubical.Data.Sigma.Base using (Σ ; _×_)
 open import Cubical.Foundations.Function using (_∘_ ; _$_ ) 
 
-open import homework.1--Type-Theory.1-1--Types-and-Functions hiding (_∘_)
+open import homework.1--Type-Theory.1-1--Types-and-Functions hiding (_∘_ ; uncurry ; curry)
 open import homework.1--Type-Theory.1-2--Inductive-Types
 open import homework.1--Type-Theory.1-3--Propositions-as-Types hiding (¬_)
 open import homework.2--Paths-and-Identifications.2-1--Paths
@@ -507,7 +507,8 @@ A orP B = ∃ (A ⊎ B)
 -- orP-ump : {C : Type ℓ} (isPropC : isProp C)
 --         → Iso (A orP B → C) ((A → C) × (B → C))
         
--- orP-ump isPropC = propExt {!   !} {!   !} {!   !} λ x y → {!   !}
+-- -- orP-ump isPropC = propExt {!   !} {!   !} {!   !} λ x y → fst x {!  !}
+-- orP-ump isPropC = propExt (λ x y → {!  !}) {!   !} {!   !} {!   !}
 
 ```
 
@@ -530,14 +531,25 @@ TotallyOrderedTwoElementSet = Σ[ F ∈ Type ] (Bool ≡ F)
 
 Challenge:
 ```
--- ∃-Idem-×-L-Iso : Iso (∃ (∃ A) × B) (∃ A × B)
--- ∃-Idem-×-L-Iso = propExt {! isProp  !} {!  isProp () !} {!   !} {!   !}
+∃-Idem-×-L-Iso : Iso (∃ ((∃ A) × B)) (∃ (A × B))
+∃-Idem-×-L-Iso = propExt isProp-∃ isProp-∃ (∃-rec isProp-∃ lemma) (∃-rec isProp-∃ λ (a , b) → ∣ ∣ a ∣ , b ∣)
+  where
+    lemma : (∃ A) × B → ∃ (A × B)
+    lemma (∣ x ∣ , b) = ∣ x , b ∣
+    lemma (squash x x₁ i , b) = squash (lemma (x , b)) (lemma (x₁ , b)) i
+
 
 -- ∃-Idem-×-R-Iso : Iso (∃ A × (∃ B)) (∃ A × B)
--- ∃-Idem-×-R-Iso = {!!}
+-- ∃-Idem-×-R-Iso = propExt {!   !} {!   !} {!   !} {!   !}
 
 -- ∃-×-Iso : Iso ((∃ A) × (∃ B)) (∃ A × B)
--- ∃-×-Iso = {!!}
+-- ∃-×-Iso =
+--   propExt (isProp× isProp-∃ isProp-∃)
+--   isProp-∃ 
+--   (λ (a , b) → ∣ {!   !} , {!   !} ∣)
+--   (∃-rec (isProp× isProp-∃ isProp-∃) λ (a , b) → ∣ a ∣ , ∣ b ∣)
+
+
 ```
 
 ## Decidable Types
