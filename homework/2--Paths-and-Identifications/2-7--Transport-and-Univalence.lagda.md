@@ -40,13 +40,13 @@ isEquivTransport : {A B : Type ℓ} (p : A ≡ B) → isEquiv (transport p)
 isEquivTransport {A = A} p =
   transport (λ i → isEquiv (λ x → transport-filler p x i)) (idIsEquiv A)
 
-pathToEquiv : {A B : Type ℓ} → A ≡ B → A ≃ B
+pathToEquiv : {A B : Type ℓ} → A ≡ B → A ≃ B 
 fst (pathToEquiv p) = transport p
 snd (pathToEquiv p) = isEquivTransport p
 ```
 
 As we noted at the end of 2-5, paths in subtypes can be computed in
-the underlying type. Since the type `A ≃ B` of equivalences is a
+the underlying type. Since the type `A ≃  B` of equivalences is a
 subtype of the type of functions `A → B` (since `A ≃ B` is by
 definition `Σ[ f ∈ A → B ] isEquiv f` and `isEquiv f` is a
 proposition), we may compute paths between equivalences on their
@@ -90,10 +90,10 @@ _ = refl
 In general, however, transporting over a constant path is not by
 definition the identity.
 ```
-{- Error!
-_ : {x : A} → transport (λ _ → A) x ≡ x
-_ = refl
--}
+--Error!
+-- _ : {x : A} → transport (λ _ → A) x ≡ x
+-- _ = refl
+
 ```
 
 In the basic type formers that we have (pairs, functions, paths),
@@ -108,7 +108,7 @@ To transport in a type of pairs, we just transport in each component:
 ```
   _ : {x : A i0} {y : B i0}
     →   transport (λ i → A i × B i) (x , y)
-      ≡ (transport (λ i → A i) x , transport (λ i → B i) y)
+      ≡ ((transport (λ i → A i) x , transport (λ i → B i) y))
   _ = refl
 
 ```
@@ -144,7 +144,7 @@ Here's how a function into `Bool` would transport:
 ```
   _ : {p : A i0 → Bool}
     → transport (λ i → A i → Bool) p
-    ≡ λ x → p (transport (λ i → A (~ i)) x)
+    ≡ {!λ x → p (transport (λ i → A (~ i)) x)!}
   _ = refl
 ```
 
@@ -152,17 +152,28 @@ Try it yourself:
 ```
   _ : {m : A i0 × A i0 → A i0}
     → transport (λ i → A i × A i → A i) m
-    ≡ {!!}
+    ≡ λ (x , y) → 
+      let
+        x' = transport (λ i → A (~ i)) x
+        y' = transport (λ i → A (~ i)) y
+      in transport (λ i → A i) (m (x' , y'))
   _ = refl
 
   _ : {α : A i0 × B i0 → B i0}
     → transport (λ i → A i × B i → B i) α
-    ≡ {!!}
+    ≡ λ (a , b) →
+      let
+        a' = transport (λ i → A (~ i)) a
+        b' = transport (λ i → B (~ i)) b
+      in transport (λ i → B i) (α (a' , b'))
   _ = refl
 
   _ : {y : (A i0 → A i0) → A i0}
     → transport (λ i → (A i → A i) → A i) y
-    ≡ {!!}
+    ≡ λ f →
+      let
+        f' = transport (λ i → {! A ( ~ i)  !}) {!   !}
+      in transport (λ i → A i) (y (f'))
   _ = refl
 ```
 
@@ -178,8 +189,11 @@ module _ {A : I → Type} {B : (i : I) → A i → Type} where private
           x1 : A i1
           x1 = transport (λ i → A i) x0
 
+          x0≡x1 : PathP A x0 x1
+          x0≡x1 = transport-filler (λ i → A i) x0
+
           -- Here we need a path from `B i0 x0` to `B i1 x1`
-          y1 = transport {!!} y0
+          y1 = transport (λ i → B i (x0≡x1 i)) y0
         in (x1 , y1)
   _ = refl
 
@@ -190,8 +204,11 @@ module _ {A : I → Type} {B : (i : I) → A i → Type} where private
           x0 : A i0
           x0 = transport (λ i → A (~ i)) x1
 
+          x1≡x0 : PathP (λ i → A (~ i)) x1 x0
+          x1≡x0 = transport-filler (λ i → A (~ i)) x1
+
           fx1 : B i1 x1
-          fx1 = transport {!!} (f x0)
+          fx1 = transport (λ i → B i (x1≡x0 (~ i))) (f x0)
         in fx1
   _ = refl
 
@@ -215,7 +232,13 @@ This is now a square entirely in the type `A i1`, and so the
 module _ {A : I → Type} {a : (i : I) → A i} {b : (i : I) → A i} where private
   _ : {p : a i0 ≡ b i0}
     → transport (λ i → a i ≡ b i) p
-    ≡ {!!}
+    -- ≡ λ i →
+    --   hcomp (λ { j ( i = i0) → fromPathP (λ l → a l) j
+    --            ; j (i = i1) → fromPathP (λ l → b l) j } ) 
+              
+    --           (cong (transport (λ i → A i)) p i)
+    ≡ (({!   !} ∙∙ {!   !} ∙∙ {!   !}))
+
   _ = refl
 
 ```
@@ -420,3 +443,4 @@ isEquivAddℤ' (negsuc n) = isEquivTransport (sub-n-Path (suc n))
 
 isEquivAddℤ : (m : ℤ) → isEquiv (λ n → n +ℤ m)
 isEquivAddℤ = subst (λ add → (m : ℤ) → isEquiv (λ n → add n m)) +ℤ'≡+ℤ isEquivAddℤ'
+  

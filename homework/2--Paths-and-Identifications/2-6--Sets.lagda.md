@@ -352,7 +352,6 @@ not-Path = isoToPath not-Iso
   where bad-Path : refl ≡ not-Path
         bad-Path = s Bool Bool refl not-Path
 ```
-
 We can also define higher inductive types which are not sets. This
 type is called the "circle" (written by topologists as $S¹$), since it
 contains a point `base` and a path `loop` which goes from `base` to

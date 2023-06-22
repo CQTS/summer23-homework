@@ -396,6 +396,7 @@ The bottom of the box is `p`. Therefore, we can use `hcomp` to close
 off the box. We will call the top of this particular box the "double
 composite".
 ```
+-- _··_··_
 _∙∙_∙∙_ : (r : w ≡ x) (p : x ≡ y) (q : y ≡ z) → w ≡ z
 (r ∙∙ p ∙∙ q) i = hcomp (doubleComp-sides r q i) (p i)
 ```
