@@ -361,6 +361,48 @@ contains a point `base` and a path `loop` which goes from `base` to
 data S¹ : Type where
   base : S¹
   loop : base ≡ base
+
+data Bouquet (A : Type ℓ) : Type ℓ where
+  pot : Bouquet A 
+  bulb : (a : A) → Bouquet A
+  stem : (a : A) → pot ≡ bulb a 
+  flower : (a : A) → bulb a ≡ bulb a
+
+ΩBouquet : (A : Type ℓ) → Type ℓ
+ΩBouquet A = (pot {A = A} ≡ pot)
+
+
+data InvList (A : Type ℓ) : Type ℓ where 
+  ε : InvList A
+  _:·:_ : (a : A) → InvList A → InvList A
+  _⁻¹:·:_ : (a : A) → InvList A → InvList A 
+  section-law : (a : A) (L : InvList A) → (a :·: (a ⁻¹:·: L)) ≡ L -- section-law a : section (a :·:_) (a ⁻¹:·:_)
+  retract-law : (a : A) (L : InvList A) → (a ⁻¹:·: (a :·: L)) ≡ L -- retract-law a : retract (a :·:_) (a ⁻¹:·:_)
+  is-set : isSet (InvList A)
+
+
+_+++_ : {A : Type ℓ} → InvList A → InvList A → InvList A
+
+ε +++ L' = L'
+(a :·: L) +++ L' = a :·: (L +++ L')
+(a ⁻¹:·: L) +++ L' = a ⁻¹:·: (L +++ L')
+section-law a L i +++ L' = section-law a (L +++ L') i
+retract-law a L i +++ L' = retract-law a (L +++ L') i
+is-set L L' p q i j +++ L'' = is-set (L +++ L'') (L' +++ L'') (λ j → p j +++ L'') (λ j → q j +++ L'') i j
+
+
+inverse : {A : Type ℓ} → InvList A → InvList A
+inverse ε = ε
+inverse (a :·: L) = (inverse L) +++ (a ⁻¹:·: ε)
+inverse (a ⁻¹:·: L) = (inverse L) +++ (a :·: ε)
+inverse (section-law a L i) = {!   !}
+inverse (retract-law a L i) = {!   !}
+inverse (is-set L L₁ x y i j) = {!   !}
+
+
+-- using encode - decode
+one-of-our-theorems : ( A : Type ℓ) → Iso (ΩBouquet A) (InvList A)
+one-of-our-theorems = {!   !}
 ```
 
 To show that `S¹` is not a set, we can define its "double cover" - a
@@ -378,3 +420,4 @@ double-cover (loop i) = isoToPath not-Iso i
 ¬isSet-S¹ p = true≢false (λ i → subst double-cover (uhoh i) true)
   where uhoh = p base base refl loop
 ```
+  
