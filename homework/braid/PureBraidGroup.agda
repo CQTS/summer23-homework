@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 
 
-module braids.FreeGroup where
+module homework.braid.PureBraidGroup where
 open import Cubical.Foundations.Prelude
 open import Cubical.Data.Nat.Base
 open import Cubical.Data.Fin.Base
