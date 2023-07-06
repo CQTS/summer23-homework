@@ -92,4 +92,5 @@ data Braid (n : ℕ) : Type where
 -}
 
 
-
+reduce : {n : ℕ} (b : Braid (suc n)) → Braid n
+reduce b = {!   !}
