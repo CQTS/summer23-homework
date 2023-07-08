@@ -15,17 +15,6 @@ open import Cubical.Data.Sigma
 open import Cubical.Data.Nat.Order.Recursive using () renaming (_≤_ to _≤′_)
 
 
-
-private
-  variable
-    ℓ ℓ' ℓ'' : Level
-    A : Type ℓ
-    B : A → Type ℓ
-    x y z w : A
-
-∂ : I → I
-∂ i = i ∨ ~ i
-
 -- -- Braid group with n generators, so n + 1 strands
 -- data Braid (n : ℕ) : Type where 
 
