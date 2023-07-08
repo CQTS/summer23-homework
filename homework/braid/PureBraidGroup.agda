@@ -66,12 +66,17 @@ data BPureBraid (n : ℕ) : Type where -- the space whose loops are the pure bra
                                                                                                             ((threewayCommutativityCommon r p q proof-rp proof-pq)) 
                                                                                                             (gen r q (<-trans proof-rp proof-pq)) 
                                                                                                             
-
-  -- -- associativity : (r p s q : Fin n) → (proof-rp : toℕ r < toℕ p) → (proof-ps : toℕ p < toℕ s) → (proof-sq : toℕ s < toℕ q) → Square 
-  --                                                                                                           (gen r s (<-trans proof-rp proof-ps))
-  --                                                                                                           (gen r s (<-trans proof-rp proof-ps))
-  --                                                                                                           ((gen r q (<-trans (<-trans proof-rp proof-ps) proof-sq) ) ∙ (gen p q (<-trans proof-ps proof-sq)) ∙ (gen s q proof-sq))
-  --                                                                                                           ((gen r q (<-trans (<-trans proof-rp proof-ps) proof-sq) ) ∙ (gen p q (<-trans proof-ps proof-sq)) ∙ (gen s q proof-sq))
+  associativityLeft : (r p s q : Fin n) → (proof-rp : toℕ r < toℕ p) → (proof-ps : toℕ p < toℕ s) → (proof-sq : toℕ s < toℕ q) → Square (gen r q (<-trans (<-trans proof-rp proof-ps  ) proof-sq))
+                                                                                                                                        (gen p q (<-trans proof-ps proof-sq))
+                                                                                                                                        (gen r s (<-trans proof-rp proof-ps))
+                                                                                                                                        (sym (gen s q proof-sq))
+                                                                                                                                        
+  associativityRight : (r p s q : Fin n) → (proof-rp : toℕ r < toℕ p) → (proof-ps : toℕ p < toℕ s) → (proof-sq : toℕ s < toℕ q) → Square (gen r q (<-trans (<-trans proof-rp proof-ps  ) proof-sq))
+                                                                                                                                        (gen p q (<-trans proof-ps proof-sq))
+                                                                                                                                        (gen r s (<-trans proof-rp proof-ps))
+                                                                                                                                        (sym (gen s q proof-sq))
+                                                                                                                                        
+  associativityConnector : (r p s q : Fin n) → (proof-rp : toℕ r < toℕ p) → (proof-ps : toℕ p < toℕ s) → (proof-sq : toℕ s < toℕ q) → (associativityRight r p s q proof-rp proof-ps proof-sq)  ≡ ( associativityLeft r p s q proof-rp proof-ps proof-sq)
 
 
 
@@ -84,12 +89,15 @@ addGen base = base
 addGen (gen (m , proof-m) (n , proof-n) constraint i) = gen (m , ≤-suc proof-m) (n , ≤-suc proof-n) constraint i
 addGen (commutativity1 (p , proof-p) (q , proof-q) (r , proof-r) (s , proof-s) proof-rs proof-sp proof-pq i j) = commutativity1 (p , ≤-suc proof-p) (q , ≤-suc proof-q) (r , ≤-suc proof-r) (s , ≤-suc proof-s) proof-rs proof-sp proof-pq i j
 addGen (commutativity2 (p , proof-p) (q , proof-q) (r , proof-r) (s , proof-s) proof-pr proof-rs proof-sq i j) = commutativity2 (p , ≤-suc proof-p ) ( q , ≤-suc proof-q) (r , ≤-suc proof-r) (s , ≤-suc proof-s) proof-pr  proof-rs  proof-sq i j
-addGen (threewayCommutativityCommon (p , proof-p) (q , proof-q) (r , proof-r) proof-pq proof-qr i) = threewayCommutativityCommon ( p , ≤-suc proof-p) (q , ≤-suc proof-q) (r , ≤-suc proof-r) proof-pq proof-qr i 
+
+addGen (threewayCommutativityCommon (r , proof-r) (p , proof-p) (q , proof-q) proof-rp proof-pq i)  = threewayCommutativityCommon ( r , ≤-suc proof-r) (p , ≤-suc proof-p) (q , ≤-suc proof-q) proof-rp proof-pq i 
 addGen (threewayCommutativityLeft (r , proof-r) (p , proof-p) (q , proof-q)  proof-rp proof-pq i j) = threewayCommutativityLeft (r , ≤-suc proof-r) (p , ≤-suc proof-p) (q , ≤-suc proof-q) proof-rp proof-pq i j 
-addGen (threewayCommutativityRight (r , proof-r) (p , proof-p) (q , proof-q) proof-rp proof-pq i j) =  threewayCommutativityRight (r , ≤-suc proof-r) (p , ≤-suc proof-p) (q , ≤-suc proof-q) proof-rp proof-pq i j  
-addGen (threewayCommutativityTop (r , proof-r) (p , proof-p) (q , proof-q)  proof-rp proof-pq i j) =   threewayCommutativityTop (r , ≤-suc proof-r) (p , ≤-suc proof-p) (q , ≤-suc proof-q) proof-rp proof-pq i j  
--- addGen associativity r p s q proof-rp proof-ps proof-sq i j = ? 
-                                                                                                            
+addGen (threewayCommutativityRight (r , proof-r) (p , proof-p) (q , proof-q) proof-rp proof-pq i j) = threewayCommutativityRight (r , ≤-suc proof-r) (p , ≤-suc proof-p) (q , ≤-suc proof-q) proof-rp proof-pq i j
+addGen (threewayCommutativityTop (r , proof-r) (p , proof-p) (q , proof-q)  proof-rp proof-pq i j)  =  threewayCommutativityTop (r , ≤-suc proof-r) (p , ≤-suc proof-p) (q , ≤-suc proof-q) proof-rp proof-pq i j
+
+addGen (associativityLeft (r , proof-r) (p , proof-p) (s , proof-s) (q , proof-q) proof-rp proof-ps proof-sq i j) = associativityLeft (r , ≤-suc proof-r) (p , ≤-suc proof-p) (s , ≤-suc proof-s) (q , ≤-suc proof-q) proof-rp proof-ps proof-sq i j
+addGen (associativityRight (r , proof-r) (p , proof-p) (s , proof-s) (q , proof-q) proof-rp proof-ps proof-sq i j) = associativityRight (r , ≤-suc proof-r) (p , ≤-suc proof-p) (s , ≤-suc proof-s) (q , ≤-suc proof-q) proof-rp proof-ps proof-sq i j
+addGen (associativityConnector (r , proof-r) (p , proof-p) (s , proof-s) (q , proof-q) proof-rp proof-ps proof-sq i j k) = associativityConnector  (r , ≤-suc proof-r) (p , ≤-suc proof-p) (s , ≤-suc proof-s) (q , ≤-suc proof-q) proof-rp proof-ps proof-sq i j k                                                                                                          
                                                                                                         
 
 
