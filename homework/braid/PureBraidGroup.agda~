@@ -111,20 +111,24 @@ deletion (gen (suc p , proof-p) (suc q , proof-q) constraint i) = gen ( p , pred
 
 -- j = i0 ⊢ deletion (gen (r , proof-r) (s , proof-s) proof-rs i)
 
-deletion (commutativity1 (zero , proof-p) (zero , proof-q) (zero , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) = base
-deletion (commutativity1 (zero , proof-p) (zero , proof-q) (zero , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = base
-deletion (commutativity1 (zero , proof-p) (zero , proof-q) (suc r , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) =  base
-deletion (commutativity1 (suc p , proof-p) (zero , proof-q) (zero , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) =  base -- ⊥.rec {A = Square {!   !} {!   !} {!   !} {!   !}}(¬-<-zero proof-pq) i j
-deletion (commutativity1 (suc p , proof-p) (zero , proof-q) (zero , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = base -- ⊥.rec {A = Square {!   !} {!   !} {!   !} {!   !}}(¬-<-zero proof-pq) i j
-deletion (commutativity1 (suc p , proof-p) (zero , proof-q) (suc r , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) = base -- ⊥.rec {A = Square {!   !} {!   !} {!   !} {!   !}}(¬-<-zero proof-pq) i j
-deletion (commutativity1 (zero , proof-p) (suc q , proof-q) (zero , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) = base
-deletion (commutativity1 (zero , proof-p) (suc q , proof-q) (zero , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = base
-deletion (commutativity1 (zero , proof-p) (suc q , proof-q) (suc r , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) = base
-deletion (commutativity1 (zero , proof-p) (zero , proof-q) (suc r , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = ⊥.rec {A = Square refl refl (gen (r , pred-≤-pred proof-r) (s , pred-≤-pred proof-s) (pred-≤-pred proof-rs)) (gen (r , pred-≤-pred proof-r) (s , pred-≤-pred proof-s) (pred-≤-pred proof-rs)) } (¬-<-zero proof-pq) i j
-deletion (commutativity1 (zero , proof-p) (suc q , proof-q) (suc r , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = ⊥.rec {A = Square refl refl (gen (r , pred-≤-pred proof-r) (s , pred-≤-pred proof-s) (pred-≤-pred proof-rs)) (gen (r , pred-≤-pred proof-r) (s , pred-≤-pred proof-s) (pred-≤-pred proof-rs))}(¬-<-zero proof-sp) i j 
-deletion (commutativity1 (suc p , proof-p) (zero , proof-q) (suc r , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = ⊥.rec {A = Square refl refl (gen (r , pred-≤-pred proof-r) (s , pred-≤-pred proof-s) (pred-≤-pred proof-rs)) (gen (r , pred-≤-pred proof-r) (s , pred-≤-pred proof-s) (pred-≤-pred proof-rs))}(¬-<-zero proof-pq) i j 
-deletion (commutativity1 (suc p , proof-p) (suc q , proof-q) (zero , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) =  ⊥.rec {A = Square (gen (p , pred-≤-pred proof-p) (q , pred-≤-pred proof-q) (pred-≤-pred proof-pq)) (gen (p , pred-≤-pred proof-p) (q , pred-≤-pred proof-q) (pred-≤-pred proof-pq)) refl refl}(¬-<-zero proof-rs) i j 
-deletion (commutativity1 (suc p , proof-p) (suc q , proof-q) (suc r , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) =  ⊥.rec {A = Square (gen (p , pred-≤-pred proof-p) (q , pred-≤-pred proof-q) (pred-≤-pred proof-pq)) (gen (p , pred-≤-pred proof-p) (q , pred-≤-pred proof-q) (pred-≤-pred proof-pq)) refl refl}(¬-<-zero proof-rs) i j
+deletion (commutativity1 (zero , proof-p) (zero , proof-q) (zero , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) = ⊥.rec {A = Square refl refl refl refl}(¬-<-zero proof-pq) i j
+deletion (commutativity1 (zero , proof-p) (zero , proof-q) (zero , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = ⊥.rec {A = Square refl     refl   refl     refl  }(¬-<-zero proof-pq) i j
+deletion (commutativity1 (zero , proof-p) (zero , proof-q) (suc r , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) = {!!}  --⊥.rec {A = Square {! refl  !} {! refl  !} {! refl  !} {!refl   !}}(¬-<-zero proof-pq) i j
+deletion (commutativity1 (zero , proof-p) (zero , proof-q) (suc r , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = {!!} -- ⊥.rec {A = Square {! refl  !} {! refl !} {! gen r s   !} {! gen r s  !}}(¬-<-zero proof-pq) i j
+deletion (commutativity1 (zero , proof-p) (suc q , proof-q) (zero , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) = {!!} -- ⊥.rec {A = Square {! refl  !} {!refl   !} {! refl  !} {!refl   !}}(¬-<-zero proof-sp) i j
+deletion (commutativity1 (zero , proof-p) (suc q , proof-q) (zero , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = {!!} -- ⊥.rec {A = Square {!refl   !} {! refl  !} {!refl   !} {! refl   !}}(¬-<-zero proof-sp) i j
+deletion (commutativity1 (zero , proof-p) (suc q , proof-q) (suc r , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) = {!!} -- ⊥.rec {A = Square {! refl  !} {! refl  !} {! refl   !} {! refl  !}}(¬-<-zero proof-sp) i j
+deletion (commutativity1 (zero , proof-p) (suc q , proof-q) (suc r , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = {!!} -- ⊥.rec {A = Square {! refl  !} {! refl  !} {! gen r s  !} {! gen r s   !}}(¬-<-zero proof-sp) i j 
+
+
+deletion (commutativity1 (suc p , proof-p) (zero , proof-q) (zero , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) = ⊥.rec {A = Square {!   !} {!   !} {!   !} {!   !}}(¬-<-zero proof-pq) i j
+deletion (commutativity1 (suc p , proof-p) (zero , proof-q) (zero , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = ⊥.rec {A = Square {!   !} {!   !} {!   !} {!   !}}(¬-<-zero proof-pq) i j
+deletion (commutativity1 (suc p , proof-p) (zero , proof-q) (suc r , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) = ⊥.rec {A = Square {!   !} {!   !} {!   !} {!   !}}(¬-<-zero proof-pq) i j
+deletion (commutativity1 (suc p , proof-p) (zero , proof-q) (suc r , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = ⊥.rec {A = Square {!   !} {!   !} {!   !} {!   !}}(¬-<-zero proof-pq) i j 
+
+deletion (commutativity1 (suc p , proof-p) (suc q , proof-q) (zero , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) = ⊥.rec {A = Square {!!} {!!} {!!} {!!}}(¬-<-zero proof-rs) i j 
+deletion (commutativity1 (suc p , proof-p) (suc q , proof-q) (suc r , proof-r) (zero , proof-s) proof-rs proof-sp proof-pq i j) = ⊥.rec {A = Square {!!} {!!} {!!} {!!}}(¬-<-zero proof-rs) i j
+
 deletion (commutativity1 (suc p , proof-p) (suc q , proof-q) (zero , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = gen (p , pred-≤-pred proof-p) (q , pred-≤-pred proof-q) (pred-≤-pred proof-pq) j
 deletion (commutativity1 (suc p , proof-p) (suc q , proof-q) (suc r , proof-r) (suc s , proof-s) proof-rs proof-sp proof-pq i j) = commutativity1 (p , pred-≤-pred proof-p) (q , pred-≤-pred proof-q) (r , pred-≤-pred proof-r) (s , pred-≤-pred proof-s) (pred-≤-pred proof-rs) (pred-≤-pred proof-sp) (pred-≤-pred proof-pq) i j
 
@@ -165,4 +169,3 @@ deletion (associativityLeft r p s q proof-rp proof-ps proof-sq i j) = {!!}
 deletion (associativityRight r p s q proof-rp proof-ps proof-sq i j) = {!!}
 deletion (associativityConnector r p s q proof-rp proof-ps proof-sq i j k) = {!!}
   
-   
