@@ -81,7 +81,8 @@ addStrand (threeGenCommutativityLeft r p q proof-rp proof-pq i j) = threeGenComm
 addStrand (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) = threeGenCommutativityMiddle (fsuc r) (fsuc p) (fsuc q) (suc-≤-suc proof-rp) (suc-≤-suc proof-pq) i j
 addStrand (threeGenCommutativityRight r p q proof-rp proof-pq i j) = threeGenCommutativityRight (fsuc r) (fsuc p) (fsuc q) (suc-≤-suc proof-rp) (suc-≤-suc proof-pq) i j
 addStrand (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) = fourGenCommutativityConnector (fsuc r ) (fsuc p) (fsuc s) (fsuc q) (suc-≤-suc proof-rp) (suc-≤-suc proof-ps) (suc-≤-suc proof-sq) i
-addStrand (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) = fourGenCommutativityComposition (fsuc r ) (fsuc p) (fsuc s) (fsuc q) (suc-≤-suc proof-rp) (suc-≤-suc proof-ps) (suc-≤-suc proof-sq) i j
+addStrand (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) = 
+    fourGenCommutativityComposition (fsuc r ) (fsuc p) (fsuc s) (fsuc q) (suc-≤-suc proof-rp) (suc-≤-suc proof-ps) (suc-≤-suc proof-sq) i j
 addStrand (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) = fourGenCommutativity (fsuc r ) (fsuc p) (fsuc s) (fsuc q) (suc-≤-suc proof-rp) (suc-≤-suc proof-ps) (suc-≤-suc proof-sq) i j
 
 
@@ -164,7 +165,8 @@ delStrand (threeGenCommutativityConnector (zero , proof-r) (suc p , proof-p) (su
 delStrand (threeGenCommutativityConnector (suc r , proof-r) (zero , proof-p) (zero , proof-q) proof-rp proof-pq i) = base
 delStrand (threeGenCommutativityConnector (suc r , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq i) = gen (r , pred proof-r) (q , pred proof-q) i
 delStrand (threeGenCommutativityConnector (suc r , proof-r) (suc p , proof-p) (zero , proof-q) proof-rp proof-pq i) = gen (p , pred proof-p) (r , pred proof-r) i
-delStrand (threeGenCommutativityConnector (suc r , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq i) = threeGenCommutativityConnector (r , pred proof-r) (p , pred proof-p) (q , pred proof-q) (pred proof-rp) (pred proof-pq) i
+delStrand (threeGenCommutativityConnector (suc r , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq i) = 
+    threeGenCommutativityConnector (r , pred proof-r) (p , pred proof-p) (q , pred proof-q) (pred proof-rp) (pred proof-pq) i
 
 delStrand (threeGenCommutativityLeft (zero , proof-r) (zero , proof-p) (zero , proof-q) proof-rp proof-pq i j) = base
 delStrand (threeGenCommutativityLeft (zero , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq i j) = base
@@ -173,7 +175,8 @@ delStrand (threeGenCommutativityLeft (zero , proof-r) (suc p , proof-p) (suc q ,
 delStrand (threeGenCommutativityLeft (suc r , proof-r) (zero , proof-p) (zero , proof-q) proof-rp proof-pq i j) = base
 delStrand (threeGenCommutativityLeft (suc r , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq i j) = gen (r , pred proof-r) (q , pred proof-q) (i ∧ ~ j)
 delStrand (threeGenCommutativityLeft (suc r , proof-r) (suc p , proof-p) (zero , proof-q) proof-rp proof-pq i j) = gen  (p , pred proof-p) (r , pred proof-r) i
-delStrand (threeGenCommutativityLeft (suc r , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq i j) = threeGenCommutativityLeft (r , pred proof-r) (p , pred proof-p) (q , pred proof-q) (pred proof-rp) (pred proof-pq) i j
+delStrand (threeGenCommutativityLeft (suc r , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq i j) = 
+    threeGenCommutativityLeft (r , pred proof-r) (p , pred proof-p) (q , pred proof-q) (pred proof-rp) (pred proof-pq) i j
 
 delStrand (threeGenCommutativityMiddle (zero , proof-r) (zero , proof-p) (zero , proof-q) proof-rp proof-pq i j) = base
 delStrand (threeGenCommutativityMiddle (zero , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq i j) = base
@@ -182,7 +185,8 @@ delStrand (threeGenCommutativityMiddle (zero , proof-r) (suc p , proof-p) (suc q
 delStrand (threeGenCommutativityMiddle (suc r , proof-r) (zero , proof-p) (zero , proof-q) proof-rp proof-pq i j) = base
 delStrand (threeGenCommutativityMiddle (suc r , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq i j) = gen (r , pred proof-r) (q , pred proof-q) i
 delStrand (threeGenCommutativityMiddle (suc r , proof-r) (suc p , proof-p) (zero , proof-q) proof-rp proof-pq i j) = gen  (p , pred proof-p) (r , pred proof-r) (i ∨ j)
-delStrand (threeGenCommutativityMiddle (suc r , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq i j) = threeGenCommutativityMiddle (r , pred proof-r) (p , pred proof-p) (q , pred proof-q) (pred proof-rp) (pred proof-pq) i j
+delStrand (threeGenCommutativityMiddle (suc r , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq i j) = 
+    threeGenCommutativityMiddle (r , pred proof-r) (p , pred proof-p) (q , pred proof-q) (pred proof-rp) (pred proof-pq) i j
 
 delStrand (threeGenCommutativityRight (zero , proof-r) (zero , proof-p) (zero , proof-q) proof-rp proof-pq i j) = base
 delStrand (threeGenCommutativityRight (zero , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq i j) = base
@@ -191,7 +195,8 @@ delStrand (threeGenCommutativityRight (zero , proof-r) (suc p , proof-p) (suc q 
 delStrand (threeGenCommutativityRight (suc r , proof-r) (zero , proof-p) (zero , proof-q) proof-rp proof-pq i j) = base
 delStrand (threeGenCommutativityRight (suc r , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq i j) = gen (r , pred proof-r) (q , pred proof-q) (i ∨ j)
 delStrand (threeGenCommutativityRight (suc r , proof-r) (suc p , proof-p) (zero , proof-q) proof-rp proof-pq i j) = gen  (p , pred proof-p) (r , pred proof-r) (i ∧ ~ j)
-delStrand (threeGenCommutativityRight (suc r , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq i j) = threeGenCommutativityRight (r , pred proof-r) (p , pred proof-p) (q , pred proof-q) (pred proof-rp) (pred proof-pq) i j
+delStrand (threeGenCommutativityRight (suc r , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq i j) = 
+    threeGenCommutativityRight (r , pred proof-r) (p , pred proof-p) (q , pred proof-q) (pred proof-rp) (pred proof-pq) i j
 
 
 delStrand (fourGenCommutativityConnector (zero , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i) = base
@@ -211,7 +216,8 @@ delStrand (fourGenCommutativityConnector (suc r , proof-r) (suc p , proof-p) (su
 
 
 --valid cases
-delStrand (fourGenCommutativityConnector (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i) = ((gen (p , pred proof-p) (q , pred proof-q)) ∙ (gen (s , pred proof-s) (q , pred proof-q))) i
+delStrand (fourGenCommutativityConnector (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i) =
+    ((gen (p , pred proof-p) (q , pred proof-q)) ∙ (gen (s , pred proof-s) (q , pred proof-q))) i
 
 
 delStrand (fourGenCommutativityConnector (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i) = fourGenCommutativityConnector
@@ -230,13 +236,29 @@ delStrand (fourGenCommutativityComposition (zero , proof-r) (suc p , proof-p) (s
 delStrand (fourGenCommutativityComposition (suc r , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) =   base 
 delStrand (fourGenCommutativityComposition (suc r , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) =   gen (r , pred proof-r) (q , pred proof-q) (i ∨ j)
 delStrand (fourGenCommutativityComposition (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) =   base 
-delStrand (fourGenCommutativityComposition (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = {!  !}
+delStrand (fourGenCommutativityComposition (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = ⊥.rec 
+                                                                                                                                                    {A = Square 
+                                                                                                                                                    (gen (r , pred proof-r) (q , pred proof-q)) 
+                                                                                                                                                    (sym (gen (s , pred proof-s) (q , pred proof-q))) 
+                                                                                                                                                    refl refl }
+                                                                                                                                                    (¬-<-zero proof-rp) i j
+                                                                                                                                                    
 delStrand (fourGenCommutativityComposition (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) =  base  
-delStrand (fourGenCommutativityComposition (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = {!   !}
+delStrand (fourGenCommutativityComposition (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = ⊥.rec 
+                                                                                                                                                    {A = Square 
+                                                                                                                                                    (gen (r , pred proof-r) (q , pred proof-q) ) 
+                                                                                                                                                    refl refl 
+                                                                                                                                                    (gen (p , pred proof-p) (q , pred proof-q)) }
+                                                                                                                                                    (¬-<-zero proof-ps) i j
+                                                                                                                                                    
 delStrand (fourGenCommutativityComposition (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) =   base 
 
 --valid cases
-delStrand (fourGenCommutativityComposition (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = compPath-filler (gen (p , pred proof-p) ( q , pred proof-q  ) ) ( gen (s , pred proof-s) (q , pred proof-q) ) (~ j) i
+delStrand (fourGenCommutativityComposition (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = compPath-filler 
+                                                                                                                                                    (gen (p , pred proof-p) 
+                                                                                                                                                    ( q , pred proof-q  )) 
+                                                                                                                                                    (gen (s , pred proof-s) (q , pred proof-q) ) 
+                                                                                                                                                    (~ j) i
 
 delStrand (fourGenCommutativityComposition (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = fourGenCommutativityComposition
                                                                                                                                                      (r , pred proof-r) (p , pred proof-p)
@@ -244,39 +266,26 @@ delStrand (fourGenCommutativityComposition (suc r , proof-r) (suc p , proof-p) (
                                                                                                                                                      (pred proof-rp) (pred proof-ps) (pred proof-sq) i j
 
 
-delStrand (fourGenCommutativityConnector (zero , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i) = base
-delStrand (fourGenCommutativityConnector (zero , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i) =   base
-delStrand (fourGenCommutativityConnector (zero , proof-r) (zero , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i) = base
-delStrand (fourGenCommutativityConnector (zero , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i) =  gen (s , pred proof-s) (q , pred proof-q) i
-delStrand (fourGenCommutativityConnector (zero , proof-r) (suc p , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i) =  base
-delStrand (fourGenCommutativityConnector (zero , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i) =  gen (p , pred proof-p) (q , pred proof-q) i  
-delStrand (fourGenCommutativityConnector (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i) =   base
-delStrand (fourGenCommutativityConnector (suc r , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i) =  base
-delStrand (fourGenCommutativityConnector (suc r , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i) =  gen (r , pred proof-r) (q , pred proof-q) i  
-delStrand (fourGenCommutativityConnector (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i) =   base
-delStrand (fourGenCommutativityConnector (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i) =  base
-delStrand (fourGenCommutativityConnector (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i) =   base
-delStrand (fourGenCommutativityConnector (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i) =  base
-delStrand (fourGenCommutativityConnector (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i) =  basedelStrand (fourGenCommutativity (zero , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) =   base 
-delStrand (fourGenCommutativity (zero , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) =  base  
-delStrand (fourGenCommutativity (zero , proof-r) (zero , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) =  base  
-delStrand (fourGenCommutativity (zero , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = {!   !}
-delStrand (fourGenCommutativity (zero , proof-r) (suc p , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) = {!   !}
-delStrand (fourGenCommutativity (zero , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = {!   !}
-delStrand (fourGenCommutativity (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) = {!   !}
 
-delStrand (fourGenCommutativity (suc r , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) = {!   !}
-delStrand (fourGenCommutativity (suc r , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = {!   !}
-delStrand (fourGenCommutativity (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) = {!   !}
-delStrand (fourGenCommutativity (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = {!   !}
-delStrand (fourGenCommutativity (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) = {!   !}
-delStrand (fourGenCommutativity (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = {!   !}
-delStrand (fourGenCommutativity (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) = {!   !}
-
+delStrand (fourGenCommutativity (zero , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) = base
+delStrand (fourGenCommutativity (zero , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) =   base
+delStrand (fourGenCommutativity (zero , proof-r) (zero , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) = base
+delStrand (fourGenCommutativity (zero , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) =  gen (s , pred proof-s) (q , pred proof-q) i
+delStrand (fourGenCommutativity (zero , proof-r) (suc p , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) =  base
+delStrand (fourGenCommutativity (zero , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) =  gen (p , pred proof-p) (q , pred proof-q) i  
+delStrand (fourGenCommutativity (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) =   base
+delStrand (fourGenCommutativity (suc r , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) =  base
+delStrand (fourGenCommutativity (suc r , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) =  gen (r , pred proof-r) (q , pred proof-q) i  
+delStrand (fourGenCommutativity (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) =   gen (r , pred proof-r) (s , pred proof-s) j 
+delStrand (fourGenCommutativity (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) =  gen (r , pred proof-r) (s , pred proof-s) j 
+delStrand (fourGenCommutativity (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) =   base
+delStrand (fourGenCommutativity (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) =  base
+delStrand (fourGenCommutativity (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq i j) =  gen (r , pred proof-r) (s , pred proof-s) j 
 
 --valid cases
-delStrand (fourGenCommutativity (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = ((gen (p , pred proof-p) (q , pred proof-q)) ∙ (gen (s , pred proof-s) (q , pred proof-q))) i
+delStrand (fourGenCommutativity (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = 
+    ((gen (p , pred proof-p) (q , pred proof-q)) ∙ (gen (s , pred proof-s) (q , pred proof-q))) i
 delStrand (fourGenCommutativity (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq i j) = fourGenCommutativity
-                                                                                                                                                     (r , pred proof-r) (p , pred proof-p)
-                                                                                                                                                     (s , pred proof-s) (q , pred proof-q)
-                                                                                                                                                     (pred proof-rp) (pred proof-ps) (pred proof-sq) i j
+                                                                                                                                          (r , pred proof-r) (p , pred proof-p)
+                                                                                                                                          (s , pred proof-s) (q , pred proof-q)
+                                                                                                                                          (pred proof-rp) (pred proof-ps) (pred proof-sq) i j

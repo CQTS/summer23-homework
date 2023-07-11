@@ -304,9 +304,7 @@ deletion (fourwayCommutativityComposition (suc r , proof-r) (suc p , proof-p) (s
 deletion (fourwayCommutativity (zero , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = base
 deletion (fourwayCommutativity (zero , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = base
 deletion (fourwayCommutativity (zero , proof-r) (zero , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = base
-
 deletion (fourwayCommutativity (zero , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = gen (s ,  pred-≤-pred proof-s  ) (q ,  pred-≤-pred proof-q  ) ( pred-≤-pred proof-sq  )  i
-
 deletion (fourwayCommutativity (zero , proof-r) (suc p , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = base
 deletion (fourwayCommutativity (zero , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) =  gen (p , pred-≤-pred proof-p) (q , pred-≤-pred proof-q) (pred-≤-pred proof-pq) i 
 deletion (fourwayCommutativity (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = base
