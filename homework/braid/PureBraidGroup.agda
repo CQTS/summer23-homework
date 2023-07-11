@@ -8,7 +8,6 @@ open import Cubical.Data.Fin.Base
 open import Cubical.Data.Nat.Order
 open import Cubical.Data.Empty as ⊥
 -- open import homework.2--Paths-and-Identifications.2-4--Composition-and-Filling using (doubleCompPath-filler')
-open import homework.braid.Lemma
 
 
 
@@ -269,10 +268,9 @@ deletion (fourwayCommutativityComposition (zero , proof-r) (suc p , proof-p) (su
 deletion (fourwayCommutativityComposition (suc r , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
 deletion (fourwayCommutativityComposition (suc r , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = gen (r , pred-≤-pred proof-r) (q , pred-≤-pred proof-q) (pred-≤-pred proof-rq) (i ∨ j)
 deletion (fourwayCommutativityComposition (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
-deletion {n = n} (fourwayCommutativityComposition (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = ⊥.rec {A = BPureBraid n} (¬-<-zero proof-rp)
-  -- ⊥.rec {A = Square (gen (r , pred-≤-pred proof-r) (q , pred-≤-pred proof-q) (pred-≤-pred proof-rq)) (gen (s , pred-≤-pred proof-s) (q , pred-≤-pred proof-q) (pred-≤-pred proof-sq)) refl refl } (¬-<-zero proof-rp) i {! j  !}
+deletion (fourwayCommutativityComposition (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = ⊥.rec {A = Square (gen (r , pred-≤-pred proof-r) (q , pred-≤-pred proof-q) (pred-≤-pred proof-rq)) (sym (gen (s , pred-≤-pred proof-s) (q , pred-≤-pred proof-q) (pred-≤-pred proof-sq))) refl refl } (¬-<-zero proof-rp) i j
 deletion (fourwayCommutativityComposition (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
-deletion (fourwayCommutativityComposition (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = {!   !}
+deletion (fourwayCommutativityComposition (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = ⊥.rec {A = Square (gen (r , pred-≤-pred proof-r) (q , pred-≤-pred proof-q) (pred-≤-pred proof-rq)) refl refl (gen (p , pred-≤-pred proof-p) (q , pred-≤-pred proof-q) (pred-≤-pred proof-pq)) } (¬-<-zero proof-ps) i j
 deletion (fourwayCommutativityComposition (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
 
 
@@ -289,7 +287,7 @@ deletion (fourwayCommutativityComposition (zero , proof-r) (suc p , proof-p) (su
   --     (gen (p , pred-≤-pred proof-p) (q , pred-≤-pred proof-q) (pred-≤-pred {!   !}))
   --     (sym (gen (s , pred-≤-pred proof-s) (q , pred-≤-pred proof-q) (pred-≤-pred {!   !} ))))
   --     i j
-  = lemma2 (compPath-filler (gen (p , pred-≤-pred proof-p) ( q , pred-≤-pred proof-q  ) ( pred-≤-pred proof-pq  )) ( gen (s , pred-≤-pred proof-s) (q , pred-≤-pred proof-q) ( pred-≤-pred proof-sq) )) i j
+  = compPath-filler (gen (p , pred-≤-pred proof-p) ( q , pred-≤-pred proof-q  ) ( pred-≤-pred proof-pq  )) ( gen (s , pred-≤-pred proof-s) (q , pred-≤-pred proof-q) ( pred-≤-pred proof-sq) )  (~ j) i
 
 
 deletion (fourwayCommutativityComposition (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = fourwayCommutativityComposition (r , pred-≤-pred proof-r) (p , pred-≤-pred proof-p) (s , pred-≤-pred proof-s) (q , pred-≤-pred proof-q) (pred-≤-pred proof-rp) (pred-≤-pred proof-ps) (pred-≤-pred proof-sq) (pred-≤-pred proof-rq) (pred-≤-pred proof-pq) i j
