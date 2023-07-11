@@ -21,12 +21,8 @@ open import homework.braid.Lemma
 
 
 predFin : {n : ℕ} (p : Fin (suc n)) → Fin n
-predFin {n = zero} fzero = ⊥.rec {!   !}
-predFin {n = zero} (suc p , proof-p) = (⊥.rec (¬-<-zero (pred-≤-pred proof-p)))
-
-
-predFin {n = suc n} (zero , proof-p) = {!   !}
-predFin {n = suc n} (suc p , proof-p) = {!   !}
+predFin {n = zero} (p , proof-p) = {!!}
+predFin {n = suc n} (p , proof-p) = {!!}
 
 
 
@@ -248,7 +244,7 @@ deletion (fourwayCommutativityConnector (zero , proof-r) (suc p , proof-p) (zero
 deletion (fourwayCommutativityConnector (zero , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i) = {!   !}
 deletion (fourwayCommutativityConnector (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i) = base
 deletion (fourwayCommutativityConnector (suc r , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i) = base
-deletion (fourwayCommutativityConnector (suc r , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i) = gen (r , pred-≤-pred proof-r ) (q , pred-≤-pred proof-q ) (pred-≤-pred proof-rq) {! i !}
+deletion (fourwayCommutativityConnector (suc r , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i) = {!   !}
 deletion (fourwayCommutativityConnector (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i) = base 
 deletion (fourwayCommutativityConnector (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i) = {!   !}
 deletion (fourwayCommutativityConnector (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i) = base
@@ -269,9 +265,9 @@ deletion (fourwayCommutativityConnector (suc r , proof-r) (suc p , proof-p) (suc
 deletion (fourwayCommutativityComposition (zero , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
 deletion (fourwayCommutativityComposition (zero , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
 deletion (fourwayCommutativityComposition (zero , proof-r) (zero , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
-deletion (fourwayCommutativityComposition (zero , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = gen (s , pred-≤-pred proof-s) (q , pred-≤-pred proof-q) (pred-≤-pred proof-sq) (i ∧ ( ~ j))
+deletion (fourwayCommutativityComposition (zero , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = gen (s , pred-≤-pred proof-s) (q , pred-≤-pred proof-q) (pred-≤-pred proof-sq) {!   !}
 deletion (fourwayCommutativityComposition (zero , proof-r) (suc p , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
-deletion (fourwayCommutativityComposition (zero , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = {! x`x`x`x`x` !}
+deletion (fourwayCommutativityComposition (zero , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = {! base  !}
 deletion (fourwayCommutativityComposition (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
 deletion (fourwayCommutativityComposition (suc r , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
 deletion (fourwayCommutativityComposition (suc r , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = {!base   !}
@@ -293,7 +289,7 @@ deletion (fourwayCommutativityComposition (zero , proof-r) (suc p , proof-p) (su
   --     (gen (p , pred-≤-pred proof-p) (q , pred-≤-pred proof-q) (pred-≤-pred {!   !}))                                                                                                                                                                                           
   --     (sym (gen (s , pred-≤-pred proof-s) (q , pred-≤-pred proof-q) (pred-≤-pred {!   !} ))))
   --     i j
-  = lemma2 (compPath-filler (gen (p , pred-≤-pred proof-p) ( q , pred-≤-pred proof-q  ) ( pred-≤-pred proof-pq  )) ( gen (s , pred-≤-pred proof-s) (q , pred-≤-pred proof-q) ( pred-≤-pred proof-sq) )) i j
+  = lemma2 (compPath-filler (gen (p , pred-≤-pred proof-p) ( q , pred-≤-pred proof-q  ) ( pred-≤-pred proof-pq  )) ( gen (s , pred-≤-pred proof-s) (q , pred-≤-pred proof-q) ( pred-≤-pred proof-sq)   )) i j
 
   
 
@@ -324,4 +320,3 @@ deletion {n = n} (fourwayCommutativity (zero , proof-r) (suc p , proof-p) (suc s
 deletion (fourwayCommutativity (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) =  fourwayCommutativity (r , pred-≤-pred proof-r) (p , pred-≤-pred proof-p) (s , pred-≤-pred proof-s) (q , pred-≤-pred proof-q) (pred-≤-pred proof-rp) (pred-≤-pred  proof-ps) (pred-≤-pred  proof-sq) (pred-≤-pred proof-rs) (pred-≤-pred proof-rq) (pred-≤-pred proof-pq) i j
   
          
-  
