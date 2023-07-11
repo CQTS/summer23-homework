@@ -20,13 +20,6 @@ open import homework.braid.Lemma
 --   makeGroupoid : {x y : B3} → isSet (x ≡ y)
 
 
-predFin : {n : ℕ} (p : Fin (suc n)) → Fin n
-predFin {n = zero} fzero = ⊥.rec {!   !}
-predFin {n = zero} (suc p , proof-p) = (⊥.rec (¬-<-zero (pred-≤-pred proof-p)))
-
-
-predFin {n = suc n} (zero , proof-p) = {!   !}
-predFin {n = suc n} (suc p , proof-p) = {!   !}
 
 
 
@@ -103,7 +96,7 @@ addGen : {n : ℕ} (b : BPureBraid n) → BPureBraid (suc n)
 addGen base = base
 addGen (gen (m , proof-m) (n , proof-n) constraint i) = gen (m , ≤-suc proof-m) (n , ≤-suc proof-n) constraint i
 addGen (commutativity1 (p , proof-p) (q , proof-q) (r , proof-r) (s , proof-s) proof-rs proof-sp proof-pq i j) = commutativity1 (p , ≤-suc proof-p) (q , ≤-suc proof-q) (r , ≤-suc proof-r) (s , ≤-suc proof-s) proof-rs proof-sp proof-pq i j
-addGen (commutativity2 (p , proof-p) (q , proof-q) (r , proof-r) (s , proof-s) proof-pr proof-rs proof-sq proof-pq i j) = {!   !} --commutativity2 (p , ≤-suc proof-p ) ( q , ≤-suc proof-q) (r , ≤-suc proof-r) (s , ≤-suc proof-s) proof-pr  proof-rs  proof-sq i j
+addGen (commutativity2 (p , proof-p) (q , proof-q) (r , proof-r) (s , proof-s) proof-pr proof-rs proof-sq proof-pq i j) = commutativity2 (p , ≤-suc proof-p ) ( q , ≤-suc proof-q) (r , ≤-suc proof-r) (s , ≤-suc proof-s) proof-pr  proof-rs proof-sq proof-pq i j
 
 
 addGen (threewayCommutativityCommon (r , proof-r) (p , proof-p) (q , proof-q) proof-rp proof-pq proof-rq i)  = threewayCommutativityCommon ( r , ≤-suc proof-r) (p , ≤-suc proof-p) (q , ≤-suc proof-q) proof-rp proof-pq proof-rq i
@@ -276,7 +269,8 @@ deletion (fourwayCommutativityComposition (zero , proof-r) (suc p , proof-p) (su
 deletion (fourwayCommutativityComposition (suc r , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
 deletion (fourwayCommutativityComposition (suc r , proof-r) (zero , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = gen (r , pred-≤-pred proof-r) (q , pred-≤-pred proof-q) (pred-≤-pred proof-rq) (i ∨ j)
 deletion (fourwayCommutativityComposition (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
-deletion (fourwayCommutativityComposition (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = {!  !}
+deletion {n = n} (fourwayCommutativityComposition (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = ⊥.rec {A = BPureBraid n} (¬-<-zero proof-rp)
+  -- ⊥.rec {A = Square (gen (r , pred-≤-pred proof-r) (q , pred-≤-pred proof-q) (pred-≤-pred proof-rq)) (gen (s , pred-≤-pred proof-s) (q , pred-≤-pred proof-q) (pred-≤-pred proof-sq)) refl refl } (¬-<-zero proof-rp) i {! j  !}
 deletion (fourwayCommutativityComposition (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
 deletion (fourwayCommutativityComposition (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = {!   !}
 deletion (fourwayCommutativityComposition (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
