@@ -18,8 +18,8 @@ open import Cubical.Data.Nat.Order
   
 
 
-data BPureBraid (n : ℕ) : Type where -- the space whose loops are the pure braid group of n generators or n+1 strands
-  base : BPureBraid n
+data BPureBraid' (n : ℕ) : Type where -- the space whose loops are the pure braid group of n generators or n+1 strands
+  base : BPureBraid' n
   gen  : (p q : Fin n) → (constraint : toℕ p < toℕ q)  → base ≡ base
 
   -- genRule : (p q : Fin n) → (toℕ p < toℕ q) → 
