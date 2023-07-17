@@ -59,18 +59,20 @@ data BPureBraid' (n : ℕ) :  Type where -- the space whose loops are the pure b
                                                                                                                                         (threewayCommutativityCommon r p q proof-rp proof-pq proof-rq)
                                                                                                                                         (gen r p proof-rp )
 
+  threewayCommutativityMiddle : (r p q : Fin n) → (proof-rp : toℕ r < toℕ p) → (proof-pq : toℕ p < toℕ q) → (proof-rq : toℕ r < toℕ q) → Square
+                                                                                                                                        (gen r p proof-rp)
+                                                                                                                                        (sym (gen p q proof-pq))
+                                                                                                                                        (threewayCommutativityCommon r p q proof-rp proof-pq proof-rq)
+                                                                                                                                        (gen r q proof-rq)
 
+                                                                                                                                      
   threewayCommutativityRight : (r p q : Fin n) → (proof-rp : toℕ r < toℕ p) → (proof-pq : toℕ p < toℕ q) → (proof-rq : toℕ r < toℕ q) → Square
-                                                                                                                                          (gen r p proof-rp)
-                                                                                                                                          (sym (gen p q proof-pq))
-                                                                                                                                          (threewayCommutativityCommon r p q proof-rp proof-pq proof-rq)
-                                                                                                                                          (gen r q proof-rq)
-
-  threewayCommutativityTop : (r p q : Fin n) → (proof-rp : toℕ r < toℕ p) → (proof-pq : toℕ p < toℕ q) → (proof-rq : toℕ r < toℕ q) → Square
                                                                                                                                         (gen r q proof-rq)
                                                                                                                                         (sym (gen r p proof-rp))
                                                                                                                                         (threewayCommutativityCommon r p q proof-rp proof-pq proof-rq)
                                                                                                                                         (gen p q proof-pq)
+
+
 
   fourwayCommutativityConnector : (r p s q : Fin n) → (proof-rp : toℕ r < toℕ p) → (proof-ps : toℕ p < toℕ s) → (proof-sq : toℕ s < toℕ q) → (proof-rq : toℕ r < toℕ q) → (proof-pq : toℕ p < toℕ q) → base ≡ base
 
@@ -108,8 +110,8 @@ addGen (commutativity2 (p , proof-p) (q , proof-q) (r , proof-r) (s , proof-s) p
 
 addGen (threewayCommutativityCommon (r , proof-r) (p , proof-p) (q , proof-q) proof-rp proof-pq proof-rq i)  = threewayCommutativityCommon ( r , ≤-suc proof-r) (p , ≤-suc proof-p) (q , ≤-suc proof-q) proof-rp proof-pq proof-rq i
 addGen (threewayCommutativityLeft (r , proof-r) (p , proof-p) (q , proof-q)  proof-rp proof-pq proof-rq i j) = threewayCommutativityLeft (r , ≤-suc proof-r) (p , ≤-suc proof-p) (q , ≤-suc proof-q) proof-rp proof-pq proof-rq i j
-addGen (threewayCommutativityRight (r , proof-r) (p , proof-p) (q , proof-q) proof-rp proof-pq proof-rq i j) = threewayCommutativityRight (r , ≤-suc proof-r) (p , ≤-suc proof-p) (q , ≤-suc proof-q) proof-rp proof-pq proof-rq i j
-addGen (threewayCommutativityTop (r , proof-r) (p , proof-p) (q , proof-q)  proof-rp proof-pq proof-rq i j)  =  threewayCommutativityTop (r , ≤-suc proof-r) (p , ≤-suc proof-p) (q , ≤-suc proof-q) proof-rp proof-pq proof-rq i j
+addGen (threewayCommutativityMiddle (r , proof-r) (p , proof-p) (q , proof-q) proof-rp proof-pq proof-rq i j) = threewayCommutativityMiddle (r , ≤-suc proof-r) (p , ≤-suc proof-p) (q , ≤-suc proof-q) proof-rp proof-pq proof-rq i j
+addGen (threewayCommutativityRight (r , proof-r) (p , proof-p) (q , proof-q)  proof-rp proof-pq proof-rq i j)  =  threewayCommutativityRight (r , ≤-suc proof-r) (p , ≤-suc proof-p) (q , ≤-suc proof-q) proof-rp proof-pq proof-rq i j
 
 addGen (fourwayCommutativityComposition (r , proof-r) (p , proof-p) (s , proof-s) (q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = fourwayCommutativityComposition (r , ≤-suc proof-r) (p , ≤-suc proof-p) (s , ≤-suc proof-s) (q , ≤-suc proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j
 addGen (fourwayCommutativity (r , proof-r) (p , proof-p) (s , proof-s) (q , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = fourwayCommutativity (r , ≤-suc proof-r) (p , ≤-suc proof-p) (s , ≤-suc proof-s) (q , ≤-suc proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j
@@ -207,30 +209,30 @@ deletion (threewayCommutativityLeft (suc r , proof-r) (suc p , proof-p) (suc q ,
 
 
 -- impossible case
+deletion (threewayCommutativityMiddle (zero , proof-r) (zero , proof-p) (zero , proof-q) proof-rp proof-pq proof-rq i j) = base
+deletion (threewayCommutativityMiddle (zero , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = base
+deletion (threewayCommutativityMiddle (zero , proof-r) (suc p , proof-p) (zero , proof-q) proof-rp proof-pq proof-rq i j) = base
+deletion (threewayCommutativityMiddle (suc r , proof-r) (zero , proof-p) (zero , proof-q) proof-rp proof-pq proof-rq i j) = base
+deletion (threewayCommutativityMiddle (suc r , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = gen (r , pred proof-r)  (q , pred proof-q) (pred proof-rq)  i
+deletion (threewayCommutativityMiddle (suc r , proof-r) (suc p , proof-p) (zero , proof-q) proof-rp proof-pq proof-rq i j) = gen  (r , pred proof-r) (p , pred proof-p) (pred proof-rp) ( i ∨ j  )
+
+
+-- only cases that are possible
+deletion (threewayCommutativityMiddle (zero , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = gen (p , pred proof-p) (q , pred proof-q) (pred proof-pq) ( i ∧ ~ j  )
+deletion (threewayCommutativityMiddle (suc r , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = threewayCommutativityMiddle (r , pred proof-r) (p , pred proof-p) (q , pred proof-q) (pred proof-rp) (pred proof-pq) (pred proof-rq) i j
+
+
+
+
 deletion (threewayCommutativityRight (zero , proof-r) (zero , proof-p) (zero , proof-q) proof-rp proof-pq proof-rq i j) = base
 deletion (threewayCommutativityRight (zero , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = base
 deletion (threewayCommutativityRight (zero , proof-r) (suc p , proof-p) (zero , proof-q) proof-rp proof-pq proof-rq i j) = base
 deletion (threewayCommutativityRight (suc r , proof-r) (zero , proof-p) (zero , proof-q) proof-rp proof-pq proof-rq i j) = base
-deletion (threewayCommutativityRight (suc r , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = gen (r , pred proof-r)  (q , pred proof-q) (pred proof-rq)  i
-deletion (threewayCommutativityRight (suc r , proof-r) (suc p , proof-p) (zero , proof-q) proof-rp proof-pq proof-rq i j) = gen  (r , pred proof-r) (p , pred proof-p) (pred proof-rp) ( i ∨ j  )
+deletion (threewayCommutativityRight (suc r , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = gen (r , pred proof-r)  (q , pred proof-q) (pred proof-rq) (  i ∨ j )
+deletion (threewayCommutativityRight (suc r , proof-r) (suc p , proof-p) (zero , proof-q) proof-rp proof-pq proof-rq i j) = gen  (r , pred proof-r) (p , pred proof-p) (pred proof-rp) ( i ∧ ~ j  )
 
-
--- only cases that are possible
-deletion (threewayCommutativityRight (zero , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = gen (p , pred proof-p) (q , pred proof-q) (pred proof-pq) ( i ∧ ~ j  )
+deletion (threewayCommutativityRight (zero , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = gen (p , pred proof-p) (q , pred proof-q) (pred proof-pq)  i
 deletion (threewayCommutativityRight (suc r , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = threewayCommutativityRight (r , pred proof-r) (p , pred proof-p) (q , pred proof-q) (pred proof-rp) (pred proof-pq) (pred proof-rq) i j
-
-
-
-
-deletion (threewayCommutativityTop (zero , proof-r) (zero , proof-p) (zero , proof-q) proof-rp proof-pq proof-rq i j) = base
-deletion (threewayCommutativityTop (zero , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = base
-deletion (threewayCommutativityTop (zero , proof-r) (suc p , proof-p) (zero , proof-q) proof-rp proof-pq proof-rq i j) = base
-deletion (threewayCommutativityTop (suc r , proof-r) (zero , proof-p) (zero , proof-q) proof-rp proof-pq proof-rq i j) = base
-deletion (threewayCommutativityTop (suc r , proof-r) (zero , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = gen (r , pred proof-r)  (q , pred proof-q) (pred proof-rq) (  i ∨ j )
-deletion (threewayCommutativityTop (suc r , proof-r) (suc p , proof-p) (zero , proof-q) proof-rp proof-pq proof-rq i j) = gen  (r , pred proof-r) (p , pred proof-p) (pred proof-rp) ( i ∧ ~ j  )
-
-deletion (threewayCommutativityTop (zero , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = gen (p , pred proof-p) (q , pred proof-q) (pred proof-pq)  i
-deletion (threewayCommutativityTop (suc r , proof-r) (suc p , proof-p) (suc q , proof-q) proof-rp proof-pq proof-rq i j) = threewayCommutativityTop (r , pred proof-r) (p , pred proof-p) (q , pred proof-q) (pred proof-rp) (pred proof-pq) (pred proof-rq) i j
 
 
 
@@ -256,7 +258,7 @@ deletion (fourwayCommutativityConnector (zero , proof-r) (suc p , proof-p) (suc 
    ((gen (p , pred proof-p) (q , pred proof-q) (pred proof-pq)) ∙ (gen (s , pred proof-s) (q , pred proof-q) (pred proof-sq)) ) i
 
   --gen (p , pred proof-p) (s , pred proof-s) (pred proof-ps) i -- questionable
-  -- deletion (fourwayCommutativityConnector (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i) = {!   !}
+
 deletion (fourwayCommutativityConnector (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i) =
   fourwayCommutativityConnector (r , pred proof-r) (p , pred proof-p) (s , pred proof-s) (q , pred proof-q) (pred proof-rp) (pred proof-ps) (pred proof-sq) (pred proof-rq) (pred proof-pq) i
 

@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module Braid.Isomorphism.to where
 
 open import Cubical.Foundations.Prelude
@@ -54,7 +55,7 @@ BPureBraid→BPureBraid' n (twoGenCommutativity1 p q r s proof-rp proof-sp proof
 BPureBraid→BPureBraid' n (twoGenCommutativity1 p q r s proof-rp proof-sp proof-rq proof-sq i j) | (lt proof) with fst r ≟ fst s
 BPureBraid→BPureBraid' n (twoGenCommutativity1 p q r s proof-rp proof-sp proof-rq proof-sq i j) | (lt proof) | (lt proof2) = commutativity1 p q r s proof2 proof-sp proof i j
 BPureBraid→BPureBraid' n (twoGenCommutativity1 p q r s proof-rp proof-sp proof-rq proof-sq i j) | (lt proof) | (eq proof2) = gen p q proof j
-BPureBraid→BPureBraid' n (twoGenCommutativity1 p q r s proof-rp proof-sp proof-rq proof-sq i j) | (lt proof) | (gt proof2) = commutativity1 p q s r proof2 proof-rp proof i j 
+BPureBraid→BPureBraid' n (twoGenCommutativity1 p q r s proof-rp proof-sp proof-rq proof-sq i j) | (lt proof) | (gt proof2) = commutativity1 p q s r proof2 proof-rp proof i j
 
 BPureBraid→BPureBraid' n (twoGenCommutativity1 p q r s proof-rp proof-sp proof-rq proof-sq i j) | (eq proof) with fst r ≟ fst s
 BPureBraid→BPureBraid' n (twoGenCommutativity1 p q r s proof-rp proof-sp proof-rq proof-sq i j) | (eq proof) | (lt proof2) = gen r s proof2 i 
@@ -99,7 +100,7 @@ BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-
 
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (lt proof) | (eq proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (lt proof) | (eq proof2) | (lt proof3) = base 
-BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (lt proof) | (eq proof2) | (eq proof3) = gen p q proof i
+BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (lt proof) | (eq proof2) | (eq proof3) = base
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (lt proof) | (eq proof2) | (gt proof3) = base
 
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (lt proof) | (gt proof2) with fst r ≟ fst q    
@@ -112,17 +113,17 @@ BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) with fst r ≟ fst p
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (lt proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (lt proof2) | (lt proof3) = base      
-BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (lt proof2) | (eq proof3) = gen r p proof2 i 
+BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (lt proof2) | (eq proof3) = base 
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (lt proof2) | (gt proof3) = base
 
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (eq proof2) with fst r ≟ fst q
-BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (eq proof2) | (lt proof3) = gen r q proof3 i
+BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (eq proof2) | (lt proof3) = base
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (eq proof2) | (eq proof3) = base          
-BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (eq proof2) | (gt proof3) = gen q r proof3 i
+BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (eq proof2) | (gt proof3) = base
 
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (gt proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (gt proof2) | (lt proof3) = base
-BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (gt proof2) | (eq proof3) = gen p r proof2 i
+BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (gt proof2) | (eq proof3) = base
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (eq proof) | (gt proof2) | (gt proof3) = base       
 
 
@@ -135,7 +136,7 @@ BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-
 
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (gt proof) | (eq proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (gt proof) | (eq proof2) | (lt proof3) = base   
-BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (gt proof) | (eq proof2) | (eq proof3) = gen q p proof i
+BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (gt proof) | (eq proof2) | (eq proof3) = base
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (gt proof) | (eq proof2) | (gt proof3) = base
 
 BPureBraid→BPureBraid' n (threeGenCommutativityConnector r p q proof-rp proof-pq i) | (gt proof) | (gt proof2) with fst r ≟ fst q
@@ -160,7 +161,7 @@ BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i 
 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) | (lt proof3) =  ⊥.rec {A = Square (gen p q proof) (sym (gen r q proof3)) refl refl} (<!= proof-rp proof2) i j 
-BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) | (eq proof3) =  gen p q proof (i ∨ j) 
+BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) | (eq proof3) =  ⊥.rec {A = Square (gen p q proof) refl refl refl } (<!= proof-rp proof2) i j 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) | (gt proof3) =  ⊥.rec {A = Square (gen p q proof) (sym (gen q r proof3)) refl refl } (<!= proof-rp proof2) i j 
 
 
@@ -174,17 +175,17 @@ BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) with fst r ≟ fst p
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) | (lt proof3) =  ⊥.rec {A = Square refl (sym (gen r q proof3)) refl (gen r p proof2)} (<!= proof-pq proof) i j 
-BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) | (eq proof3) =  gen r p proof2 i 
+BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) | (eq proof3) =  ⊥.rec {A = Square refl refl refl (gen r p proof2)} (<!= proof-pq proof) i j 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) | (gt proof3) =  ⊥.rec {A = Square refl (sym (gen q r proof3)) refl (gen r p proof2)} (<!= proof-pq proof) i j 
 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) with fst r ≟ fst q
-BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (lt proof3) =  gen r q proof3 (i ∧ ~ j)
+BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (lt proof3) =  ⊥.rec {A = Square refl (sym (gen r q proof3)) refl refl} (<!= proof-pq proof) i j 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (eq proof3) =  base         
-BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (gt proof3) =  gen q r proof3 (i ∧ ~ j)
+BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (gt proof3) =  ⊥.rec {A = Square refl (sym (gen q r proof3)) refl refl} (<!= proof-pq proof) i j 
 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) | (lt proof3) =  ⊥.rec {A = Square refl (sym (gen r q proof3)) refl (gen p r proof2) } (<!= proof-pq proof) i j 
-BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) | (eq proof3) =  gen p r proof2 i
+BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) | (eq proof3) =  ⊥.rec {A = Square refl refl refl (gen p r proof2)} (<!= proof-pq proof) i j 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) | (gt proof3) =  ⊥.rec {A = Square refl (sym (gen q r proof3)) refl (gen p r proof2) } (<!= proof-pq proof) i j 
 
 
@@ -192,12 +193,12 @@ BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (gt proof) with fst r ≟ fst p 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (gt proof) | (lt proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (gt proof) | (lt proof2) | (lt proof3) =  ⊥.rec {A = Square (gen q p proof) (sym (gen r q proof3)) refl (gen r p proof2)} (asym proof (weaken proof-pq)) i j 
-BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (gt proof) | (lt proof2) | (eq proof3) =  ⊥.rec {A = Square (gen q p proof) refl refl (gen r p proof2)} {!  !} i j 
+BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (gt proof) | (lt proof2) | (eq proof3) =  ⊥.rec {A = Square (gen q p proof) refl refl (gen r p proof2)} (asym proof (weaken proof-pq)) i j 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (gt proof) | (lt proof2) | (gt proof3) =  ⊥.rec {A = Square (gen q p proof) (sym (gen q r proof3)) refl (gen r p proof2)} (asym proof (weaken proof-pq)) i j 
 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) | (lt proof3) =  ⊥.rec {A = Square (gen q p proof) (sym (gen r q proof3)) refl refl} (asym proof (weaken proof-pq)) i j 
-BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) | (eq proof3) =  gen q p proof (i ∨ j)
+BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) | (eq proof3) =  ⊥.rec {A = Square (gen q p proof) refl refl refl} (asym proof (weaken proof-pq)) i j 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) | (gt proof3) =  ⊥.rec {A = Square (gen q p proof) (sym (gen q r proof3)) refl refl} (asym proof (weaken proof-pq)) i j 
 
 BPureBraid→BPureBraid' n (threeGenCommutativityLeft r p q proof-rp proof-pq i j) | (gt proof) | (gt proof2) with fst r ≟ fst q
@@ -213,14 +214,14 @@ BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq 
 
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (lt proof) with fst r ≟ fst p
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (lt proof) | (lt proof2) with fst r ≟ fst q
-BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (lt proof) | (lt proof2) | (lt proof3) = {!  !} -- threewayCommutativityTop r p q proof-rp proof-pq proof3 i {! j !} -- 1st possible case
-BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (lt proof) | (lt proof2) | (eq proof3) =  ⊥.rec {A = Square (gen r p proof2 ) (sym (gen p q proof)) refl refl} {!  !} i j
+BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (lt proof) | (lt proof2) | (lt proof3) =  threewayCommutativityMiddle r p q proof2 proof proof3 i j  -- threewayCommutativityMiddle r p q proof-rp proof-pq proof3 i {! j !} -- 1st possible case
+BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (lt proof) | (lt proof2) | (eq proof3) =  ⊥.rec {A = Square (gen r p proof2 ) (sym (gen p q proof)) refl refl} ( <!= (trans proof-rp proof-pq) proof3  ) i j
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (lt proof) | (lt proof2) | (gt proof3) =  ⊥.rec {A = Square (gen r p proof2 ) (sym (gen p q proof)) refl (gen q r proof3)} (asym proof3 (weaken (trans proof-rp proof-pq))) i j --⊥.rec {A = Square (gen p q proof) (sym(gen q r proof3)) refl (gen r p proof2)} (asym (trans proof-rp proof-pq) (weaken proof3)) i j 
 
 
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) | (lt proof3) =  ⊥.rec {A = Square refl (sym (gen p q proof)) refl (gen r q proof3)} (<!= proof-rp proof2) i j 
-BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) | (eq proof3) =  gen p q proof (i ∧ ~ j)
+BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) | (eq proof3) =  ⊥.rec {A = Square refl (sym (gen p q proof)) refl refl} (<!= proof-rp proof2) i j
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) | (gt proof3) =  ⊥.rec {A = Square refl (sym (gen p q proof)) refl (gen q r proof3)} (<!= proof-rp proof2) i j 
 
 
@@ -234,17 +235,17 @@ BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq 
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) with fst r ≟ fst p
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) | (lt proof3) =  ⊥.rec {A = Square (gen r p proof2) refl refl (gen r q proof3)} (<!= proof-pq proof) i j 
-BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) | (eq proof3) =  ⊥.rec {A = Square (gen r p proof2) refl (gen r p proof2) refl} (<!= proof-pq proof) i j 
+BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) | (eq proof3) =  ⊥.rec {A = Square (gen r p proof2) refl refl refl} (<!= proof-pq proof) i j  
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) | (gt proof3) =  ⊥.rec {A = Square (gen r p proof2) refl refl (gen q r proof3)} (<!= proof-pq proof) i j 
 
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) with fst r ≟ fst q
-BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (lt proof3) =  gen r q proof3 i 
+BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (lt proof3) =   ⊥.rec {A = Square refl refl refl (gen r q proof3)} (<!= proof-pq proof) i j  
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (eq proof3) =  base 
-BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (gt proof3) =  gen q r proof3 i 
+BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (gt proof3) =   ⊥.rec {A = Square refl refl refl (gen q r proof3)} (<!= proof-pq proof) i j  
 
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) | (lt proof3) =  ⊥.rec {A = Square (gen p r proof2) refl refl (gen r q proof3)} (<!= proof-pq proof) i j
-BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) | (eq proof3) =  ⊥.rec {A = Square (gen p r proof2) refl (gen p r proof2) refl } (<!= proof-pq proof) i j 
+BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) | (eq proof3) =  ⊥.rec {A = Square (gen p r proof2) refl refl refl} (<!= proof-pq proof) i j 
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) | (gt proof3) =  ⊥.rec {A = Square (gen p r proof2) refl refl (gen q r proof3)} (<!= proof-pq proof) i j 
 
 
@@ -257,7 +258,7 @@ BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq 
 
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) | (lt proof3) =  ⊥.rec {A = Square refl (sym (gen q p proof)) refl (gen r q proof3)} (<!= proof-rp proof2) i j 
-BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) | (eq proof3) =  ⊥.rec {A = Square refl (sym (gen q p proof)) (gen q p proof) refl} (<!= proof-rp proof2) i j 
+BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) | (eq proof3) =  ⊥.rec {A = Square refl (sym (gen q p proof)) refl refl} (<!= proof-rp proof2) i j
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) | (gt proof3) =  ⊥.rec {A = Square refl (sym (gen q p proof)) refl (gen q r proof3)} (<!= proof-rp proof2) i j
 
 BPureBraid→BPureBraid' n (threeGenCommutativityMiddle r p q proof-rp proof-pq i j) | (gt proof) | (gt proof2) with fst r ≟ fst q
@@ -273,14 +274,14 @@ BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i
 
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (lt proof) with fst r ≟ fst p
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (lt proof) | (lt proof2) with fst r ≟ fst q
-BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (lt proof) | (lt proof2) | (lt proof3) = {!  !} 
+BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (lt proof) | (lt proof2) | (lt proof3) =  threewayCommutativityRight r p q proof2 proof proof3 i j 
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (lt proof) | (lt proof2) | (eq proof3) = ⊥.rec {A = Square refl (sym (gen r p proof2)) refl (gen p q proof) } (<!= (trans proof-rp proof-pq) proof3) i j 
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (lt proof) | (lt proof2) | (gt proof3) = ⊥.rec {A = Square (gen q r proof3 ) (sym (gen r p proof2)) refl (gen p q proof)} (asym proof3 (weaken (trans proof-rp proof-pq))) i j 
 
 
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) | (lt proof3) = ⊥.rec {A = Square (gen r q proof3) refl refl (gen p q proof)} (<!= proof-rp proof2) i j 
-BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) | (eq proof3) = gen p q proof i 
+BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) | (eq proof3) = ⊥.rec {A = Square refl refl refl (gen p q proof)} (<!= proof-rp proof2) i j
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (lt proof) | (eq proof2) | (gt proof3) = ⊥.rec {A = Square (gen q r proof3) refl refl (gen p q proof)} (<!= proof-rp proof2) i j
 
 
@@ -294,17 +295,17 @@ BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) with fst r ≟ fst p
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) | (lt proof3) = ⊥.rec {A = Square (gen r q proof3) (sym (gen r p proof2)) refl refl} (<!= proof-pq proof) i j 
-BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) | (eq proof3) = ⊥.rec {A = Square refl (sym (gen r p proof2)) (gen r p proof2) refl} (<!= proof-pq proof) i j 
+BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) | (eq proof3) =  ⊥.rec {A = Square refl (sym (gen r p proof2)) refl refl} (<!= proof-pq proof) i j   
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (lt proof2) | (gt proof3) = ⊥.rec {A = Square (gen q r proof3) (sym (gen r p proof2)) refl refl} (<!= proof-pq proof) i j 
 
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) with fst r ≟ fst q
-BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (lt proof3) = gen r q proof3 (i ∨ j) 
+BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (lt proof3) =  ⊥.rec {A = Square (gen r q proof3) refl refl refl} (<!= proof-pq proof) i j 
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (eq proof3) = base 
-BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (gt proof3) = gen q r proof3 (i ∨ j)
+BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (eq proof2) | (gt proof3) =  ⊥.rec {A = Square (gen q r proof3) refl refl refl} (<!= proof-pq proof) i j 
 
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) | (lt proof3) = ⊥.rec {A = Square (gen r q proof3) (sym (gen p r proof2)) refl refl} (<!= proof-pq proof) i j 
-BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) | (eq proof3) = ⊥.rec {A = Square refl (sym (gen p r proof2)) (gen p r proof2) refl} (<!= proof-pq proof) i j 
+BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) | (eq proof3) =  ⊥.rec {A = Square refl (sym (gen p r proof2)) refl refl} (<!= proof-pq proof) i j  
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (eq proof) | (gt proof2) | (gt proof3) = ⊥.rec {A = Square (gen q r proof3) (sym (gen p r proof2)) refl refl} (<!= proof-pq proof) i j
 
 
@@ -316,7 +317,7 @@ BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i
 
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) with fst r ≟ fst q
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) | (lt proof3) = ⊥.rec {A = Square (gen r q proof3) refl refl (gen q p proof)}  (asym proof (weaken proof-pq)) i j
-BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) | (eq proof3) = gen q p proof i
+BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) | (eq proof3) = ⊥.rec {A = Square refl refl refl (gen q p proof)}  (asym proof (weaken proof-pq)) i j
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (gt proof) | (eq proof2) | (gt proof3) = ⊥.rec {A = Square (gen q r proof3) refl refl (gen q p proof)}  (asym proof (weaken proof-pq)) i j
 
 BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i j) | (gt proof) | (gt proof2) with fst r ≟ fst q
@@ -328,172 +329,171 @@ BPureBraid→BPureBraid' n (threeGenCommutativityRight r p q proof-rp proof-pq i
 -------------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) with fst r ≟ fst s
-
-
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i)  with fst r ≟ fst s
+-------------------------------------------------------------------------------------------------------------------------------------------
 BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) with fst r ≟ fst q
 
-BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) with fst r ≟ fst p
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) with fst p ≟ fst q
 BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (lt proof3) with fst s ≟ fst q
-BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (lt proof3) | (lt proof4) =  fourwayCommutativityConnector r p s q {! proof-rp  !} {!   !} {!   !} {!   !} {!   !} i -- only possible case
-BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (lt proof3) | (eq proof4) =  {!   !}
-BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (lt proof3) | (gt proof4) =  {!   !}
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (lt proof3) | (lt proof4) =   fourwayCommutativityConnector r p s q proof-rp proof-ps proof4 proof2 proof3 i   -- only possible case
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (lt proof3) | (eq proof4) =  base   
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (lt proof3) | (gt proof4) =  base 
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (eq proof3) | (gt proof4) =  ?
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (eq proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (eq proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (eq proof3) | (gt proof4) =  base
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (gt proof3) | (gt proof4) =  ? 
-
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) with fst r ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (lt proof3) | (gt proof4) =  ? 
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (eq proof3) | (gt proof4) =  ?
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (gt proof3) | (gt proof4) =  ? 
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) with fst r ≟ fst q 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (lt proof3) | (gt proof4) =  ? 
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (eq proof3) | (gt proof4) =  ? 
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (gt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (gt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (gt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (lt proof2) | (gt proof3) | (gt proof4) =  base 
 
 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) with fst p ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (lt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (lt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (lt proof3) | (gt proof4) =  base 
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) with fst r ≟ fst s
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (eq proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (eq proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (eq proof3) | (gt proof4) =  base
 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (gt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (gt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (eq proof2) | (gt proof3) | (gt proof4) =  base 
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) with fst r ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (lt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) with fst p ≟ fst q 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (lt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (lt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (lt proof3) | (gt proof4) =  base 
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (eq proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (eq proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (eq proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (eq proof3) | (gt proof4) =  base 
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (gt proof3) | (gt proof4) =  ? 
-
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) with fst r ≟ fst q
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (lt proof3) | (gt proof4) =  ?
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (eq proof3) | (gt proof4) =  ?
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (gt proof3) | (gt proof4) =  ?
-
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) with fst r ≟ fst q
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (lt proof3) | (gt proof4) =  ? 
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (eq proof3) | (gt proof4) =  ? 
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (gt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (gt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (gt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (lt proof) | (gt proof2) | (gt proof3) | (gt proof4) =  base 
 
 
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) with fst r ≟ fst s 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) with fst r ≟ fst q
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) with fst r ≟ fst q
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (lt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) with fst p ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (lt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (lt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (lt proof3) | (gt proof4) =  base 
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (eq proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (eq proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (eq proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (eq proof3) | (gt proof4) =  base 
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (gt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (gt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (gt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (lt proof2) | (gt proof3) | (gt proof4) =  base 
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) with fst r ≟ fst q
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (lt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) with fst p ≟ fst q
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (eq proof3) | (gt proof4) =  ?
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (lt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (lt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (lt proof3) | (gt proof4) =  base
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (gt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (eq proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (eq proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (eq proof3) | (gt proof4) =  base
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) with fst r ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (gt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (gt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (eq proof2) | (gt proof3) | (gt proof4) =  base
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (lt proof3) | (gt proof4) =  ?
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) with fst p ≟ fst q
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (eq proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (lt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (lt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (lt proof3) | (gt proof4) =  base 
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (gt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (eq proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (eq proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (eq proof3) | (gt proof4) =  base 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (gt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (gt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (eq proof) | (gt proof2) | (gt proof3) | (gt proof4) =  base 
+
+
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) with fst r ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) with fst p ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (lt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (lt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (lt proof3) | (gt proof4) =  base 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (eq proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (eq proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (eq proof3) | (gt proof4) =  base 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (gt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (gt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (lt proof2) | (gt proof3) | (gt proof4) =  base 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) with fst p ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (lt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (lt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (lt proof3) | (gt proof4) =  base 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (eq proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (eq proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (eq proof3) | (gt proof4) =  base
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (gt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (gt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (eq proof2) | (gt proof3) | (gt proof4) =  base 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) with fst p ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (lt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (lt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (lt proof3) | (gt proof4) =  base
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (eq proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (eq proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (eq proof3) | (gt proof4) =  base 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (gt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (gt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) | (gt proof) | (gt proof2) | (gt proof3) | (gt proof4) =  base 
 
 
 
@@ -509,176 +509,338 @@ BPureBraid→BPureBraid' n (fourGenCommutativityConnector r p s q proof-rp proof
 
 
 BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j)  with fst r ≟ fst s
-
-
-
+-------------------------------------------------------------------------------------------------------------------------------------------
 BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) with fst r ≟ fst q
 
-BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) with fst r ≟ fst p
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) with fst p ≟ fst q
 BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (lt proof3) with fst s ≟ fst q
-BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (lt proof3) | (lt proof4) =  {!   !} -- only possible case
-BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (lt proof3) | (eq proof4) =  {!   !}
-BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (lt proof3) | (gt proof4) =  {!   !}
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (lt proof3) | (lt proof4) =   fourwayCommutativityComposition r p s q proof-rp proof-ps  proof4 proof2 proof3 i j  -- only possible case
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (lt proof3) | (eq proof4) =   ⊥.rec {A = Square (gen r q proof2) refl refl (gen p q proof3)} (<!= proof-sq proof4) i j   
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (lt proof3) | (gt proof4) =   ⊥.rec {A = Square (gen r q proof2) (sym (gen q s proof4)) refl (gen p q proof3)} (asym proof4 (weaken proof-sq)) i j    
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (eq proof3) | (gt proof4) =  ?
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (eq proof3) | (lt proof4) =   ⊥.rec {A = Square (gen r q proof2) (sym (gen s q  proof4)) refl refl} (<!= (trans proof-ps proof-sq) proof3) i j  
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (eq proof3) | (eq proof4) =   ⊥.rec {A = Square (gen r q proof2) refl refl refl } (<!= (trans proof-ps proof-sq) proof3) i j  
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (eq proof3) | (gt proof4) =   ⊥.rec {A = Square (gen r q proof2) (sym (gen q s  proof4)) refl refl} (<!= (trans proof-ps proof-sq) proof3) i j  
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (gt proof3) | (gt proof4) =  ? 
-
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) with fst r ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (lt proof3) | (gt proof4) =  ? 
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (eq proof3) | (gt proof4) =  ?
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (gt proof3) | (gt proof4) =  ? 
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) with fst r ≟ fst q 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (lt proof3) | (gt proof4) =  ? 
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (eq proof3) | (gt proof4) =  ? 
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (gt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (gt proof3) | (lt proof4) =   ⊥.rec {A = Square (gen r q proof2) (sym (gen s q  proof4)) refl (gen q p proof3)} (asym proof3 (weaken (trans proof-ps proof-sq))) i j  
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (gt proof3) | (eq proof4) =   ⊥.rec {A = Square (gen r q proof2) refl refl (gen q p proof3)} (asym proof3 (weaken (trans proof-ps proof-sq))) i j  
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (gt proof3) | (gt proof4) =   ⊥.rec {A = Square (gen r q proof2) (sym (gen q s  proof4)) refl (gen q p proof3) } (asym proof3 (weaken (trans proof-ps proof-sq))) i j   
 
 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) with fst p ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (lt proof3) | (lt proof4) =  ⊥.rec {A = Square refl (sym (gen s q  proof4)) refl (gen p q proof3)} (<!= (trans proof-rp (trans proof-ps proof-sq)) proof2) i j 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (lt proof3) | (eq proof4) =  ⊥.rec {A = Square refl refl refl (gen p q proof3)} (<!= (trans proof-rp (trans proof-ps proof-sq)) proof2) i j 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (lt proof3) | (gt proof4) =  ⊥.rec {A = Square refl (sym (gen q s  proof4)) refl (gen p q proof3)} (<!= (trans proof-rp (trans proof-ps proof-sq)) proof2) i j  
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) with fst r ≟ fst s
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (eq proof3) | (lt proof4) =  ⊥.rec {A = Square refl (sym (gen s q proof4)) refl refl} (<!= (trans proof-rp (trans proof-ps proof-sq)) proof2) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (eq proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (eq proof3) | (gt proof4) =  ⊥.rec {A = Square refl (sym (gen q s  proof4)) refl refl} (<!= (trans proof-rp (trans proof-ps proof-sq)) proof2) i j   
 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (gt proof3) | (lt proof4) =  ⊥.rec {A = Square refl (sym (gen s q  proof4)) refl (gen q p proof3)} (<!= (trans proof-rp (trans proof-ps proof-sq)) proof2) i j 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (gt proof3) | (eq proof4) =  ⊥.rec {A = Square refl refl  refl (gen q p proof3)} (<!= proof-sq proof4) i j 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (gt proof3) | (gt proof4) =  ⊥.rec {A = Square refl (sym (gen q s  proof4)) refl (gen q p proof3)} (<!= (trans proof-rp (trans proof-ps proof-sq)) proof2) i j  
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) with fst r ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (lt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) with fst p ≟ fst q 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (lt proof3) | (lt proof4) =  ⊥.rec {A = Square (gen q r proof2) (sym (gen s q  proof4)) refl (gen p q  proof3)} (asym proof2 (weaken (trans proof-rp (trans proof-ps proof-sq)))) i j 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (lt proof3) | (eq proof4) =  ⊥.rec {A = Square (gen q r proof2) refl refl (gen p q  proof3)} (asym proof2 (weaken (trans proof-rp (trans proof-ps proof-sq)))) i j 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (lt proof3) | (gt proof4) =  ⊥.rec {A = Square (gen q r proof2) (sym (gen q s  proof4)) refl (gen p q proof3)} (asym proof2 (weaken (trans proof-rp (trans proof-ps proof-sq)))) i j  
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (eq proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (eq proof3) | (lt proof4) =  ⊥.rec {A = Square (gen q r proof2) (sym (gen s q  proof4)) refl refl} (asym proof2 (weaken (trans proof-rp (trans proof-ps proof-sq)))) i j  
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (eq proof3) | (eq proof4) =  ⊥.rec {A = Square (gen q r proof2) refl refl refl} (asym proof2 (weaken (trans proof-rp (trans proof-ps proof-sq)))) i j  
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (eq proof3) | (gt proof4) =  ⊥.rec {A = Square (gen q r proof2) (sym (gen q s  proof4)) refl refl} (asym proof2 (weaken (trans proof-rp (trans proof-ps proof-sq)))) i j   
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (gt proof3) | (gt proof4) =  ? 
-
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) with fst r ≟ fst q
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (lt proof3) | (gt proof4) =  ?
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (eq proof3) | (gt proof4) =  ?
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (gt proof3) | (gt proof4) =  ?
-
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) with fst r ≟ fst q
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (lt proof3) | (gt proof4) =  ? 
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (eq proof3) | (gt proof4) =  ? 
-
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (gt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (gt proof3) | (lt proof4) =  ⊥.rec {A = Square (gen q r proof2) (sym (gen s q  proof4)) refl (gen q p proof3)} (asym proof2 (weaken (trans proof-rp (trans proof-ps proof-sq)))) i j  
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (gt proof3) | (eq proof4) =  ⊥.rec {A = Square (gen q r proof2) refl refl (gen q p proof3)} (asym proof2 (weaken (trans proof-rp (trans proof-ps proof-sq)))) i j  
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (gt proof3) | (gt proof4) =  ⊥.rec {A = Square (gen q r proof2) (sym (gen q s  proof4)) refl (gen q p proof3)} (asym proof2 (weaken (trans proof-rp (trans proof-ps proof-sq)))) i j   
 
 
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) with fst r ≟ fst s 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) with fst r ≟ fst q
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) with fst r ≟ fst q
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (lt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) with fst p ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (lt proof3) | (lt proof4) =  ⊥.rec {A = Square (gen r q proof2) (sym (gen s q  proof4)) refl (gen p q proof3)} (<!= (trans proof-rp proof-ps) proof) i j  
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (lt proof3) | (eq proof4) =  ⊥.rec {A = Square (gen r q proof2) refl  refl (gen p q proof3)} (<!= (trans proof-rp proof-ps) proof) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (lt proof3) | (gt proof4) =  ⊥.rec {A = Square (gen r q  proof2) (sym (gen q s  proof4)) refl (gen p q proof3)} (<!= (trans proof-rp proof-ps) proof) i j   
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (eq proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (eq proof3) | (lt proof4) =  ⊥.rec {A = Square (gen r q  proof2) (sym (gen s q  proof4)) refl refl} (<!= (trans proof-rp proof-ps) proof) i j  
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (eq proof3) | (eq proof4) =  ⊥.rec {A = Square (gen r q  proof2) refl refl refl} (<!= proof-sq proof4) i j  
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (eq proof3) | (gt proof4) =  ⊥.rec {A = Square (gen r q proof2) (sym (gen q s  proof4)) refl refl} (<!= (trans proof-rp proof-ps) proof) i j   
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (gt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (gt proof3) | (lt proof4) =  ⊥.rec {A = Square (gen r q proof2) (sym (gen s q  proof4)) refl (gen q p proof3)} (<!= (trans proof-rp proof-ps) proof) i j  
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (gt proof3) | (eq proof4) =  ⊥.rec {A = Square (gen r q proof2) refl  refl (gen q p proof3)} (<!= proof-sq proof4) i j  
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (gt proof3) | (gt proof4) =  ⊥.rec {A = Square (gen r q proof2) (sym (gen q s  proof4)) refl (gen q p proof3)} (<!= (trans proof-rp proof-ps) proof) i j   
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) with fst r ≟ fst q
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (lt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) with fst p ≟ fst q
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (eq proof3) | (gt proof4) =  ?
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (lt proof3) | (lt proof4) =  ⊥.rec {A = Square refl (sym (gen s q  proof4)) refl (gen p q proof3)} (<!= (trans proof-rp proof-ps) proof) i j   
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (lt proof3) | (eq proof4) =   ⊥.rec {A = Square refl refl refl (gen p q proof3)} (<!= (trans proof-rp proof-ps) proof) i j      
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (lt proof3) | (gt proof4) =   ⊥.rec {A = Square refl (sym (gen q s  proof4)) refl (gen p q proof3)} (<!= (trans proof-rp proof-ps) proof) i j     
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (gt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (eq proof3) | (lt proof4) =   ⊥.rec {A = Square refl (sym (gen s q  proof4)) refl refl} (<!= (trans proof-rp proof-ps) proof) i j      
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (eq proof3) | (eq proof4) =   base      
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (eq proof3) | (gt proof4) =   ⊥.rec {A = Square refl (sym (gen q s  proof4)) refl refl} (<!= (trans proof-rp proof-ps) proof) i j   
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) with fst r ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (gt proof3) | (lt proof4) =   ⊥.rec {A = Square refl (sym (gen s q  proof4)) refl (gen q p proof3)} (<!= (trans proof-rp proof-ps) proof) i j      
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (gt proof3) | (eq proof4) =   ⊥.rec {A = Square refl refl refl (gen q p proof3)} (<!= (trans proof-rp proof-ps) proof) i j   
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (gt proof3) | (gt proof4) =   ⊥.rec {A = Square refl (sym (gen q s  proof4)) refl (gen q p proof3)} (<!= (trans proof-rp proof-ps) proof) i j    
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (lt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (lt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (lt proof3) | (gt proof4) =  ?
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) with fst p ≟ fst q
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (eq proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (eq proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (eq proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (lt proof3) | (lt proof4) =   ⊥.rec {A = Square (gen q r proof2) (sym (gen s q  proof4)) refl (gen p q proof3)} (<!= (trans proof-rp proof-ps) proof) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (lt proof3) | (eq proof4) =   ⊥.rec {A = Square (gen q r proof2) refl  refl (gen p q proof3)} (<!= (trans proof-rp proof-ps) proof) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (lt proof3) | (gt proof4) =   ⊥.rec {A = Square (gen q r proof2) (sym (gen q s  proof4)) refl (gen p q proof3)} (<!= (trans proof-rp proof-ps) proof) i j 
 
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (gt proof3) | (lt proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (gt proof3) | (eq proof4) =  ?
--- BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (gt proof3) | (gt proof4) =  ? 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (eq proof3) | (lt proof4) =   ⊥.rec {A = Square (gen q r proof2) (sym (gen s q  proof4)) refl refl} (<!= (trans proof-rp proof-ps) proof) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (eq proof3) | (eq proof4) =    ⊥.rec {A = Square (gen q r proof2) refl refl refl} (<!= (trans proof-rp proof-ps) proof) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (eq proof3) | (gt proof4) =    ⊥.rec {A = Square (gen q r proof2) (sym (gen q s  proof4)) refl refl} (<!= (trans proof-rp proof-ps) proof) i j 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (gt proof3) | (lt proof4) =   ⊥.rec {A = Square (gen q r proof2) (sym (gen s q  proof4)) refl (gen q p proof3)} (<!= (trans proof-rp proof-ps) proof) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (gt proof3) | (eq proof4) =   ⊥.rec {A = Square (gen q r proof2) refl refl (gen q p proof3)} (<!= (trans proof-rp proof-ps) proof) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (gt proof3) | (gt proof4) =   ⊥.rec {A = Square (gen q r proof2) (sym (gen q s  proof4)) refl (gen q p proof3)} (<!= (trans proof-rp proof-ps) proof) i j 
+
+
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) with fst r ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) with fst p ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (lt proof3) | (lt proof4) =  ⊥.rec {A = Square (gen r q proof2) (sym (gen s q  proof4)) refl (gen p q proof3)} (asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (lt proof3) | (eq proof4) =  ⊥.rec {A = Square (gen r q proof2) refl refl (gen p q proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (lt proof3) | (gt proof4) =  ⊥.rec {A = Square (gen r q proof2) (sym (gen q s proof4)) refl (gen p q proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (eq proof3) | (lt proof4) =  ⊥.rec {A = Square (gen r q proof2) (sym (gen s q  proof4)) refl refl} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (eq proof3) | (eq proof4) =  ⊥.rec {A = Square (gen r q proof2) refl refl refl} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (eq proof3) | (gt proof4) =  ⊥.rec {A = Square (gen r q proof2) (sym (gen q s  proof4)) refl refl} ( asym proof (weaken (trans proof-rp proof-ps))) i j 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (gt proof3) | (lt proof4) =  ⊥.rec {A = Square (gen r q proof2) (sym (gen s q  proof4)) refl (gen q p proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (gt proof3) | (eq proof4) =  ⊥.rec {A = Square (gen r q proof2) refl refl (gen q p proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (gt proof3) | (gt proof4) =  ⊥.rec {A = Square (gen r q proof2) (sym (gen q s  proof4)) refl (gen q p proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) with fst p ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (lt proof3) | (lt proof4) =  ⊥.rec {A = Square refl (sym (gen s q  proof4)) refl (gen p q proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (lt proof3) | (eq proof4) =  ⊥.rec {A = Square refl refl refl (gen p q proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (lt proof3) | (gt proof4) =  ⊥.rec {A = Square refl (sym (gen q s  proof4)) refl (gen p q proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (eq proof3) | (lt proof4) =  ⊥.rec {A = Square refl (sym (gen s q  proof4)) refl refl} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (eq proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (eq proof3) | (gt proof4) =  ⊥.rec {A = Square refl (sym (gen q s  proof4)) refl refl} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (gt proof3) | (lt proof4) =  ⊥.rec {A = Square refl (sym (gen s q  proof4)) refl (gen q p proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (gt proof3) | (eq proof4) =  ⊥.rec {A = Square refl refl refl (gen q p proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (gt proof3) | (gt proof4) =  ⊥.rec {A = Square refl (sym (gen q s  proof4)) refl (gen q p proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) with fst p ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (lt proof3) | (lt proof4) =   ⊥.rec {A = Square (gen q r proof2) (sym (gen s q  proof4)) refl (gen p q proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (lt proof3) | (eq proof4) =   ⊥.rec {A = Square (gen q r proof2) refl refl (gen p q proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j 
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (lt proof3) | (gt proof4) =     ⊥.rec {A = Square (gen q r proof2) (sym (gen q s  proof4)) refl (gen p q proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (eq proof3) | (lt proof4) =   ⊥.rec {A = Square (gen q r proof2) (sym (gen s q  proof4)) refl refl} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (eq proof3) | (eq proof4) =    ⊥.rec {A = Square (gen q r proof2) refl refl refl } ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (eq proof3) | (gt proof4) =    ⊥.rec {A = Square (gen q r proof2) (sym (gen q s  proof4)) refl refl} ( asym proof (weaken (trans proof-rp proof-ps))) i j 
+
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (gt proof3) | (lt proof4) =   ⊥.rec {A = Square (gen q r proof2) (sym (gen s q  proof4)) refl (gen q p proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (gt proof3) | (eq proof4) =  ⊥.rec {A = Square (gen q r proof2) refl refl (gen q p proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j
+BPureBraid→BPureBraid' n (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (gt proof3) | (gt proof4) =   ⊥.rec {A = Square (gen q r proof2) (sym (gen q s  proof4)) refl (gen q p proof3)} ( asym proof (weaken (trans proof-rp proof-ps))) i j  
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) with fst r ≟ fst s
+-------------------------------------------------------------------------------------------------------------------------------------------
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) with fst r ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) with fst p ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (lt proof3) | (lt proof4) =    fourwayCommutativity r p s q proof-rp proof-ps proof4 proof proof2 proof3 i j -- only possible case
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (lt proof3) | (eq proof4) =  gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (lt proof3) | (gt proof4) =  gen r s proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (eq proof3) | (lt proof4) =  gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (eq proof3) | (eq proof4) =  gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (eq proof3) | (gt proof4) =  gen r s proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (gt proof3) | (lt proof4) =  gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (gt proof3) | (eq proof4) =  gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (lt proof2) | (gt proof3) | (gt proof4) =  gen r s proof j
+
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) with fst p ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (lt proof3) | (lt proof4) = gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (lt proof3) | (eq proof4) = gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (lt proof3) | (gt proof4) = gen r s proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (eq proof3) | (lt proof4) = gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (eq proof3) | (eq proof4) = gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (eq proof3) | (gt proof4) = gen r s proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (gt proof3) | (lt proof4) = gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (gt proof3) | (eq proof4) = gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (eq proof2) | (gt proof3) | (gt proof4) = gen r s proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) with fst p ≟ fst q 
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (lt proof3) | (lt proof4) = gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (lt proof3) | (eq proof4) = gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (lt proof3) | (gt proof4) = gen r s proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (eq proof3) | (lt proof4) = gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (eq proof3) | (eq proof4) = gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (eq proof3) | (gt proof4) = gen r s proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (gt proof3) | (lt proof4) = gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (gt proof3) | (eq proof4) = gen r s proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (lt proof) | (gt proof2) | (gt proof3) | (gt proof4) = gen r s proof j
+
+
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) with fst r ≟ fst q
+
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) with fst p ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (lt proof3) | (lt proof4) = base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (lt proof3) | (eq proof4) = base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (lt proof3) | (gt proof4) = base
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (eq proof3) | (lt proof4) = base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (eq proof3) | (eq proof4) = base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (eq proof3) | (gt proof4) = base
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (gt proof3) | (lt proof4) = base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (gt proof3) | (eq proof4) = base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (lt proof2) | (gt proof3) | (gt proof4) = base
+
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) with fst p ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (lt proof3) | (lt proof4) = base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (lt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (lt proof3) | (gt proof4) =  base
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (eq proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (eq proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (eq proof3) | (gt proof4) =  base
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (gt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (gt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (eq proof2) | (gt proof3) | (gt proof4) =  base
+
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) with fst p ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (lt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (lt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (lt proof3) | (gt proof4) =  base
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (eq proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (eq proof3) | (eq proof4) =   base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (eq proof3) | (gt proof4) =   base
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (gt proof3) | (lt proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (gt proof3) | (eq proof4) =  base
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (eq proof) | (gt proof2) | (gt proof3) | (gt proof4) =  base
+
+
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) with fst r ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) with fst p ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (lt proof3) | (lt proof4) = gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (lt proof3) | (eq proof4) = gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (lt proof3) | (gt proof4) = gen s r proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (eq proof3) | (lt proof4) = gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (eq proof3) | (eq proof4) = gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (eq proof3) | (gt proof4) = gen s r proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (gt proof3) | (lt proof4) = gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (gt proof3) | (eq proof4) = gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (lt proof2) | (gt proof3) | (gt proof4) = gen s r proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) with fst p ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (lt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (lt proof3) | (lt proof4) = gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (lt proof3) | (eq proof4) = gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (lt proof3) | (gt proof4) = gen s r proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (eq proof3) | (lt proof4) = gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (eq proof3) | (eq proof4) = gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (eq proof3) | (gt proof4) = gen s r proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (gt proof3) | (lt proof4) = gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (gt proof3) | (eq proof4) = gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (eq proof2) | (gt proof3) | (gt proof4) = gen s r proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) with fst p ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (lt proof3) with fst s ≟ fst q
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (lt proof3) | (lt proof4) =  gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (lt proof3) | (eq proof4) =  gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (lt proof3) | (gt proof4) =    gen s r proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (eq proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (eq proof3) | (lt proof4) =  gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (eq proof3) | (eq proof4) =   gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (eq proof3) | (gt proof4) =   gen s r proof j
+
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (gt proof3) with fst s ≟ fst q
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (gt proof3) | (lt proof4) =  gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (gt proof3) | (eq proof4) = gen s r proof j
+BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) | (gt proof) | (gt proof2) | (gt proof3) | (gt proof4) = gen s r proof j   
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-BPureBraid→BPureBraid' n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) = {!  !} 
-
-
--------------------------------------------------------------------------------------------------------------------------------------------
