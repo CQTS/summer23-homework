@@ -27,44 +27,16 @@ from n (twoGenCommutativity2 p q r s proof-pr proof-ps proof-rq proof-sq i j) = 
 
 from n (threeGenCommutativityConnector r p q i) with fst p ≟ fst q   | fst r ≟ fst p | fst r ≟ fst q
 ...                                                 | (lt proof)     | (lt proof2)| (lt proof3) = threeGenCommutativityConnector r p q proof2 proof i
-...                                                 | (lt proof)     | (lt proof2)| (eq proof3) = base
-...                                                 | (lt proof)     | (lt proof2)| (gt proof3) = base
-
-...                                                 | (lt proof)     | (eq proof2)| (lt proof3) = base
-...                                                 | (lt proof)     | (eq proof2)| (eq proof3) = base
-...                                                 | (lt proof)     | (eq proof2)| (gt proof3) = base
-
-...                                                 | (lt proof)     | (gt proof2)| (lt proof3) = base
-...                                                 | (lt proof)     | (gt proof2)| (eq proof3) = base
-...                                                 | (lt proof)     | (gt proof2)| (gt proof3) = base
-
-...                                                 | (eq proof)     | (lt proof2)| (lt proof3) = base
-...                                                 | (eq proof)     | (lt proof2)| (eq proof3) = base
-...                                                 | (eq proof)     | (lt proof2)| (gt proof3) = base
-
-...                                                 | (eq proof)     | (eq proof2)| (lt proof3) = base
-...                                                 | (eq proof)     | (eq proof2)| (eq proof3) = base
-...                                                 | (eq proof)     | (eq proof2)| (gt proof3) = base
-
-...                                                 | (eq proof)     | (gt proof2)| (lt proof3) = base
-...                                                 | (eq proof)     | (gt proof2)| (eq proof3) = base
-...                                                 | (eq proof)     | (gt proof2)| (gt proof3) = base
-
-...                                                 | (gt proof)     | (lt proof2)| (lt proof3) = base
-...                                                 | (gt proof)     | (lt proof2)| (eq proof3) = base
-...                                                 | (gt proof)     | (lt proof2)| (gt proof3) = base
-
-...                                                 | (gt proof)     | (eq proof2)| (lt proof3) = base
-...                                                 | (gt proof)     | (eq proof2)| (eq proof3) = base
-...                                                 | (gt proof)     | (eq proof2)| (gt proof3) = base
-
-...                                                 | (gt proof)     | (gt proof2)| (lt proof3) = base
-...                                                 | (gt proof)     | (gt proof2)| (eq proof3) = base
 ...                                                 | (gt proof)     | (gt proof2)| (gt proof3) = threeGenCommutativityConnector q p r proof proof2 i
+...                                                 | _              | _          | _           = base 
+
 
 
 from n (threeGenCommutativityLeft r p q i j) with fst p ≟ fst q   | fst r ≟ fst p | fst r ≟ fst q
 ...                                                 | (lt proof)     | (lt proof2)| (lt proof3) = threeGenCommutativityLeft r p q proof2 proof i j
+...                                                 | (gt proof)     | (gt proof2)| (gt proof3) = {!   !}
+
+
 ...                                                 | (lt proof)     | (lt proof2)| (eq proof3) = {!   !}
 ...                                                 | (lt proof)     | (lt proof2)| (gt proof3) = {!   !}
 
@@ -98,7 +70,6 @@ from n (threeGenCommutativityLeft r p q i j) with fst p ≟ fst q   | fst r ≟ 
 
 ...                                                 | (gt proof)     | (gt proof2)| (lt proof3) = {!   !}
 ...                                                 | (gt proof)     | (gt proof2)| (eq proof3) = {!   !}
-...                                                 | (gt proof)     | (gt proof2)| (gt proof3) = doubleCompPath-filler (gen q p) (sym (gen q r)) (gen p r) {!  i !}  {!   !} --threeGenCommutativityLeft q p r proof proof2 {! i !} {!   !}
 
 
 
@@ -119,25 +90,37 @@ from n (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) = fourGenCo
 
 
 PBraid-Iso-PBraid' : ∀ n →  Iso (BPureBraid n) (BPureBraid' n)
-PBraid-Iso-PBraid' n = iso (to n) (from n) s r
+PBraid-Iso-PBraid' n = iso (to n) (from n) sec ret
     where 
-        s : section (to n) (from n)
-        s base = {!   !}
-        s (gen p q i) = {!   !}
-        s (identity p i j) = {!   !}
-        s (genEquality p q i j) = {!   !}
-        s (twoGenCommutativity1 p q r s₁ proof-rp proof-sp proof-rq proof-sq i j) = {!   !}
-        s (twoGenCommutativity2 p q r s₁ proof-pr proof-ps proof-rq proof-sq i j) = {!   !}
-        s (threeGenCommutativityConnector r p q i) = {!   !}
-        s (threeGenCommutativityLeft r p q i j) = {!   !}
-        s (threeGenCommutativityMiddle r p q i j) = {!   !}
-        s (threeGenCommutativityRight r p q i j) = {!   !}
-        s (fourGenCommutativityConnector r p s₁ q proof-rp proof-ps proof-sq i) = {!   !}
-        s (fourGenCommutativityComposition r p s₁ q proof-rp proof-ps proof-sq i j) = {!   !}
-        s (fourGenCommutativity r p s₁ q proof-rp proof-ps proof-sq i j) = {!   !}
+        sec : section (to n) (from n)
+        sec base = refl
+        sec (gen p q i) j = (gen p q) i
+        sec (identity p i j) k = identity p i j
+        sec (genEquality p q i j) k = genEquality p q i j
+        sec (twoGenCommutativity1 p q r s proof-rp proof-sp proof-rq proof-sq i j) k = twoGenCommutativity1 p q r s proof-rp proof-sp proof-rq proof-sq i j
+        sec (twoGenCommutativity2 p q r s proof-pr proof-ps proof-rq proof-sq i j) k = twoGenCommutativity2 p q r s proof-pr proof-ps proof-rq proof-sq i j
+        sec (threeGenCommutativityConnector r p q i) j = {!   !}
+        sec (threeGenCommutativityLeft r p q i j) k = {!   !}
+        sec (threeGenCommutativityMiddle r p q i j) k = {!   !}
+        sec (threeGenCommutativityRight r p q i j) k = {!   !}
+        sec (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) j = fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i
+        sec (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j) k = fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i j
+        sec (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) k = fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j
 
-        r : retract (to n) (from n)
-        r b  = {!   !}
+        ret : retract (to n) (from n)
+        ret base = {!!}
+        ret (gen p q i) = {!!}
+        ret (identity p i i₁) = {!!}
+        ret (genEquality p q i i₁) = {!!}
+        ret (twoGenCommutativity1 p q r s proof-rp proof-sp proof-rq proof-sq i i₁) = {!!}
+        ret (twoGenCommutativity2 p q r s proof-pr proof-ps proof-rq proof-sq i i₁) = {!!}
+        ret (threeGenCommutativityConnector r p q proof-rp proof-pq i) = {!!}
+        ret (threeGenCommutativityLeft r p q proof-rp proof-pq i i₁) = {!!}
+        ret (threeGenCommutativityMiddle r p q proof-rp proof-pq i i₁) = {!!}
+        ret (threeGenCommutativityRight r p q proof-rp proof-pq i i₁) = {!!}
+        ret (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq i) = {!!}
+        ret (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i i₁) = {!!}
+        ret (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i i₁) = {!!}
 
   
   
