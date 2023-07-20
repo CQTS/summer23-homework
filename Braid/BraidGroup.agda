@@ -33,7 +33,8 @@ data Braid (n : ℕ) : Type where
                   σⱼ                                   i
 
     -}
-    commutativity : (i j : Fin n) → (abs (fst i ℕ- fst j) > 1) → Square (gen i) (gen i) (gen j) (gen j)      
+    commutativity1 : (p q : Fin n) → (proof-pq : suc (toℕ p) < (toℕ q) ) → Square (gen p) (gen p) (gen q) (gen q)      
+    commutativity2 : (p q : Fin n) → (proof-qp : suc (toℕ q) < (toℕ p) ) → Square (gen p) (gen p) (gen q) (gen q)      
     
 
 
@@ -63,7 +64,9 @@ data Braid (n : ℕ) : Type where
 addGen : {n : ℕ} (b : Braid n) → Braid (suc n)
 addGen base = base
 addGen (gen (m , proof) i) = gen (m , ≤-suc proof) i
-addGen (commutativity p q constraint i j) = commutativity (toℕ p , ≤-suc (snd p)) (toℕ q , ≤-suc (snd q)) constraint i j
+addGen (commutativity1 p q proof-pq i j) = commutativity1 (toℕ p , ≤-suc (snd p)) (toℕ q , ≤-suc (snd q)) proof-pq i j
+addGen (commutativity2 p q proof-qp i j) = commutativity2 (toℕ p , ≤-suc (snd p)) (toℕ q , ≤-suc (snd q)) proof-qp i j
+
 addGen (pullThroughMid k constraint i) = pullThroughMid (toℕ k , ≤-suc (snd k)) (≤-suc constraint) i
 addGen (pullThroughTop k proof i j) = pullThroughTop ( toℕ k , ≤-suc (snd k)) (≤-suc proof) i j
 addGen (pullThroughBottom k proof i j) = pullThroughBottom ( toℕ k , ≤-suc (snd k)) (≤-suc proof) i j
@@ -90,29 +93,28 @@ We get a square which is :
 
 Which gives us the path  σ₀ ≡ σ₀ · σ₀ , a contradiction!!
 
+delGen : {n : ℕ} (b : Braid (suc n) ) → Braid n
+delGen base = base
+delGen (gen (zero , proof) i) = base
+delGen (gen (suc m , proof) i) = gen (m , pred-≤-pred proof) i
+
+
+delGen (commutativity (zero , proof-m) (zero , proof-n) constraint i j) = base
+delGen (commutativity (zero , proof-m) (suc n , proof-n) constraint i j) = gen (n , pred-≤-pred proof-n) i
+delGen (commutativity (suc m , proof-m) (zero , proof-n) constraint i j) = gen (m , pred-≤-pred proof-m) j
+delGen (commutativity (suc m , proof-m) (suc n , proof-n) constraint i j) = commutativity (m , pred-≤-pred proof-m) (n , pred-≤-pred proof-n) constraint i j
+
+
+delGen (pullThroughMid (zero , proof) constraint i) = gen (zero , pred-≤-pred constraint) i
+delGen (pullThroughMid (suc m , proof) constraint i) = pullThroughMid (m , pred-≤-pred proof) (pred-≤-pred constraint) i
+
+delGen (pullThroughTop (zero , proof) constraint i j) = gen (zero , pred-≤-pred constraint) i
+delGen (pullThroughTop (suc m , proof) constraint i j) = pullThroughTop (m , pred-≤-pred proof) (pred-≤-pred constraint) i j
+
+delGen (pullThroughBottom (zero , proof) constraint i j) =  gen (zero , pred-≤-pred constraint) {! j  !}
+delGen (pullThroughBottom (suc m , proof) constraint i j) = pullThroughBottom (m , pred-≤-pred proof) (pred-≤-pred constraint) i j  
+
 -}
-
--- delGen : {n : ℕ} (b : Braid (suc n) ) → Braid n
--- delGen base = base
--- delGen (gen (zero , proof) i) = base
--- delGen (gen (suc m , proof) i) = gen (m , pred-≤-pred proof) i
-
-
--- delGen (commutativity (zero , proof-m) (zero , proof-n) constraint i j) = base
--- delGen (commutativity (zero , proof-m) (suc n , proof-n) constraint i j) = gen (n , pred-≤-pred proof-n) i
--- delGen (commutativity (suc m , proof-m) (zero , proof-n) constraint i j) = gen (m , pred-≤-pred proof-m) j
--- delGen (commutativity (suc m , proof-m) (suc n , proof-n) constraint i j) = commutativity (m , pred-≤-pred proof-m) (n , pred-≤-pred proof-n) constraint i j
-
-
--- delGen (pullThroughMid (zero , proof) constraint i) = gen (zero , pred-≤-pred constraint) i
--- delGen (pullThroughMid (suc m , proof) constraint i) = pullThroughMid (m , pred-≤-pred proof) (pred-≤-pred constraint) i
-
--- delGen (pullThroughTop (zero , proof) constraint i j) = gen (zero , pred-≤-pred constraint) i
--- delGen (pullThroughTop (suc m , proof) constraint i j) = pullThroughTop (m , pred-≤-pred proof) (pred-≤-pred constraint) i j
-
--- delGen (pullThroughBottom (zero , proof) constraint i j) =  gen (zero , pred-≤-pred constraint) {! j  !}
--- delGen (pullThroughBottom (suc m , proof) constraint i j) = pullThroughBottom (m , pred-≤-pred proof) (pred-≤-pred constraint) i j  
-
 
 
 
