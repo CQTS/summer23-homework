@@ -2,10 +2,13 @@
 
 
 module Braid.PureBraidAlt where
+
+open import Cubical.Core.Primitives
 open import Cubical.Foundations.Prelude
-open import Cubical.Data.Nat.Base
-open import Cubical.Data.Fin.Base
-open import Cubical.Data.Nat.Order renaming (pred-≤-pred to pred ; ≤-suc to sucP)
+open import Cubical.Data.Nat
+open import Cubical.Data.Fin
+open import Cubical.Data.Nat.Order renaming (pred-≤-pred to pred ; ≤-suc to sucP ; ¬-<-zero to !<0 ; ¬m<m to !m<m ;
+                                             <-weaken to weaken; <-asym to asym ; <-trans to trans ; <→≢  to <!=)
 open import Cubical.Data.Empty as ⊥
 
 
@@ -368,7 +371,7 @@ deletion (fourwayCommutativityConnector (suc r , proof-r) (zero , proof-p) (zero
 
 --possible cases
 deletion (fourwayCommutativityConnector (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i) =
-    CommonComposer (s , pred proof-s) (p , pred proof-p) (q , pred proof-q) (pred proof-sq) (pred proof-pq) i
+    CommonComposer (p , pred proof-p) (s , pred proof-s) (q , pred proof-q) (pred proof-pq) (pred proof-sq) i
 
 deletion (fourwayCommutativityConnector (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i) =
   fourwayCommutativityConnector 
@@ -388,6 +391,7 @@ deletion (fourwayCommutativityComposition (suc r , proof-r) (suc p , proof-p) (z
 deletion (fourwayCommutativityComposition (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = base
 
 
+-- generators only exist if strand q isnt deleted
 deletion (fourwayCommutativityComposition (zero , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = 
     gen (s , pred proof-s) (q , pred proof-q) (pred proof-sq) (i ∧ ( ~ j))
 
@@ -402,23 +406,27 @@ deletion (fourwayCommutativityComposition (suc r , proof-r) (zero , proof-p) (su
     ⊥.rec {A = Square 
                 (gen (r , pred proof-r) (q , pred proof-q) (pred proof-rq))
                 (sym (gen (s , pred proof-s) (q , pred proof-q) (pred proof-sq)))
-                ((gen (r , pred proof-r) (q , pred proof-q) (pred proof-rq)) ∙ (gen (s , pred proof-s) (q , pred proof-q) (pred proof-sq) ))
+                (CommonComposer (r , pred proof-r) (s , pred proof-s)
+                (q , pred proof-q) (pred proof-rq) (pred proof-sq))
                 refl }
-            (¬-<-zero proof-rp) i j
+            (!<0 proof-rp) i j
 
 deletion (fourwayCommutativityComposition (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = 
     ⊥.rec {A = Square
                 (gen (r , pred proof-r) (q , pred proof-q) (pred proof-rq))
                 refl 
-                ((gen (r , pred proof-r) (q , pred proof-q) (pred proof-rq)) ∙ (gen (p , pred proof-p) (q , pred proof-q) (pred proof-pq)))
+                (CommonComposer (r , pred proof-r) (p , pred proof-p)
+                (q , pred proof-q) (pred proof-rq) (pred proof-pq))
                 (gen (p , pred proof-p) (q , pred proof-q) (pred proof-pq)) }
-        (¬-<-zero proof-ps) i j
+        (!<0 proof-ps) i j 
+
 
 
 -- possible cases
-deletion (fourwayCommutativityComposition (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = 
-    {!   !}
-    -- compPath-filler (gen (p , pred proof-p) ( q , pred proof-q  ) ( pred proof-pq  )) ( gen (s , pred proof-s) (q , pred proof-q) ( pred proof-sq) )  (~ j) i
+deletion (fourwayCommutativityComposition (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) =
+    compPath-filler 
+      (gen (p , pred proof-p) (q , pred proof-q) (pred proof-pq))
+      (gen (s , pred proof-s) (q , pred proof-q) (pred proof-sq)) (~ j) i
 
 
 deletion (fourwayCommutativityComposition (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rq proof-pq i j) = 
@@ -440,7 +448,8 @@ deletion (fourwayCommutativity (zero , proof-r) (suc p , proof-p) (suc s , proof
 deletion (fourwayCommutativity (suc r , proof-r) (zero , proof-p) (zero , proof-s) (zero , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = base
 
 deletion (fourwayCommutativity (suc r , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = 
-    {!    !}
+    CommonComposer (r , pred proof-r) (p , pred proof-p)
+         (q , pred proof-q) (pred proof-rq) (pred proof-pq) i
 
 deletion (fourwayCommutativity (zero , proof-r) (suc p , proof-p) (zero , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j)  = 
     gen (p , pred proof-p) (q , pred proof-q) (pred proof-pq) i
@@ -452,7 +461,15 @@ deletion (fourwayCommutativity (suc r , proof-r) (zero , proof-p) (suc s , proof
     gen (r , pred proof-r) (s , pred proof-s) (pred proof-rs) j
     
 deletion (fourwayCommutativity (suc r , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) =
-     {!   !}
+     ⊥.rec {A = Square 
+                    (gen (r , pred proof-r) (s , pred proof-s) (pred proof-rs)) 
+                    (gen (r , pred proof-r) (s , pred proof-s) (pred proof-rs))
+                    (CommonComposer (r , pred proof-r) (s , pred proof-s)
+                    (q , pred proof-q) (pred proof-rq) (pred proof-sq))
+                    (CommonComposer (r , pred proof-r) (s , pred proof-s)
+                    (q , pred proof-q) (pred proof-rq) (pred proof-sq))
+                }
+                (!<0 proof-rp) i  j
 
 deletion (fourwayCommutativity (zero , proof-r) (zero , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j)  = 
     gen (s ,  pred proof-s) (q ,  pred proof-q) ( pred proof-sq)  i
@@ -463,7 +480,7 @@ deletion (fourwayCommutativity (suc r , proof-r) (suc p , proof-p) (suc s , proo
 
 -- possible cases
 deletion {n = n} (fourwayCommutativity (zero , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = 
-    CommonComposer (s , pred proof-s) (p , pred proof-p) (q , pred proof-q) (pred proof-sq) (pred proof-pq) i
+    CommonComposer (p , pred proof-p) (s , pred proof-s) (q , pred proof-q) (pred proof-pq) (pred proof-sq) i
 
 -- fourwayCommutativityConnector (zero , {! zero-≤ {n = n}  !}) (p , pred proof-p) (s , pred proof-s) (q , pred proof-q) {!  !} (pred proof-ps) (pred proof-sq) i
 deletion (fourwayCommutativity (suc r , proof-r) (suc p , proof-p) (suc s , proof-s) (suc q , proof-q) proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = 

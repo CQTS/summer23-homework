@@ -7,7 +7,7 @@ open import Cubical.Foundations.Prelude
 open import Cubical.Data.Nat
 open import Cubical.Data.Fin 
 open import Cubical.Data.Int
-open import Cubical.Data.Nat.Order renaming (pred-≤-pred to pred ; suc-< to presuc ; ¬-<-zero to !<0 ; ¬m<m to !m<m ; <-weaken to weaken; <-asym to asym ; <-trans to trans ; <→≢ to <!=)
+open import Cubical.Data.Nat.Order renaming (pred-≤-pred to pred ; suc-< to presuc ; ¬-<-zero to !<0 ; ¬m<m to !m<m ; <-weaken to weaken; <-asym to asym ; <-trans to trans ; <→≢  to <!=)
 open import Cubical.Foundations.GroupoidLaws
 open import Cubical.Data.Empty as ⊥
 
