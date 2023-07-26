@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 
 
-module Braid.PureBraidAlt where
+module Braid.PureBraidAlt' where
 
 open import Cubical.Core.Primitives
 open import Cubical.Foundations.Prelude
@@ -16,17 +16,17 @@ open import Cubical.Data.Empty as ⊥
 
 
 
-data BPureBraid' (n : ℕ) :  Type where -- pure braid group of n strands
+data BPureBraid' (n : ℕ) :  Type where -- pure braid group of n + 1 strands
   base : BPureBraid' n
-  gen  : (p q : Fin n) → (proof-pq : toℕ p < toℕ q)  → base ≡ base
+  gen  : (p q : Fin (suc n)) → (proof-pq : toℕ p < toℕ q)  → base ≡ base
 
-  twoGencommutativity1 : (p q r s : Fin n)
+  twoGencommutativity1 : (p q r s : Fin (suc n))
                           → (proof-rs : toℕ r < toℕ s)
                           → ( proof-sp : toℕ s < toℕ p)
                           → ( proof-pq : toℕ p < toℕ q)
                           →  Square (gen p q proof-pq)  (gen p q proof-pq) (gen r s proof-rs ) (gen r s proof-rs)
 
-  twoGencommutativity2 : (p q r s : Fin n) 
+  twoGencommutativity2 : (p q r s : Fin (suc n)) 
                           → (proof-pr : toℕ p < toℕ r)
                           → ( proof-rs : toℕ r < toℕ s)
                           → ( proof-sq : toℕ s < toℕ q)
@@ -44,13 +44,13 @@ data BPureBraid' (n : ℕ) :  Type where -- pure braid group of n strands
 --            b — — — > b                       b — — — > b                          b — — — > b
 --             sym (A p q)                       3wayCommon                             A r q
 
-  threeGenCommutativityConnector : (r p q : Fin n) 
+  threeGenCommutativityConnector : (r p q : Fin (suc n)) 
                                 → (proof-rp : toℕ r < toℕ p) 
                                 → (proof-pq : toℕ p < toℕ q) 
                                 → (proof-rq : toℕ r < toℕ q) 
                                 → base ≡ base
 
-  threeGenCommutativityLeft : (r p q : Fin n) 
+  threeGenCommutativityLeft : (r p q : Fin (suc n)) 
                                 → (proof-rp : toℕ r < toℕ p) 
                                 → (proof-pq : toℕ p < toℕ q) 
                                 → (proof-rq : toℕ r < toℕ q) 
@@ -60,7 +60,7 @@ data BPureBraid' (n : ℕ) :  Type where -- pure braid group of n strands
                                     (threeGenCommutativityConnector r p q proof-rp proof-pq proof-rq)
                                     (gen r p proof-rp )
 
-  threeGenCommutativityMiddle : (r p q : Fin n) 
+  threeGenCommutativityMiddle : (r p q : Fin (suc n)) 
                                 → (proof-rp : toℕ r < toℕ p) 
                                 → (proof-pq : toℕ p < toℕ q) 
                                 → (proof-rq : toℕ r < toℕ q) 
@@ -71,7 +71,7 @@ data BPureBraid' (n : ℕ) :  Type where -- pure braid group of n strands
                                     (gen r q proof-rq)
 
                                                                                                                                       
-  threeGenCommutativityRight : (r p q : Fin n) 
+  threeGenCommutativityRight : (r p q : Fin (suc n)) 
                                 → (proof-rp : toℕ r < toℕ p) 
                                 → (proof-pq : toℕ p < toℕ q) 
                                 → (proof-rq : toℕ r < toℕ q) 
@@ -84,7 +84,7 @@ data BPureBraid' (n : ℕ) :  Type where -- pure braid group of n strands
 
 
 
-  fourGenCommutativityConnector : (r p s q : Fin n) 
+  fourGenCommutativityConnector : (r p s q : Fin (suc n)) 
                                   → (proof-rp : toℕ r < toℕ p) 
                                   → (proof-ps : toℕ p < toℕ s) 
                                   → (proof-sq : toℕ s < toℕ q) 
@@ -100,7 +100,7 @@ data BPureBraid' (n : ℕ) :  Type where -- pure braid group of n strands
       --        b - - - > b
       --            Conn
 
-  fourGenCommutativityComposition : (r p s q : Fin n) 
+  fourGenCommutativityComposition : (r p s q : Fin (suc n)) 
                                     → (proof-rp : toℕ r < toℕ p) 
                                     → (proof-ps : toℕ p < toℕ s) 
                                     → (proof-sq : toℕ s < toℕ q) 
@@ -112,7 +112,7 @@ data BPureBraid' (n : ℕ) :  Type where -- pure braid group of n strands
                                           (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq proof-rq proof-pq )
                                           (gen p q proof-pq)
 
-  fourGenCommutativity : (r p s q : Fin n) 
+  fourGenCommutativity : (r p s q : Fin (suc n)) 
                                     → (proof-rp : toℕ r < toℕ p) 
                                     → (proof-ps : toℕ p < toℕ s) 
                                     → (proof-sq : toℕ s < toℕ q) 
@@ -126,10 +126,10 @@ data BPureBraid' (n : ℕ) :  Type where -- pure braid group of n strands
                                           (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq proof-rq proof-pq)
 
 
-GenComposer : {n : ℕ} (p q r s : Fin n) → (proof-pq : toℕ p < toℕ q) → (proof-rs : toℕ r < toℕ s)  → Path (BPureBraid' n) base base
+GenComposer : {n : ℕ} (p q r s : Fin (suc n)) → (proof-pq : toℕ p < toℕ q) → (proof-rs : toℕ r < toℕ s)  → Path (BPureBraid' n) base base
 GenComposer p q r s proof-pq proof-rs = (gen p q proof-pq) ∙ (gen r s proof-rs)
 
-CommonComposer : {n : ℕ} (r p q : Fin n) → (proof-rq : toℕ r < toℕ q) → (proof-pq : toℕ p < toℕ q) → Path (BPureBraid' n) base base
+CommonComposer : {n : ℕ} (r p q : Fin (suc n)) → (proof-rq : toℕ r < toℕ q) → (proof-pq : toℕ p < toℕ q) → Path (BPureBraid' n) base base
 CommonComposer r p q proof-rq proof-pq = GenComposer r q p q proof-rq proof-pq
 
 

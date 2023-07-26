@@ -26,6 +26,9 @@ GenHelperZero n (suc (suc q)) proof-q = gen (suc q , presuc proof-q) ∙∙ (Gen
 
 
 
+
+
+
 GenConvertor : {n : ℕ}  →  (p : ℕ) → (q : ℕ) → (p < n) → (q < n) → (p < q) → Path (Braid n) base base
 
 -- 3 base cases
@@ -36,6 +39,18 @@ GenConvertor {n = suc n} zero q proof-p proof-q proof-pq = GenHelperZero (suc n)
 GenConvertor {n = suc n} (suc p) zero proof-p proof-q proof-pq i = ⊥.rec {A = Path (Braid (suc n)) base base} (!<0 proof-pq) i
 
 GenConvertor {n = suc n} (suc p) (suc q) proof-p proof-q proof-pq i = addGen {n = n} (GenConvertor {n = n} p q (pred proof-p) (pred proof-q) (pred proof-pq) i) 
+
+
+
+CommutativityHelperZero : (n : ℕ)  →  (p q s : ℕ)              --  
+                      → (p < n) → (q < n) → (s < n)             -- proofs to make them fin n
+                      → (p < q)                                 -- to use only one presentation a generator
+                      → (s < p) → (s < q)   -- conditions for commutativity
+                      → (Path (Braid n) base base)
+CommutativityHelperZero = ?
+
+
+
 
 
 
@@ -64,6 +79,8 @@ CommutativityHelper (suc a) (suc b) (suc c) (suc d) p-a p-b p-c p-d ab cd ca cb 
 
 -- A₁₃  = σ₂ σ₁² σ₂⁻¹   A₁₃ . A₄₅ =  σ₂ σ₁² σ₂⁻¹ . σ₄ σ₄
 -- A₄₅  = σ₄ σ₄         A₄₅ . A₁₃ =  σ₄ σ₄ . σ₂ σ₁² σ₂⁻¹
+
+
 
 
 

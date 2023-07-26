@@ -22,7 +22,7 @@ data Braid (n : ℕ) : Type where
 
     {-
     σᵢ is the ith generator
-    Commutativity : σᵢσ­ⱼ = σ­ⱼσᵢ   0 ≤ i , j ≤ n - 1 ;  |i - j| ≥ 2 <=> |i - j| > 1
+    Commutativity : σᵢσ­ⱼ = σ­ⱼσᵢ   0 ≤ i,j ≤ n - 1 ;  |i - j| ≥ 2 <=> |i - j| > 1
       
                    σⱼ
                b - - - > b

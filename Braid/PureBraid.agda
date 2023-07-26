@@ -13,7 +13,7 @@ open import Cubical.Data.Empty as ⊥
 
 
 
-data BPureBraid (n : ℕ) :  Type where -- the space whose loops are the pure braid group of n strands
+data BPureBraid (n : ℕ) :  Type where -- pure braid group of n strands
   base : BPureBraid n
   gen  : (p q : Fin n)  → base ≡ base
   identity : (p : Fin n) → Square (gen p p) refl refl refl
