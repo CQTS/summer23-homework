@@ -68,12 +68,25 @@ GenConvertor {n = suc n} (suc p) (suc q) proof-p proof-q proof-pq i = addGen {n 
 
 
 
+
+
+{-
+   
+                   σⱼ                                σⱼ²
+               b - - - > b                       b - - - > b
+               ^         ^                       ^         ^
+          σᵢ   |         |  σᵢ        --->   σᵢ  |         | σᵢ
+               |         |                       |         |
+               b — — — > b                       b - - - > b    
+                  σⱼ                                 σⱼ²
+-}
+
 SwapCompositions1 : {n : ℕ} → (p q : ℕ) → (proof-p : p < n) → (proof-q : q < n) → ((suc p) < q) → 
-    Square (Gen (p , proof-p) ^ 2) (Gen (p , proof-p) ^ 2) (gen (q , proof-q)) (gen (q , proof-q)) 
+    Square (gen (p , proof-p)) (gen (p , proof-p)) (Gen (q , proof-q) ^ 2) (Gen (q , proof-q) ^ 2) 
     
--- using vertical composition to get the required square-- using vertical composition to get the required square
+-- using vertical composition to get the required square
 SwapCompositions1 p q proof-p proof-q proof-pq = 
-    (Braid.commutativity1 (p , proof-p) (q , proof-q) proof-pq) ∙₂ (Braid.commutativity1 (p , proof-p) (q , proof-q) proof-pq)
+    (Braid.commutativity1 (p , proof-p) (q , proof-q) proof-pq) ∙v' (Braid.commutativity1 (p , proof-p) (q , proof-q) proof-pq)
 
 
 SwapCompositions2 : {n : ℕ} → (p q : ℕ) → (proof-p : p < n) → (proof-q : q < n) → ((suc q) < p)→ 
@@ -82,12 +95,13 @@ SwapCompositions2 p q proof-p proof-q proof-qp =
      (Braid.commutativity2 (p , proof-p) (q , proof-q) proof-qp) ∙v' (Braid.commutativity2 (p , proof-p) (q , proof-q) proof-qp)
 
 
+
+-- this function can swap the image of a Pure Braid generator and a single Braid group generator
 GenSwapper : {n : ℕ} → (p q r : ℕ) → (proof-p : p < (suc n)) → (proof-q : q < (suc n)) → (proof-r : r < n) → (proof-pq : p < q) → (proof-qr : q < r) →
-    Square (GenConvertor p q proof-p proof-q proof-pq) (GenConvertor p q proof-p proof-q proof-pq)  (gen (r , proof-r)) (gen (r , proof-r))
+    Square  (gen (r , proof-r)) (gen (r , proof-r)) (GenConvertor p q proof-p proof-q proof-pq) (GenConvertor p q proof-p proof-q proof-pq)
 
 GenSwapper zero zero r proof-p proof-q proof-r proof-pq proof-qr = ⊥.rec (!<0 proof-pq)
-
-GenSwapper zero (suc zero) r proof-p proof-q proof-r proof-pq proof-qr = {! SwapCompositions1  zero r (pred proof-q) proof-r proof-qr  !}
+GenSwapper zero (suc zero) r proof-p proof-q proof-r proof-pq proof-qr i j =  SwapCompositions1 zero r (pred proof-q) proof-r proof-qr {!!} {!!}    
 
 GenSwapper zero (suc (suc q)) r proof-p proof-q proof-r proof-pq proof-qr = {!   !}
 GenSwapper (suc p) zero r proof-p proof-q proof-r proof-pq proof-qr = {!   !}
@@ -148,3 +162,4 @@ PBraid≤Braid (threeGenCommutativityRight r p q proof-rp proof-pq proof-rq i j)
 PBraid≤Braid (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq proof-rq proof-pq i) = {!   !}
 PBraid≤Braid (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq proof-rq proof-pq i j) = {!   !}
 PBraid≤Braid (fourGenCommutativity r p s q proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = {!   !}
+ 
