@@ -42,9 +42,15 @@ Gen p ^ (suc zero) = gen p
 Gen p ^ (suc (suc k)) = gen p ∙ (Gen p ^ (suc k))
 
 
--- when p = 0 i.e A₀ₖ 
--- q and p are Fin (suc n) so that Pure Braid has n + 1 strands to match Braid n
+
 GenHelperZero : (n : ℕ) (q : ℕ) → (q < (suc n)) → Path (Braid n) base base
+{-
+
+when p = 0 i.e A₀ₖ 
+q and p are Fin (suc n) so that Pure Braid has n + 1 strands to match Braid n
+
+-}
+
 
 -- 3 base cases
 GenHelperZero zero zero proof-q = refl
@@ -52,7 +58,9 @@ GenHelperZero zero (suc q) proof-q = ⊥.rec (!<0 (pred proof-q))
 GenHelperZero (suc n) zero proof-q = refl
 
 GenHelperZero (suc n) (suc zero) proof-q = gen (zero , zero-<-suc n) ∙ gen (zero , zero-<-suc n)
-GenHelperZero (suc n) (suc (suc q)) proof-q = gen (suc q , pred proof-q) ∙∙ GenHelperZero (suc n) (suc q) (presuc proof-q) ∙∙  sym (gen (suc q , pred proof-q))
+GenHelperZero (suc n) (suc (suc q)) proof-q = 
+    gen (suc q , pred proof-q) ∙∙ GenHelperZero (suc n) (suc q) (presuc proof-q) ∙∙  sym (gen (suc q , pred proof-q))
+
 
 GenConvertor : {n : ℕ}  →  (p q : ℕ) → (p < (suc n)) → (q < (suc n)) → (p < q) → Path (Braid n) base base
 
@@ -63,14 +71,22 @@ GenConvertor {n = zero} p (suc q) proof-p proof-q proof-pq = ⊥.rec (!<0 (pred 
 GenConvertor {n = suc n} zero q proof-p proof-q proof-pq = GenHelperZero (suc n) q proof-q
 GenConvertor {n = suc n} (suc p) zero proof-p proof-q proof-pq = ⊥.rec (!<0 proof-pq)
 
-GenConvertor {n = suc n} (suc p) (suc q) proof-p proof-q proof-pq i = addGen {n = n} ((GenConvertor {n = n} p q (pred proof-p) (pred proof-q) (pred proof-pq) i))
+GenConvertor {n = suc n} (suc p) (suc q) proof-p proof-q proof-pq i = 
+    addGen {n = n} ((GenConvertor {n = n} p q (pred proof-p) (pred proof-q) (pred proof-pq) i))
 
 
 
 
-
-
-{-
+SwapCompositions1 : {n : ℕ} → (p q : ℕ)
+                            → (proof-p : p < n) → (proof-q : q < n) --proofs to make them Fin n
+                            → ((suc p) < q) -- condition for commutativity 1
+                            → Square 
+                                (gen (p , proof-p)) 
+                                (gen (p , proof-p))
+                                (Gen (q , proof-q) ^ 2)
+                                (Gen (q , proof-q) ^ 2) 
+    
+ {-
    
                    σⱼ                                σⱼ²
                b - - - > b                       b - - - > b
@@ -79,26 +95,36 @@ GenConvertor {n = suc n} (suc p) (suc q) proof-p proof-q proof-pq i = addGen {n 
                |         |                       |         |
                b — — — > b                       b - - - > b    
                   σⱼ                                 σⱼ²
--}
-
-SwapCompositions1 : {n : ℕ} → (p q : ℕ) → (proof-p : p < n) → (proof-q : q < n) → ((suc p) < q) → 
-    Square (gen (p , proof-p)) (gen (p , proof-p)) (Gen (q , proof-q) ^ 2) (Gen (q , proof-q) ^ 2) 
-    
+-}   
 -- using vertical composition to get the required square
 SwapCompositions1 p q proof-p proof-q proof-pq = 
     (Braid.commutativity1 (p , proof-p) (q , proof-q) proof-pq) ∙v' (Braid.commutativity1 (p , proof-p) (q , proof-q) proof-pq)
 
 
-SwapCompositions2 : {n : ℕ} → (p q : ℕ) → (proof-p : p < n) → (proof-q : q < n) → ((suc q) < p)→ 
-    Square (gen (p , proof-p)) (gen (p , proof-p)) (Gen (q , proof-q) ^ 2) (Gen (q , proof-q) ^ 2)
+SwapCompositions2 : {n : ℕ} → (p q : ℕ) 
+                            → (proof-p : p < n) → (proof-q : q < n)  -- proofs to make them Fin n
+                            → ((suc q) < p)                          -- condition for commutativity2
+                            → Square 
+                                (gen (p , proof-p)) 
+                                (gen (p , proof-p)) 
+                                (Gen (q , proof-q) ^ 2) 
+                                (Gen (q , proof-q) ^ 2)
+                                
 SwapCompositions2 p q proof-p proof-q proof-qp =
      (Braid.commutativity2 (p , proof-p) (q , proof-q) proof-qp) ∙v' (Braid.commutativity2 (p , proof-p) (q , proof-q) proof-qp)
 
 
 
 -- this function can swap the image of a Pure Braid generator and a single Braid group generator
-GenSwapper : {n : ℕ} → (p q r : ℕ) → (proof-p : p < (suc n)) → (proof-q : q < (suc n)) → (proof-r : r < n) → (proof-pq : p < q) → (proof-qr : q < r) →
-    Square  (gen (r , proof-r)) (gen (r , proof-r)) (GenConvertor p q proof-p proof-q proof-pq) (GenConvertor p q proof-p proof-q proof-pq)
+GenSwapper : {n : ℕ} → (p q r : ℕ) 
+                      → (proof-p : p < (suc n)) → (proof-q : q < (suc n)) -- p q are Fin (n+1) as PureBraid (n+1) has n+1 strands to match Braid n
+                      → (proof-r : r < n)                                 -- r is Fin n as Braid n has n+1 strands
+                      → (proof-pq : p < q) → (proof-qr : q < r)           -- condition for commutativity
+                      → Square  
+                            (gen (r , proof-r)) 
+                            (gen (r , proof-r)) 
+                            (GenConvertor p q proof-p proof-q proof-pq)   -- Pure Braid generator in terms of combinations of Braid generators
+                            (GenConvertor p q proof-p proof-q proof-pq)
 
 GenSwapper zero zero r proof-p proof-q proof-r proof-pq proof-qr = ⊥.rec (!<0 proof-pq)
 GenSwapper zero (suc zero) r proof-p proof-q proof-r proof-pq proof-qr i j =  SwapCompositions1 zero r (pred proof-q) proof-r proof-qr {!!} {!!}    
