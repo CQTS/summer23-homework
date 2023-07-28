@@ -16,7 +16,8 @@ open import Cubical.Data.Empty as ⊥
 open import Braid.BraidGroup
 open import Braid.PureBraid
 
-----------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 {-
     Some helpers for order relations
 -}
@@ -33,7 +34,8 @@ m-<-sucm : (m : ℕ) → m < (suc m)
 m-<-sucm zero = zero-<-suc 0
 m-<-sucm (suc m) = sucP (m-<-sucm m)
 
------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 module _ {ℓ : Level} {A : Type ℓ}
   {a₀₀ a₀₁ : A} {a₀₋ : a₀₀ ≡ a₀₁}
   {a₁₀ a₁₁ : A} {a₁₋ : a₁₀ ≡ a₁₁}
@@ -48,13 +50,24 @@ module _ {ℓ : Level} {A : Type ℓ}
   _∙v_∙v_ : (p : Square a₀₋ a₁₋ a₋₀ a₋₁) (q : Square a₁₋ a₂₋ b₋₀ b₋₁) (r : Square a₂₋ a₃₋ c₋₀ c₋₁)
        → Square a₀₋ a₃₋ (a₋₀ ∙∙ b₋₀ ∙∙ c₋₀) (a₋₁ ∙∙ b₋₁ ∙∙ c₋₁)
   (p ∙v q ∙v r) i j = ((λ i → p i j) ∙∙ (λ i → q i j) ∙∙ (λ i → r i j)) i
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 
------------------------------------------------------------------------
 
 
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+commutativity1-Inv : {n : ℕ} (p q : Fin n) → (proof-pq : suc (toℕ p) < (toℕ q) ) → Square (Braid.gen p) (Braid.gen p) (sym (Braid.gen q)) (sym (Braid.gen q))
+commutativity1-Inv p q proof-pq i j = commutativity1 p q proof-pq (~ i) j  
 
------------------------------------------------------------------------
+commutativity2-Inv : {n : ℕ} (p q : Fin n) → (proof-qp : suc (toℕ q) < (toℕ p) ) → Square (Braid.gen p) (Braid.gen p) (sym (Braid.gen q)) (sym (Braid.gen q))
+commutativity2-Inv p q proof-qp i j = commutativity2 p q proof-qp (~ i) j  
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 
+
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 Gen_^_ : {n : ℕ} (p : Fin n) (k : ℕ)  → Path (Braid n) base base -- composes a generator with itself k times
 Gen p ^ zero = refl
 Gen p ^ (suc zero) = gen p
@@ -64,26 +77,34 @@ Gen_^-_ : {n : ℕ} (p : Fin n) (k : ℕ)  → Path (Braid n) base base -- compo
 Gen p ^- zero = refl
 Gen p ^- (suc zero) = sym (gen p)
 Gen p ^- (suc (suc k)) = sym (gen p) ∙ (Gen p ^- (suc k))
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 
 
 
-GenHelperZero : {n : ℕ} (q : ℕ) → (q < (suc n)) → Path (Braid n) base base
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 {-
+                                            CONVERTING PURE BRAID GENERATOR Apq 
+                                            TO ITS REPRESENTATIONS AS COMBINATIONS
+                                            OF BRAID GENERATORS σₖ
+                                            
+-}
 
+{-
 when p = 0 i.e A₀ₖ 
 q and p are Fin (suc n) so that Pure Braid has n + 1 strands to match Braid n
-
-
-3 base cases
 -}
+GenHelperZero : {n : ℕ} (q : ℕ) → (q < (suc n)) → Path (Braid n) base base
+
 GenHelperZero zero proof-q = refl
 GenHelperZero (suc zero) proof-q = gen (zero , pred proof-q) ∙ gen( zero , pred proof-q)
-GenHelperZero (suc (suc q)) proof-q = gen (suc q , pred proof-q) ∙∙ GenHelperZero (suc q ) (presuc proof-q) ∙∙ (sym (gen (suc q , pred proof-q)))
+GenHelperZero (suc (suc q)) proof-q = gen (suc q , pred proof-q) 
+                                        ∙∙ GenHelperZero (suc q ) (presuc proof-q) 
+                                        ∙∙ (sym (gen (suc q , pred proof-q)))
 
 
 GenConvertor : {n : ℕ}  →  (p q : ℕ) → (p < (suc n)) → (q < (suc n)) → (p < q) → Path (Braid n) base base
-
--- 3 base cases
 
 GenConvertor zero q proof-p proof-q proof-pq = GenHelperZero q proof-q
 GenConvertor (suc p) zero proof-p proof-q proof-pq = ⊥.rec (!<0 proof-pq)
@@ -91,17 +112,17 @@ GenConvertor (suc p) zero proof-p proof-q proof-pq = ⊥.rec (!<0 proof-pq)
 GenConvertor {zero} (suc p) (suc q) proof-p proof-q proof-pq = ⊥.rec (!<0 (pred proof-q))
 GenConvertor {n = suc n} (suc p) (suc q) proof-p proof-q proof-pq i = 
     addGen {n = n} (GenConvertor {n = n} p q (pred proof-p) (pred proof-q) (pred proof-pq) i)
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 
 
-SwapCompositions1 : {n : ℕ} → (p q : ℕ)
-                            → (proof-p : p < n) → (proof-q : q < n) --proofs to make them Fin n
-                            → ((suc p) < q) -- condition for commutativity 1
-                            → Square 
-                                (gen (p , proof-p)) 
-                                (gen (p , proof-p))
-                                (Gen (q , proof-q) ^ 2)
-                                (Gen (q , proof-q) ^ 2) 
-    
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+
+
  {-
    
                    σⱼ                                σⱼ²
@@ -112,6 +133,17 @@ SwapCompositions1 : {n : ℕ} → (p q : ℕ)
                b — — — > b                       b - - - > b    
                   σⱼ                                 σⱼ²
 -}   
+
+SwapCompositions1 : {n : ℕ} → (p q : ℕ)
+                            → (proof-p : p < n) → (proof-q : q < n) --proofs to make them Fin n
+                            → ((suc p) < q) -- condition for commutativity 1
+                            → Square 
+                                (gen (p , proof-p)) 
+                                (gen (p , proof-p))
+                                (Gen (q , proof-q) ^ 2)
+                                (Gen (q , proof-q) ^ 2) 
+    
+
 -- using vertical composition to get the required square
 SwapCompositions1 p q proof-p proof-q proof-pq = 
     (Braid.commutativity1 (p , proof-p) (q , proof-q) proof-pq) ∙v (Braid.commutativity1 (p , proof-p) (q , proof-q) proof-pq)
@@ -131,17 +163,13 @@ SwapCompositions2 p q proof-p proof-q proof-qp =
      (Braid.commutativity2 (p , proof-p) (q , proof-q) proof-qp) ∙v (Braid.commutativity2 (p , proof-p) (q , proof-q) proof-qp)
 
 
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 
 
 
-
-commutativity1-Inv : {n : ℕ} (p q : Fin n) → (proof-pq : suc (toℕ p) < (toℕ q) ) → Square (Braid.gen p) (Braid.gen p) (sym (Braid.gen q)) (sym (Braid.gen q))
-commutativity1-Inv p q proof-pq i j = commutativity1 p q proof-pq (~ i) j  
-
-commutativity2-Inv : {n : ℕ} (p q : Fin n) → (proof-qp : suc (toℕ q) < (toℕ p) ) → Square (Braid.gen p) (Braid.gen p) (sym (Braid.gen q)) (sym (Braid.gen q))
-commutativity2-Inv p q proof-qp i j = commutativity2 p q proof-qp (~ i) j  
-
-
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 -- Base case for gen swapper when p in Apq is zero.
 GenSwapperZero : {n : ℕ} → (q r : ℕ) 
                             → (proof-q : q < (suc n)) -- p q are Fin (n+1) as PureBraid (n+1) has n+1 strands to match Braid n
@@ -176,10 +204,12 @@ GenSwapper zero q r proof-p proof-q proof-r proof-pq proof-qr = GenSwapperZero q
 GenSwapper (suc p) zero r proof-p proof-q proof-r proof-pq proof-qr = ⊥.rec (!<0 proof-pq)
 GenSwapper {n = zero} (suc p) (suc q) r proof-p proof-q proof-r proof-pq proof-qr = ⊥.rec (!<0 proof-r)
 
--- GenSwapper {n = suc n} (suc p) (suc q) 0 proof-p proof-q proof-r proof-pq proof-qr = ⊥.rec (!<0 proof-qr)
--- GenSwapper {n = suc n} (suc p) (suc q) (suc zero) proof-p proof-q proof-r proof-pq proof-qr = ⊥.rec (!<0 (pred proof-qr))
+GenSwapper {n = suc n} (suc p) (suc q) 0 proof-p proof-q proof-r proof-pq proof-qr = ⊥.rec (!<0 proof-qr)
+GenSwapper {n = suc n} (suc p) (suc q) (suc zero) proof-p proof-q proof-r proof-pq proof-qr = ⊥.rec (!<0 (pred proof-qr))
 
-GenSwapper {n = suc n} (suc p) (suc q) r proof-p proof-q proof-r proof-pq proof-qr = {! x  !}
+GenSwapper {n = suc n} (suc p) (suc q) (suc (suc r)) proof-p proof-q proof-r proof-pq proof-qr i j  = {!   !}
+
+
 {-
 addGen {n = n} (GenSwapper {n = n} (p) (q) ((suc r)) (pred proof-p ) (pred proof-q ) (pred proof-r ) (pred proof-pq)  (pred proof-qr)  i j)
  gen (suc (suc r) , proof-r) j
@@ -188,35 +218,36 @@ addGen
    (pred proof-r) (pred proof-pq) (pred proof-qr) i1 j)
 
 -}
-
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 
 
 
 -- r < s < p < q
 
-Commutativity1Zero : {n : ℕ} → (p q s : ℕ) -- r is zero 
-                    → (p < (suc n)) → (q < (suc n)) → (s < (suc n))   -- proofs to make them fin n
-                    → (p < q)           -- since we use only one presentation of a generator
-                    → (s < p)           -- condition for commutativity 1
-                    → (Path (Braid n) base base)
+-- Commutativity1Zero : {n : ℕ} → (p q s : ℕ) -- r is zero 
+--                     → (p < (suc n)) → (q < (suc n)) → (s < (suc n))   -- proofs to make them fin n
+--                     → (p < q)           -- since we use only one presentation of a generator
+--                     → (s < p)           -- condition for commutativity 1
+--                     → (Path (Braid n) base base)
 
-Commutativity1Zero p q zero proof-p proof-q proof-s proof-pq proof-sp = GenConvertor  p q proof-p proof-q proof-pq -- A rs does not exist so
+-- Commutativity1Zero p q zero proof-p proof-q proof-s proof-pq proof-sp = GenConvertor  p q proof-p proof-q proof-pq -- A rs does not exist so
 
-Commutativity1Zero {n = n} zero zero (suc s) proof-p proof-q proof-s proof-pq proof-sp = ⊥.rec (!<0 proof-sp) -- these cases cannot exist as s < p but not if p = 0
-Commutativity1Zero {n = n} zero (suc q) (suc s) proof-p proof-q proof-s proof-pq proof-sp = ⊥.rec (!<0 proof-sp)
-Commutativity1Zero {n = n} (suc p) zero (suc s) proof-p proof-q proof-s proof-pq proof-sp = ⊥.rec (!<0 proof-pq)
+-- Commutativity1Zero {n = n} zero zero (suc s) proof-p proof-q proof-s proof-pq proof-sp = ⊥.rec (!<0 proof-sp) -- these cases cannot exist as s < p but not if p = 0
+-- Commutativity1Zero {n = n} zero (suc q) (suc s) proof-p proof-q proof-s proof-pq proof-sp = ⊥.rec (!<0 proof-sp)
+-- Commutativity1Zero {n = n} (suc p) zero (suc s) proof-p proof-q proof-s proof-pq proof-sp = ⊥.rec (!<0 proof-pq)
 
 
-Commutativity1Zero (suc p) (suc q) (suc zero) proof-p proof-q proof-s proof-pq proof-sp = {!   !}
+-- Commutativity1Zero (suc p) (suc q) (suc zero) proof-p proof-q proof-s proof-pq proof-sp = {!   !}
 
-Commutativity1Zero (suc p) (suc q) (suc (suc s)) proof-p proof-q proof-s proof-pq proof-sp x = {!   !}
+-- Commutativity1Zero (suc p) (suc q) (suc (suc s)) proof-p proof-q proof-s proof-pq proof-sp x = {!   !}
 
-Commutativity1Helper : {n : ℕ}  →  (p q r s : ℕ) 
-                      → (p < n) → (q < n) → (r < n) → (s < n) -- proofs to make them fin n
-                      → (p < q) → (r < s)                     -- since we use only one presentation of a generator
-                      → (s < p)                               -- condition for commutativity 1
-                      → (Path (Braid n) base base)
-Commutativity1Helper = {!   !}
+-- Commutativity1Helper : {n : ℕ}  →  (p q r s : ℕ) 
+--                       → (p < n) → (q < n) → (r < n) → (s < n) -- proofs to make them fin n
+--                       → (p < q) → (r < s)                     -- since we use only one presentation of a generator
+--                       → (s < p)                               -- condition for commutativity 1
+--                       → (Path (Braid n) base base)
+-- Commutativity1Helper = {!   !}
 
 -- A₁₃  = σ₂ σ₁² σ₂⁻¹   A₁₃ . A₄₅ =  σ₂ σ₁² σ₂⁻¹ . σ₄ σ₄
 -- A₄₅  = σ₄ σ₄         A₄₅ . A₁₃ =  σ₄ σ₄ . σ₂ σ₁² σ₂⁻¹
@@ -224,17 +255,17 @@ Commutativity1Helper = {!   !}
 
 
 
-PBraid≤Braid : {n : ℕ} (b : BPureBraid (suc n)) → Braid n
-PBraid≤Braid base = base
-PBraid≤Braid (gen p q proof-pq i) = GenConvertor (fst p) (fst q) (snd p) (snd q) proof-pq i
-PBraid≤Braid (twoGencommutativity1 p q r s proof-rs proof-sp proof-pq i j) = {!   !}
-PBraid≤Braid (twoGencommutativity2 p q r s proof-pr proof-rs proof-sq proof-pq i j) = {!   !}
-PBraid≤Braid (threeGenCommutativityConnector r p q proof-rp proof-pq proof-rq i) = {!   !}
-PBraid≤Braid (threeGenCommutativityLeft r p q proof-rp proof-pq proof-rq i j) = {!   !}
-PBraid≤Braid (threeGenCommutativityMiddle r p q proof-rp proof-pq proof-rq i j) = {!   !}
-PBraid≤Braid (threeGenCommutativityRight r p q proof-rp proof-pq proof-rq i j) = {!   !}
-PBraid≤Braid (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq proof-rq proof-pq i) = {!   !}
-PBraid≤Braid (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq proof-rq proof-pq i j) = {!   !}
-PBraid≤Braid (fourGenCommutativity r p s q proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = {!   !}
+-- PBraid≤Braid : {n : ℕ} (b : BPureBraid (suc n)) → Braid n
+-- PBraid≤Braid base = base
+-- PBraid≤Braid (gen p q proof-pq i) = GenConvertor (fst p) (fst q) (snd p) (snd q) proof-pq i
+-- PBraid≤Braid (twoGencommutativity1 p q r s proof-rs proof-sp proof-pq i j) = {!   !}
+-- PBraid≤Braid (twoGencommutativity2 p q r s proof-pr proof-rs proof-sq proof-pq i j) = {!   !}
+-- PBraid≤Braid (threeGenCommutativityConnector r p q proof-rp proof-pq proof-rq i) = {!   !}
+-- PBraid≤Braid (threeGenCommutativityLeft r p q proof-rp proof-pq proof-rq i j) = {!   !}
+-- PBraid≤Braid (threeGenCommutativityMiddle r p q proof-rp proof-pq proof-rq i j) = {!   !}
+-- PBraid≤Braid (threeGenCommutativityRight r p q proof-rp proof-pq proof-rq i j) = {!   !}
+-- PBraid≤Braid (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq proof-rq proof-pq i) = {!   !}
+-- PBraid≤Braid (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq proof-rq proof-pq i j) = {!   !}
+-- PBraid≤Braid (fourGenCommutativity r p s q proof-rp proof-ps proof-sq proof-rs proof-rq proof-pq i j) = {!   !}
  
  
