@@ -34,6 +34,26 @@ m-<-sucm zero = zero-<-suc 0
 m-<-sucm (suc m) = sucP (m-<-sucm m)
 
 -----------------------------------------------------------------------
+module _ {ℓ : Level} {A : Type ℓ}
+  {a₀₀ a₀₁ : A} {a₀₋ : a₀₀ ≡ a₀₁}
+  {a₁₀ a₁₁ : A} {a₁₋ : a₁₀ ≡ a₁₁}
+  {a₂₀ a₂₁ : A} {a₂₋ : a₂₀ ≡ a₂₁}
+  {a₃₀ a₃₁ : A} {a₃₋ : a₃₀ ≡ a₃₁}
+  {a₋₀ : a₀₀ ≡ a₁₀} {a₋₁ : a₀₁ ≡ a₁₁}
+  {b₋₀ : a₁₀ ≡ a₂₀} {b₋₁ : a₁₁ ≡ a₂₁}
+  {c₋₀ : a₂₀ ≡ a₃₀} {c₋₁ : a₂₁ ≡ a₃₁}
+
+  where
+-- "Threeway "Pointwise" composition
+  _∙v_∙v_ : (p : Square a₀₋ a₁₋ a₋₀ a₋₁) (q : Square a₁₋ a₂₋ b₋₀ b₋₁) (r : Square a₂₋ a₃₋ c₋₀ c₋₁)
+       → Square a₀₋ a₃₋ (a₋₀ ∙∙ b₋₀ ∙∙ c₋₀) (a₋₁ ∙∙ b₋₁ ∙∙ c₋₁)
+  (p ∙v q ∙v r) i j = ((λ i → p i j) ∙∙ (λ i → q i j) ∙∙ (λ i → r i j)) i
+
+-----------------------------------------------------------------------
+
+
+
+-----------------------------------------------------------------------
 
 Gen_^_ : {n : ℕ} (p : Fin n) (k : ℕ)  → Path (Braid n) base base -- composes a generator with itself k times
 Gen p ^ zero = refl
@@ -121,6 +141,8 @@ commutativity1-Inv p q proof-pq i j = commutativity1 p q proof-pq (~ i) j
 commutativity2-Inv : {n : ℕ} (p q : Fin n) → (proof-qp : suc (toℕ q) < (toℕ p) ) → Square (Braid.gen p) (Braid.gen p) (sym (Braid.gen q)) (sym (Braid.gen q))
 commutativity2-Inv p q proof-qp i j = commutativity2 p q proof-qp (~ i) j  
 
+
+-- Base case for gen swapper when p in Apq is zero.
 GenSwapperZero : {n : ℕ} → (q r : ℕ) 
                             → (proof-q : q < (suc n)) -- p q are Fin (n+1) as PureBraid (n+1) has n+1 strands to match Braid n
                             → (proof-r : r < n)                                 -- r is Fin n as Braid n has n+1 strands
@@ -132,22 +154,10 @@ GenSwapperZero : {n : ℕ} → (q r : ℕ)
                                 (GenConvertor 0 q (zero-<-suc n) proof-q proof-pq)
 GenSwapperZero zero r proof-q proof-r proof-pq proof-qr = ⊥.rec (!<0 proof-pq)
 GenSwapperZero (suc zero) r proof-q proof-r proof-pq proof-qr = SwapCompositions2 r 0 proof-r (pred proof-q) proof-qr
-GenSwapperZero (suc (suc q)) r proof-q proof-r proof-pq proof-qr i j = {!   !} --((commutativity2 (r , proof-r) (suc q , pred proof-q) proof-qr) ∙v {!  ? ∙v (commutativity2-Inv (r , proof-r) (suc q , pred proof-q) proof-qr)!})
-
-
-{-
-i = i0 ⊢ gen (r , proof-r) j
-i = i1 ⊢ gen (r , proof-r) j
-j = i0 ⊢ (gen (suc q , pred proof-q) ∙∙
-          GenHelperZero (suc q) (presuc proof-q) ∙∙
-          (λ i₁ → gen (suc q , pred proof-q) (~ i₁)))
-         i
-j = i1 ⊢ (gen (suc q , pred proof-q) ∙∙
-          GenHelperZero (suc q) (presuc proof-q) ∙∙
-          (λ i₁ → gen (suc q , pred proof-q) (~ i₁)))
-         i
--}
-
+GenSwapperZero (suc (suc q)) r proof-q proof-r proof-pq proof-qr = 
+    commutativity2 (r , proof-r) (suc q , pred proof-q) proof-qr
+    ∙v GenSwapperZero (suc q) r (presuc proof-q) proof-r (zero-<-suc q) (presuc proof-qr) 
+    ∙v (commutativity2-Inv (r , proof-r) (suc q , pred proof-q) proof-qr)
 
 
 -- this function can swap the image of a Pure Braid generator and a single Braid group generator
@@ -178,15 +188,6 @@ addGen
    (pred proof-r) (pred proof-pq) (pred proof-qr) i1 j)
 
 -}
-
--- congP {!  !} (GenSwapper {n = n} p q r (pred proof-p) (pred proof-q) (pred proof-r) (pred proof-pq) (pred proof-qr))
---cong addGen (GenSwapper {n = n} p q r (pred proof-p) (pred proof-q) (pred proof-r) (pred proof-pq) (pred proof-qr) i) {!   !}
-
-
-
-
-
-
 
 
 
