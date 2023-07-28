@@ -1,3 +1,14 @@
+
+{-
+This file used unnecessary case splits
+New copy was created without as many unneeded case splits
+-}
+
+
+
+
+
+
 {-# OPTIONS --safe #-}
 
 module Braid.Subgroup.MPureBraidtoBraid' where
@@ -29,10 +40,6 @@ sucTrans< : (r p q : ℕ) → (r < p) → (p < q) → ((suc r) < q)
 sucTrans< r p zero proof-rp proof-pq = ⊥.rec {A = (suc r) < 0} (!<0 proof-pq)
 sucTrans< r p (suc q) proof-rp proof-pq = ≤-trans (suc-≤-suc proof-rp) proof-pq
 
-p-<-suc : (n p : ℕ) → (p < (suc (suc n))) → (p < suc n)
-p-<-suc n zero proof-suc = zero-<-suc n
-
-p-<-suc n (suc p) proof-suc = {!   !}
 -----------------------------------------------------------------------
 
 

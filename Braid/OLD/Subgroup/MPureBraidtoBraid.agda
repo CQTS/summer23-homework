@@ -1,3 +1,20 @@
+{-
+
+Changed working definition of pure braid to one with constraints to avoid 
+using trichotomy. This one uses trichotomy, so it was abandoned.
+
+
+
+
+-}
+
+
+
+
+
+
+
+
 {-# OPTIONS --safe #-}
 
 module Braid.Subgroup.MPureBraidtoBraid where
