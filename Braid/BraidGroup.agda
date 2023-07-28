@@ -7,7 +7,7 @@ open import Cubical.Core.Primitives
 open import Cubical.Foundations.Prelude 
 open import Cubical.Data.Nat.Base hiding (_·_)
 open import Cubical.Data.Fin.Base 
-open import Cubical.Data.Nat.Order 
+open import Cubical.Data.Nat.Order renaming (suc-≤-suc to sucP)
 open import Cubical.Data.Int hiding (_+_ ; _·_)
 open import Cubical.Data.Sigma
 
@@ -63,13 +63,13 @@ data Braid (n : ℕ) : Type where
 
 addGen : {n : ℕ} (b : Braid n) → Braid (suc n)
 addGen base = base
-addGen (gen (m , proof) i) = gen (m , ≤-suc proof) i
-addGen (commutativity1 p q proof-pq i j) = commutativity1 (toℕ p , ≤-suc (snd p)) (toℕ q , ≤-suc (snd q)) proof-pq i j
-addGen (commutativity2 p q proof-qp i j) = commutativity2 (toℕ p , ≤-suc (snd p)) (toℕ q , ≤-suc (snd q)) proof-qp i j
+addGen (gen p i) = gen (fsuc p) i -- add generator to zero-th position and shift up
+addGen (commutativity1 p q proof-pq i j) =  commutativity1 (fsuc p) (fsuc q) (sucP proof-pq) i j
+addGen (commutativity2 p q proof-qp i j) =  commutativity2 (fsuc p) (fsuc q) (sucP proof-qp) i j 
 
-addGen (pullThroughMid k constraint i) = pullThroughMid (toℕ k , ≤-suc (snd k)) (≤-suc constraint) i
-addGen (pullThroughTop k proof i j) = pullThroughTop ( toℕ k , ≤-suc (snd k)) (≤-suc proof) i j
-addGen (pullThroughBottom k proof i j) = pullThroughBottom ( toℕ k , ≤-suc (snd k)) (≤-suc proof) i j
+addGen (pullThroughMid k constraint i) =  pullThroughMid (fsuc k) (sucP constraint) i 
+addGen (pullThroughTop k proof i j) =  pullThroughTop (fsuc k) (sucP proof) i j 
+addGen (pullThroughBottom k proof i j) =  pullThroughBottom (fsuc k) (sucP proof) i j 
 
 
 
