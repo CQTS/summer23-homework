@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 
 
-module Braid.PureBraidAlt' where
+module Braid.OLD.PureBraidDefinitions.PureBraidAlt' where
 
 open import Cubical.Core.Primitives
 open import Cubical.Foundations.Prelude

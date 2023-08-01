@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module Braid.PureBraid where
+module Braid.OLD.PureBraidDefinitions.PureBraid where
 open import Cubical.Foundations.Prelude
 open import Cubical.Data.Nat.Base
 open import Cubical.Data.Fin.Base

@@ -1,5 +1,5 @@
 {-# OPTIONS --safe #-}
-module Braid.PureBraid where
+module Braid.OLD.PureBraidBAK where
 open import Cubical.Foundations.Prelude
 open import Cubical.Data.Nat.Base
 open import Cubical.Data.Fin.Base
@@ -13,8 +13,8 @@ open import Cubical.Data.Empty as ⊥
 
 
 
-data BPureBraid (n : ℕ) :  Type where -- the space whose loops are the pure braid group of n strands
-  base : BPureBraid n
+data BPureBraid' (n : ℕ) :  Type where -- the space whose loops are the pure braid group of n strands
+  base : BPureBraid' n
   gen  : (p q : Fin n)  → base ≡ base
   identity : (p : Fin n) → Square (gen p p) refl refl refl
   genEquality : (p q : Fin n) → Square (gen p q) (gen q p) refl refl
@@ -72,7 +72,7 @@ data BPureBraid (n : ℕ) :  Type where -- the space whose loops are the pure br
                                                                                                                                       (fourGenCommutativityConnector r p s q proof-rp proof-ps proof-sq)
 
 
-addStrand : {n : ℕ} (b : BPureBraid n) → BPureBraid (suc n)
+addStrand : {n : ℕ} (b : BPureBraid' n) → BPureBraid' (suc n)
 
 addStrand base = base
 addStrand (gen p q i) = gen (fsuc p) (fsuc q) i
@@ -92,7 +92,7 @@ addStrand (fourGenCommutativityComposition r p s q proof-rp proof-ps proof-sq i 
 addStrand (fourGenCommutativity r p s q proof-rp proof-ps proof-sq i j) = fourGenCommutativity (fsuc r ) (fsuc p) (fsuc s) (fsuc q) (sucP proof-rp) (sucP proof-ps) (sucP proof-sq) i j
 
 
-delStrand : {n : ℕ} (b : BPureBraid (suc n)) → BPureBraid n
+delStrand : {n : ℕ} (b : BPureBraid' (suc n)) → BPureBraid' n
 
 --base always goes to base
 delStrand base = base
