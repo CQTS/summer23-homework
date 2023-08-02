@@ -54,7 +54,6 @@ data Braid (n : ℕ) : Type where
                    σ­ᵢ
                                                  
     -}
-
     -- p means k ≤ n - 2
     pullThroughMid : (k : Fin n ) → (constraint : (toℕ k + 1) < n ) → base ≡ base
     pullThroughTop : (k : Fin n) → (constraint : (toℕ k + 1) < n ) → Square (gen k) (gen k) (pullThroughMid k constraint) (gen (toℕ k + 1 , constraint))
