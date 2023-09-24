@@ -30,15 +30,18 @@ propositions --- specifically, the proposition that `x` equals `y`.
 ```
 isSetBool : (x y : Bool) → isProp (x ≡ y)
 isSetBool x y =
-  let ≡BoolPath≡ = sym $ isoToPath (≡Iso≡Bool x y)
-  in subst isProp ≡BoolPath≡ (isProp-≡Bool x y)
+  let 
+    f = Iso.fun (≡Iso≡Bool x y)
+    g = Iso.inv (≡Iso≡Bool x y)
+    r = Iso.leftInv (≡Iso≡Bool x y)
+  in isPropRetract f g r (isProp-≡Bool x y)
 
 isSetℕ : (x y : ℕ) → isProp (x ≡ y)
 isSetℕ x y =
   let ≡ℕPath≡ = sym $ isoToPath (≡Iso≡ℕ x y)
   in subst isProp ≡ℕPath≡ (isProp-≡ℕ x y)
 ```
-
+ 
 We will call a type `A` for which `x ≡ y` is a proposition for any `x`
 and `y : A` a *set*, with the idea that a set is a type where
 identifying two elements (via paths) is a proposition --- namely, the
@@ -56,7 +59,7 @@ properties we showed for propositions.
 The type `⊤` is a one-element set, and the empty type `∅` is a set.
 ```
 isSet⊤ : isSet ⊤
-isSet⊤ x y = isContr→isProp $ isContrisContr≡ isContr⊤ x y
+isSet⊤ x y = isContr→isProp (isContrisContr≡ isContr⊤ x y)
 
 isSet∅ : isSet ∅
 isSet∅ ()
@@ -91,8 +94,8 @@ Hint: Here is the cube we want to fill.
             /   |               /   |
           /     | refl        /     |
         a - - - - - - - - > a       |
-        ^       |           ^       |                    ^   j
-        |       |           |       |                  k | /
+        ^       |           ^       |  p                 ^   j
+        |       | p         |       |                  k | /
         |       |           |       |                    ∙ — >
         |       |           |       |                      i
         |       a - - - - - | - - > a
@@ -111,6 +114,17 @@ isProp→isSet-faces h a b p q i j k (j = i1) = h a b k
 isProp→isSet : isProp A → isSet A
 -- Exercise
 isProp→isSet h a b p q i j = hcomp (isProp→isSet-faces h a b p q i j) a
+
+isProp→isSet' : isProp A → isSet A
+isProp→isSet' h a b =
+
+  let 
+    isContrA = Prop-with-point-isContr h a
+    isContra≡b = isContrisContr≡ isContrA a b
+  in isContr→isProp isContra≡b
+
+-- _ : isProp→isSet → isProp→isSet'
+-- _ = refl  
 ```
 
 We can use the fact that propositions are closed under retract to
@@ -255,8 +269,12 @@ compIso {A = A} {C = C} i j = iso fun inv rightInv leftInv
   leftInv : retract fun inv
   leftInv a = cong (Iso.inv i) (Iso.leftInv j (Iso.fun i a)) ∙ Iso.leftInv i a
 
+
+
 invIso : Iso A B → Iso B A
 invIso f = iso (Iso.inv f) (Iso.fun f) (Iso.leftInv f) (Iso.rightInv f)
+
+
 
 ΣPathTransport :{B : A → Type ℓ'} (a b : Σ A B) → Type _
 ΣPathTransport {B = B} a b =
@@ -334,7 +352,6 @@ not-Path = isoToPath not-Iso
   where bad-Path : refl ≡ not-Path
         bad-Path = s Bool Bool refl not-Path
 ```
-
 We can also define higher inductive types which are not sets. This
 type is called the "circle" (written by topologists as $S¹$), since it
 contains a point `base` and a path `loop` which goes from `base` to
@@ -344,6 +361,48 @@ contains a point `base` and a path `loop` which goes from `base` to
 data S¹ : Type where
   base : S¹
   loop : base ≡ base
+
+data Bouquet (A : Type ℓ) : Type ℓ where
+  pot : Bouquet A 
+  bulb : (a : A) → Bouquet A
+  stem : (a : A) → pot ≡ bulb a 
+  flower : (a : A) → bulb a ≡ bulb a
+
+ΩBouquet : (A : Type ℓ) → Type ℓ
+ΩBouquet A = (pot {A = A} ≡ pot)
+
+
+data InvList (A : Type ℓ) : Type ℓ where 
+  ε : InvList A
+  _:·:_ : (a : A) → InvList A → InvList A
+  _⁻¹:·:_ : (a : A) → InvList A → InvList A 
+  section-law : (a : A) (L : InvList A) → (a :·: (a ⁻¹:·: L)) ≡ L -- section-law a : section (a :·:_) (a ⁻¹:·:_)
+  retract-law : (a : A) (L : InvList A) → (a ⁻¹:·: (a :·: L)) ≡ L -- retract-law a : retract (a :·:_) (a ⁻¹:·:_)
+  is-set : isSet (InvList A)
+
+
+_+++_ : {A : Type ℓ} → InvList A → InvList A → InvList A
+
+ε +++ L' = L'
+(a :·: L) +++ L' = a :·: (L +++ L')
+(a ⁻¹:·: L) +++ L' = a ⁻¹:·: (L +++ L')
+section-law a L i +++ L' = section-law a (L +++ L') i
+retract-law a L i +++ L' = retract-law a (L +++ L') i
+is-set L L' p q i j +++ L'' = is-set (L +++ L'') (L' +++ L'') (λ j → p j +++ L'') (λ j → q j +++ L'') i j
+
+
+inverse : {A : Type ℓ} → InvList A → InvList A
+inverse ε = ε
+inverse (a :·: L) = (inverse L) +++ (a ⁻¹:·: ε)
+inverse (a ⁻¹:·: L) = (inverse L) +++ (a :·: ε)
+inverse (section-law a L i) = {!   !}
+inverse (retract-law a L i) = {!   !}
+inverse (is-set L L₁ x y i j) = {!   !}
+
+
+-- using encode - decode
+one-of-our-theorems : ( A : Type ℓ) → Iso (ΩBouquet A) (InvList A)
+one-of-our-theorems = {!   !}
 ```
 
 To show that `S¹` is not a set, we can define its "double cover" - a
@@ -361,3 +420,4 @@ double-cover (loop i) = isoToPath not-Iso i
 ¬isSet-S¹ p = true≢false (λ i → subst double-cover (uhoh i) true)
   where uhoh = p base base refl loop
 ```
+  

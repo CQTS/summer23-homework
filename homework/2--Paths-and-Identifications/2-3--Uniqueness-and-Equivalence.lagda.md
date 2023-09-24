@@ -1,10 +1,10 @@
-# Homework 2-3: Uniqueness and Equivalence
+-# Homework 2-3: Uniqueness and Equivalence
 ```
 module homework.2--Paths-and-Identifications.2-3--Uniqueness-and-Equivalence where
 
 open import Cubical.Core.Primitives
 
-open import Cubical.Foundations.Function using (idfun; _∘_; const)
+open import Cubical.Foundations.Function using (idfun; _∘_; const; _$_)
 open import Cubical.Data.Sigma.Base using (_×_)
 
 open import homework.1--Type-Theory.1-2--Inductive-Types
@@ -78,11 +78,11 @@ complete the definition.
 
 Super Hint: It's exactly the connection square
              p
-         y - - - > y
+         a - - - > x
          ^         ^
     refl |         | p            ^
          |         |            j |
-         x — — — > y              ∙ — >
+         a — — — > a              ∙ — >
             refl                    i
 -}
 isContrSingl : (a : A) → isContr (singl a)
@@ -90,7 +90,16 @@ isContrSingl : (a : A) → isContr (singl a)
 isContrSingl a = (a , refl) , contract
   where
     contract : (y : singl a) → (a , refl) ≡ y
-    contract (x , p) = {!!}
+    contract (x , p) i = p i , λ j → connection∧ p i j
+
+
+J' : {a : A} ( motive : singl a → Type ℓ)
+     (r : motive (a , refl))
+     -----------------------
+   → (x : singl a) → motive x   
+
+J' {a = a} motive r x = subst motive (contraction (isContrSingl a) x) r
+
 ```
 
 We show that our type `⊤`, which was defined to have only a single
@@ -99,7 +108,10 @@ element `tt : ⊤`, is contractible.
 ```
 isContr⊤ : isContr ⊤
 -- Exercise
-isContr⊤ = {!!}
+isContr⊤ = tt , contract
+  where
+    contract : (y : ⊤) → tt ≡ y
+    contract tt = refl
 ```
 
 Any two contractible types are isomorphic. As a corollary, any
@@ -109,7 +121,15 @@ contractible type is isomorphic to `⊤`.
 isContr→Iso : {A : Type ℓ} {B : Type ℓ'} → isContr A → isContr B → Iso A B
 -- Exercise
 -- isContr→Iso c c' = ?
-isContr→Iso c c' = {!!}
+isContr→Iso c c' = iso (λ a → center c') (λ b → center c) s r
+  where
+
+    s : section (λ a → center c') (λ b → center c)
+    s b = contraction c' b
+
+    r : retract (λ a → center c') (λ b → center c)
+    r a = contraction c a
+
 
 isContrIso⊤ : {A : Type}  → isContr A → Iso A ⊤
 isContrIso⊤ c = isContr→Iso c isContr⊤
@@ -121,7 +141,8 @@ then it is contractible.
 ```
 iso⊤IsContr : {A : Type ℓ} → Iso A ⊤ → isContr A
 -- Exercise
-iso⊤IsContr the-iso = {!!}
+-- iso⊤IsContr the-iso = g tt , λ y i → {! s  !}
+iso⊤IsContr the-iso = g tt , λ y → trans (cong g (snd isContr⊤ (f y))) (r y)
   where
     f = Iso.fun the-iso
     g = Iso.inv the-iso
@@ -134,7 +155,11 @@ We can show that there is in fact a unique map from `∅` to any type.
 ```
 ∅-rec-unique : {A : Type ℓ} → isContr (∅ → A)
 -- ∅-rec-unique = ?
-∅-rec-unique = {!!}
+∅-rec-unique  = ∅-rec , λ f  → funExt (∅-recPath f)
+  where
+    ∅-recPath : (f : ∅ → A) (x : ∅) → ∅-rec x ≡ f x
+    ∅-recPath f a = ∅-rec a
+
 ```
 
 
@@ -147,8 +172,8 @@ isContrRetract
   → (v : isContr B) → isContr A
 -- Exercise
 -- Hint: You'll need transitivity of paths.
-fst (isContrRetract f g h (b , p)) = {!!} 
-snd (isContrRetract f g h (b , p)) = {!!} 
+fst (isContrRetract f g h (b , p)) = g b 
+snd (isContrRetract f g h (b , p)) = λ z  → trans (cong g (p (f z))) (h z)
 ```
 
 And we can show that if `B : A → Type` is a family of contractible types depending on `A`, then the type `(a : A) → B a` of functions is contractible.
@@ -157,8 +182,8 @@ isContrFun : ∀ {A : Type ℓ} {B : A → Type ℓ}
            → ((a : A) → isContr (B a))
            → isContr ((a : A) → B a)
 -- Exercise
-fst (isContrFun c) = {!!}
-snd (isContrFun c) f i a = {!!}
+fst (isContrFun c) = λ a → fst (c a)
+snd (isContrFun c) f i a = snd (c a) (f a) i
 ```
 
 In particular, there is a unique map `A → ⊤`.
@@ -173,6 +198,8 @@ that $f(a) = b$. We can define an analogous notion in type theory:
 isBijection : {A B : Type ℓ} (f : A → B) → Type ℓ
 isBijection {A = A} f = ∀ b → ∃! (Σ[ a ∈ A ] (f a ≡ b))
 ```
+
+
 
 As with "∃!" and "contractible", the names in type theory are taken
 from homotopy theory. Here are the usual names in type theory:
@@ -218,6 +245,41 @@ the fiber of the identity function over of point `a` is the singleton at
 choice to flip the direction of the path in the definition of
 fiber...).
 
+ 
+            refl
+         a < - - - a
+         |         |
+    refl |         | p           ^
+         v         v            j |
+         a < — — - x              ∙ — >
+            sym p                  i
+
+
+i     j 
+0      0           0
+0      1           0
+1      0           1
+1      1           0
+
+
+
+ 
+             refl
+         a - - - - > a
+         ^           ^
+  refl   |           | p     ^
+         |           |            j |
+         a - - - - > x              ∙ — >
+            p (~ i)                 i
+
+
+i     j
+0     0         1
+0     1         0
+1     0         1
+1     1         1 
+
+
 ```
 singl' : {A : Type} (a : A) → Type
 singl' {A = A} a = Σ[ x ∈ A ] (x ≡ a)
@@ -227,7 +289,17 @@ isContrSingl' : {A : Type} (a : A) → isContr (singl' a)
 isContrSingl' a = (a , refl) , contract
   where
     contract : (y : singl' a) → (a , refl) ≡ y
-    contract (x , p) i = {!!}
+    fst (contract (x , p) i) = sym p i
+    -- snd (contract (x , p) i) = λ j → (sym p ) (i ∧ ~ j)
+    snd (contract (x , p) i) j = connectionEx2 p j i
+
+isContrSingl'' : {A : Type} (a : A) → isContr (singl' a)
+-- Exercise
+isContrSingl'' a = (a , refl) , contract
+  where
+    contract : (y : singl' a) → (a , refl) ≡ y
+    fst (contract (x , p) i) = p (~ i)
+    snd (contract (x , p) i) j = p (~ i ∨ j)
 
 idIsEquiv : (A : Type) → isEquiv (idfun A)
 idIsEquiv A = λ y → isContrSingl' y
@@ -241,16 +313,22 @@ From any equivalence, we can extract an isomorphism.
 ```
 inv : {A B : Type} → A ≃ B → B → A
 inv e b = fst (center (snd e b))
+-- inv {e , is-equiv} = ?
 
 equivToIso : {A B : Type} → A ≃ B → Iso A B
 -- Exercise
 equivToIso e = iso (fst e) (inv e) (s e) (r e)
   where
     s : (e : A ≃ B) → section (fst e) (inv e)
-    s (e , is-equiv) y = {!!}
+    -- s (e , is-equiv) y = let my-path = cong e ( cong fst (is-equiv y .snd (is-equiv y .fst)))
+    --                      in trans my-path {!   !}
+
+    s (e , is-equiv) y = is-equiv y .fst .snd
+
 
     r : (e : A ≃ B) → retract (fst e) (inv e)
-    r (e , is-equiv) x i = {!!}
+    r (e , is-equiv) x i = is-equiv (e x) .snd (x , refl) i .fst
+    -- r (e , is-equiv) x = cong fst (contraction (is-equiv (e x)) (x , refl) )
 ```
 
 There is in fact a way to turn an iso into an equivalence as well, but
@@ -319,8 +397,9 @@ The graph of a function is a functional relation --- hence the name.
 ```
 isFunctionalGraph : {A B : Type ℓ} (f : A → B) → isFunctional (graph f)
 -- Exercise:
--- isFuncationalGraph f a = ?
-isFunctionalGraph f a = {!!}
+isFunctionalGraph f a = isContrSingl (f a)
+-- isFunctionalGraph f a = (f a , refl) , λ y i → (snd y i , {! !})
+
 ```
 
 On the other hand, any functional relation gives rise to a function.
@@ -329,7 +408,7 @@ isFunctional→Fun : {A B : Type ℓ} (R : Rel A B) (c : isFunctional R)
                  → A → B
 -- Exercise:
 -- isFunctional→Fun R c a = ?
-isFunctional→Fun R c a = {!!}
+isFunctional→Fun R c a = fst (fst (c a))
 ```
 
 We can show that the function we extract out of the graph of a
@@ -339,7 +418,7 @@ section-isFunctionalGraph→Fun : {A B : Type} (f : A → B)
       → isFunctional→Fun (graph f) (isFunctionalGraph f) ≡ f
 -- Exercise:v
 -- section-isFunctionalGraph→Fun f = ?
-section-isFunctionalGraph→Fun f = {!!}
+section-isFunctionalGraph→Fun f i = λ x → f x
 ```
 
 We can show that, in the other direction, we get an isomorphism
@@ -367,7 +446,8 @@ graphEquivIsOneToOne : {A B : Type} (e : A ≃ B)
                      → isOneToOne (graph (fst e))
 -- Exercise
 -- graphEquivIsOneToOne e = ?
-graphEquivIsOneToOne (e , p) = {!!}
+graphEquivIsOneToOne (e , p) = (λ a → isContrSingl (e a)) , p
 ```
 
 We can also go the other way, but we'll need a few more tools in our toolbelt.
+   

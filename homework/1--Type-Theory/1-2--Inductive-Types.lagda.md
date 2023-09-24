@@ -64,7 +64,8 @@ and `y` are `true`.
 ```
 _and_ : Bool → Bool → Bool
 -- Exercise:
-x and y = {!!}
+true and y = y
+false and y = false
 ```
 
 You don't have to split on all variables at once. Give a definition of
@@ -72,7 +73,8 @@ the logical "or" by case splitting only on the variable `x`:
 ```
 _or_ : Bool → Bool → Bool
 -- Exercise:
-x or y = {!!}
+true or y = true
+false or y = y
 ```
 
 Here is the definition of logical implication. There is a strange
@@ -83,8 +85,7 @@ if it seems unintuitive.
 
 ```
 _⇒_ : Bool → Bool → Bool
-true ⇒ true  = true
-true ⇒ false = false
+true ⇒ x  = x
 -- Here we use a "wildcard" (the underscore "_") to say that the
 -- definition we are given is valid for anything we put in that spot.
 false ⇒ _    = true
@@ -185,13 +186,21 @@ Using pattern matching, we can define the arithmetic operations on
 numbers:
 ```
 _+_ : ℕ → ℕ → ℕ
-zero    + m = m
-(suc n) + m = suc (n + m)
-
+zero + n = n
+suc (m) +  n = suc(m + n)
 _·_ : ℕ → ℕ → ℕ
 -- Exercise:
-n · m = {!!}
+zero · m = zero
+suc n · m = (n · m) + m
+
+_^_ : ℕ → ℕ → ℕ
+m ^ zero = suc zero
+m ^ suc n = (m ^ n) · m
 ```
+
+
+
+
 
 We can also define a "predecessor" operation, which partially undoes the successor suc : ℕ → ℕ. Of course, it can't fully undo it, since 0 has nowhere to go but to itself.
 ```
@@ -223,14 +232,16 @@ We can define the length of a list by recursion
 ```
 length : {A : Type} → List A → ℕ
 -- Exercise:
-length L = {!!}
+length [] = zero
+length (x :: L) = suc (length L)
 ```
 
 A natural number can be seen as a list of tally marks.
 ```
 ℕ→List⊤ : ℕ → List ⊤
 -- Exercise:
-ℕ→List⊤ n = {!!}
+ℕ→List⊤ zero = []
+ℕ→List⊤ (suc n) = tt :: ℕ→List⊤ n
 ```
 
 Together with `length : List ⊤ → ℕ`, we have a bijection between the
@@ -269,11 +280,13 @@ maps to that effect:
 ```
 Bool→⊤⊎⊤ : Bool → ⊤ ⊎ ⊤
 -- Exercise:
-Bool→⊤⊎⊤ b = {!!}
+Bool→⊤⊎⊤ true = inl tt
+Bool→⊤⊎⊤ false = inr tt
 
 ⊤⊎⊤→Bool : ⊤ ⊎ ⊤ → Bool
 -- Exercise:
-⊤⊎⊤→Bool c = {!!}
+⊤⊎⊤→Bool (inl x) = true
+⊤⊎⊤→Bool (inr x) = false
 ```
 
 Clearly, if you turned a `Bool` into an element of `⊤ ⊎ ⊤` and then
@@ -285,13 +298,15 @@ There is a sense in which ⊎ acts like an addition of types, and ∅ acts
 like zero. This addition of types satisfies the expected laws up
 to equivalence, but again we can't yet fully express that.
 ```
-∅⊎-to : ∀ {ℓ} (A : Type ℓ) → ∅ ⊎ A → A
+∅⊎-to : ∀ {ℓ} (A : Type ℓ) → (∅ ⊎ A) → (A)
 -- Exercise:
-∅⊎-to A x = {!!}
+
+∅⊎-to A (inl ())
+∅⊎-to A (inr a) = a
 
 ∅⊎-fro : ∀ {ℓ} (A : Type ℓ) → A → ∅ ⊎ A
 -- Exercise:
-∅⊎-fro A a = {!!}
+∅⊎-fro A a = inr a
 ```
 
 Now we can describe the integers. An integer is either a natural
@@ -309,12 +324,14 @@ then negated):
 ```
 ℤ→ℕ⊎ℕ : ℤ → ℕ ⊎ ℕ
 -- Exercise:
-ℤ→ℕ⊎ℕ z = {!!}
+ℤ→ℕ⊎ℕ (pos n) = inr n
+ℤ→ℕ⊎ℕ (negsuc n) = inl n
 
 
 ℕ⊎ℕ→ℤ : ℕ ⊎ ℕ → ℤ
 -- Exercise:
-ℕ⊎ℕ→ℤ z = {!!}
+ℕ⊎ℕ→ℤ (inl a) = negsuc a
+ℕ⊎ℕ→ℤ (inr b) = pos b
 ```
 
 We can define the various arithmetic operations of the
@@ -331,12 +348,18 @@ Now we can define the successor of integers which sends `z` to `z +
 ```
 sucℤ : ℤ → ℤ
 -- Exercise:
-sucℤ z = {!!}
+sucℤ (pos n) = pos(suc n)
+sucℤ (negsuc zero) = pos zero
+sucℤ (negsuc (suc n)) = negsuc (n)
 
 predℤ : ℤ → ℤ
 -- Exercise:
-predℤ z = {!!}
+predℤ (pos zero) = negsuc (zero)
+predℤ (pos (suc n)) = pos (n)
+predℤ (negsuc n) = negsuc (suc n)
 ```
+
+predℤ -1 (negsuc zero) = negsuc (suc zero) = negsuc (1) = -2
 
 Now we turn our attention to defining addition of integers. Since the
 integers are the disjoint union of two copies of the natural numbers,
@@ -346,16 +369,21 @@ these cases out.
 ```
 _+pos_ : ℤ → ℕ → ℤ
 -- Exercise:
-z +pos n = {!!}
+z +pos zero = z
+z +pos (suc n) = sucℤ (z +pos n)
 
 _+negsuc_ : ℤ → ℕ → ℤ
--- Exercise:
-z +negsuc n = {!!}
+z +negsuc zero = predℤ z
+z +negsuc (suc n) = predℤ (z +negsuc n)
+
 
 _+ℤ_ : ℤ → ℤ → ℤ
 m +ℤ pos n = m +pos n
 m +ℤ negsuc n = m +negsuc n
+
 ```
+
+negsuc (suc suc zero) + pos (suc zero) <=> -3  + 1 = -2 = negsuc (suc zero)
 
 We can negate an integer, and define the subtraction of integers in
 terms of addition and negation.
@@ -363,7 +391,9 @@ terms of addition and negation.
 ```
 -_ : ℤ → ℤ
 -- Exercise:
-- z = {!!}
+- pos zero = pos zero
+- pos (suc n) = negsuc n
+- negsuc n = pos (suc n)
 
 _-_ : ℤ → ℤ → ℤ
 m - n = m +ℤ (- n)
@@ -374,8 +404,17 @@ of integers.
 ```
 _·ℤ_ : ℤ → ℤ → ℤ
 -- Exercise:
-n ·ℤ m = {!!}
+
+--multiplicative constant zero
+pos zero ·ℤ m = pos zero
+--multiplication by -1
+negsuc zero ·ℤ m = - m
+-- (n+1) * m = m + (n * m)
+pos (suc n) ·ℤ m = pos n +ℤ ((pos n) ·ℤ m)
+-- -((n+1)+1) * m = -m - (n+1) * m
+negsuc (suc n) ·ℤ m = - m +ℤ negsuc(n) ·ℤ m
 ```
+
 
 # Extra:
 
@@ -389,3 +428,4 @@ infix  8 -_
 infixl 7 _·_ _·ℤ_
 infixl 6 _+_ _+ℤ_ _-_
 ```
+  

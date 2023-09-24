@@ -37,6 +37,8 @@ that "`P a` equals `true`". Here is a definition of the proposition
 that a number is even, defined together with the proposition that a
 number is odd:
 
+
+
 ```
 isEven : ℕ → Bool
 isOdd  : ℕ → Bool
@@ -51,11 +53,16 @@ Try writing a proposition to represent whether a natural number is
 ```
 isZero : ℕ → Bool
 -- Exercise:
--- isZero n = {!!}
 isZero zero = true
 isZero (suc n) = false
 ```
 
+```
+--filter isEven {1,2,3,4,5,6} = {2,4,6}
+filter : (A : Type) → (A → Bool) → List A → List A
+filter P L [] = []
+filter P L (x :: list) = if L x then x :: list else list
+```
 
 This way of representing propositions is most common in programming
 languages without dependent types. But there is another very powerful
@@ -80,6 +87,16 @@ Bool→Type true  = trueP
 Bool→Type false = falseP
 ```
 
+```
+isEvenType : ℕ → Type
+isEvenType n = Bool→Type (isEven n)
+
+--twoisEven : isEvenType (suc (suc zero))
+--twoisEven = {!   !}
+```
+
+```
+```
 So `Bool→Type` sends `true` to the type `⊤`, which has an element
 `tt`; under the interpretation that proofs of propositions are the
 elements of the types representing those propositions, this means we
@@ -127,11 +144,18 @@ the right, we use the corresponding operation on propostions-as-types.
 ```
 and→Type : (a b : Bool) → (Bool→Type (a and b)) iffP ((Bool→Type a) andP (Bool→Type b))
 -- Exercise:
-and→Type a b = {!!}
+and→Type true b = (λ p → tt , p) , (λ q → snd q)        ---(λ p → tt , p ) ,  snd
+and→Type false b = ∅-rec , fst
+
+ev : {A B : Type} → (A) → (A → B) → B
+ev a  = λ f → f a
+
 
 ⇒→Type : (a b : Bool) → (Bool→Type (a ⇒ b)) iffP ((Bool→Type a) impliesP (Bool→Type b))
 -- Exercise:
-⇒→Type a b = {!!}
+⇒→Type true b = (λ p → λ _ → p) , ev tt ---(const , flip apply tt)/evaluate tt
+⇒→Type false b = (λ p → ∅-rec) , λ q → tt  ---(λ _ → ∅-rec) , const tt
+
 ```
 
 Negation can be seen as a special case of implication: not P is the same as P implies false.
@@ -143,7 +167,8 @@ infix 3 ¬_  -- This is just to make ¬ go on the outside of most formulas
 
 -- Exercise
 not→Type : (a : Bool) → (Bool→Type (not a)) iffP (¬ Bool→Type a)
-not→Type a = {!!}
+not→Type true = const , ev tt
+not→Type false = (λ p → λ x → x) , const tt
 ```
 
 Now the logic of the propositions-as-types is not exactly the same as
@@ -156,12 +181,15 @@ following two implications:
 
 implies¬¬ : (P : Type) → P impliesP (¬ ¬ P)
 -- Exercise
-implies¬¬ P p = {!!}
+implies¬¬ P = λ p → λ np → np p
 
 
 ¬¬¬implies¬ : (P : Type) → (¬ ¬ ¬ P) impliesP (¬ P)
 -- Exercise
-¬¬¬implies¬ P nnnp = {!!}
+¬¬¬implies¬ P nnnp = λ p → nnnp (λ np → np p)   
+```
+
+```
 ```
 
 One way to understand the difference between `¬ ¬ P` and `P` is that
@@ -177,10 +205,14 @@ This pattern of relating logical operations to type operations
 continues with `or`, but runs into a subtle hiccup. One direction is
 straightforward:
 
+
+
 ```
 or→Type-fro : (a b : Bool) → ((Bool→Type a) ⊎ (Bool→Type b)) → Bool→Type (a or b)
 -- Exercise:
-or→Type-fro a b p = {!!}
+or→Type-fro true b p = tt
+or→Type-fro false b (inr q) = q
+
 ```
 
 In the other direction, however, we can define two *different*
@@ -188,11 +220,15 @@ functions with the same type.
 ```
 or→Type-to : (a b : Bool) →  Bool→Type (a or b) → ((Bool→Type a) ⊎ (Bool→Type b))
 -- Exercise:
-or→Type-to a b p = {!!}
+or→Type-to true b p = inl p
+or→Type-to false b p = inr p
 
 or→Type-to' : (a b : Bool) →  Bool→Type (a or b) → ((Bool→Type a) ⊎ (Bool→Type b))
 -- Exercise:
-or→Type-to' a b p = {!!}
+or→Type-to' true true p = inr p
+or→Type-to' true false p = inl p
+or→Type-to' false true p = inr p
+or→Type-to' false false p = ∅-rec p
 ```
 
 This has to do with the fact that not every type should be thought of
@@ -227,7 +263,8 @@ Bool-ind : ∀ {ℓ} {C : Bool → Type ℓ}
          → (cfalse : C false)
          → ((b : Bool) → C b)
 -- Exercise:
-Bool-ind ctrue cfalse b = {!!}
+Bool-ind ctrue cfalse true = ctrue
+Bool-ind ctrue cfalse false = cfalse
 ```
 
 `A ⊎ B` is similar. In the recursion principle, the inputs were maps
@@ -242,7 +279,8 @@ the input `a : A` or `b : B` respectively.
       → (cinr : (b : B) → C (inr b))
       → (x : A ⊎ B) → C x
 -- Exercise:
-⊎-ind cinl cinr x = {!!}
+⊎-ind cinl cinr (inl a) = cinl a
+⊎-ind cinl cinr (inr b) = cinr b
 ```
 
 `ℕ` is a little trickier. It is best to think of ordinary mathematical
@@ -261,7 +299,8 @@ If we can provide both of those things, then we get a function from
          → (csuc : (n : ℕ) → C n → C (suc n))
          → ((n : ℕ) → C n)
 -- Exercise:
-ℕ-ind czero csuc n = {!!}
+ℕ-ind czero csuc zero = czero
+ℕ-ind czero csuc (suc n) = csuc n (ℕ-ind czero csuc n)
 ```
 
 As in recursion, we don't often need to use `Bool-ind`, `⊎-ind` or
@@ -280,11 +319,14 @@ isZeroP n = Bool→Type (isZero n)
 
 evenOrOdd : (n : ℕ) → isEvenP n ⊎ isOddP n
 -- Exercise:
-evenOrOdd n = {!!}
+evenOrOdd zero = inl tt
+evenOrOdd (suc zero) = inr tt
+evenOrOdd (suc (suc n)) = evenOrOdd n
 
 zeroImpliesEven : (n : ℕ) → (isZeroP n) impliesP (isEvenP n)
 -- Exercise:
-zeroImpliesEven n = {!!}
+zeroImpliesEven zero = λ z → tt
+zeroImpliesEven (suc n) = ∅-rec -- if left side is false then the implication is true
 ```
 
 # Equality
@@ -308,20 +350,23 @@ relation on Booleans.
 ```
 ≡Bool-refl : (a : Bool) → a ≡Bool a
 -- Exercise:
-≡Bool-refl a = {!!}
+≡Bool-refl true = tt
+≡Bool-refl false = tt
 
 ≡Bool-sym : (a b : Bool)
   → a ≡Bool b
   → b ≡Bool a
 -- Exercise:
-≡Bool-sym a b p = {!!}
+≡Bool-sym true true p = tt
+≡Bool-sym false false p = tt
 
 ≡Bool-trans : (a b c : Bool)
   → a ≡Bool b
   → b ≡Bool c
   → a ≡Bool c
 -- Exercise:
-≡Bool-trans a b c p q = {!!}
+≡Bool-trans true true true p q = tt
+≡Bool-trans false false false p q = tt
 ```
 
 We can also show that all of our logical operations preserve the
@@ -332,14 +377,18 @@ not-equals : (a b : Bool)
   → a ≡Bool b
   → (not a) ≡Bool (not b)
 -- Exercise:
-not-equals a b p = {!!}
+not-equals true true p = tt
+not-equals false false p = tt
 
 and-equals : (a1 a2 b1 b2 : Bool)
   → (a1 ≡Bool a2)
   → (b1 ≡Bool b2)
   → (a1 and b1) ≡Bool (a2 and b2)
 -- Exercise:
-and-equals a1 a2 b1 b2 p q = {!!}
+and-equals true true true true p q = tt
+and-equals true true false false p q = tt
+and-equals false false true true p q = tt
+and-equals false false false false p q = tt
 ```
 
 We can similarly define equality of natural numbers.
@@ -347,7 +396,10 @@ We can similarly define equality of natural numbers.
 
 _≡ℕ_ : (n m : ℕ) → Type
 -- Exercise:
-n ≡ℕ m = {!!}
+zero ≡ℕ zero = ⊤
+zero ≡ℕ suc m = ∅
+suc n ≡ℕ zero = ∅
+suc n ≡ℕ suc m = n ≡ℕ m
 ```
 Try writing out this definition in plain language to check your
 understanding.
@@ -358,20 +410,23 @@ symmetric, and transitive relation.
 ```
 ≡ℕ-refl : (n : ℕ) → n ≡ℕ n
 -- Exercise:
-≡ℕ-refl n = {!!}
+≡ℕ-refl zero = tt
+≡ℕ-refl (suc n) = ≡ℕ-refl n
 
 ≡ℕ-sym : (n m : ℕ)
   → n ≡ℕ m
   → m ≡ℕ n
 -- Exercise:
-≡ℕ-sym n m p = {!!}
+≡ℕ-sym zero zero p = tt
+≡ℕ-sym (suc n) (suc m) p = ≡ℕ-sym (n) (m) p
 
 ≡ℕ-trans : (n m k : ℕ)
   → n ≡ℕ m
   → m ≡ℕ k
   → n ≡ℕ k
 -- Exercise:
-≡ℕ-trans n m k p q = {!!}
+≡ℕ-trans zero zero zero p q = tt
+≡ℕ-trans (suc n) (suc m) (suc k) p q = ≡ℕ-trans (n) (m) (k) p q
 ```
 
 We can also show that all of the arithmetic operations preserve the
@@ -383,7 +438,9 @@ equality.
   → m1 ≡ℕ m2
   → (n1 + m1) ≡ℕ (n2 + m2)
 -- Exercise:
-+-≡ℕ n1 n2 m1 m2 p q = {!!}
+
++-≡ℕ zero zero m1 m2 p q = q
++-≡ℕ (suc n1) (suc n2) m1 m2 p q = +-≡ℕ n1 n2 m1 m2 p q
 ```
 
 It would be quite tedious if we had to define the specific notion of
@@ -415,13 +472,19 @@ suc n ≤ℕ suc m = n ≤ℕ m
 
 ≤ℕ-refl : (n : ℕ) → n ≤ℕ n
 -- Exercise:
-≤ℕ-refl n = {!!}
+≤ℕ-refl zero = tt
+≤ℕ-refl (suc n) = ≤ℕ-refl n
 
 ≤ℕ-trans : (n m k : ℕ) (p : n ≤ℕ m) (q : m ≤ℕ k) → n ≤ℕ k
 -- Exercise:
-≤ℕ-trans n m k p q = {!!}
+≤ℕ-trans zero zero zero p q = tt  
+≤ℕ-trans zero zero (suc k) p q = tt
+≤ℕ-trans zero (suc m) (suc k) p q = tt
+≤ℕ-trans (suc n) (suc m) (suc k) p q = ≤ℕ-trans n m k p q
 
 ≤ℕ-antisym : (n m : ℕ) (p : n ≤ℕ m) (q : m ≤ℕ n) → n ≡ℕ m
 -- Exercise:
-≤ℕ-antisym n m p q = {!!}
+≤ℕ-antisym zero zero p q = tt
+≤ℕ-antisym (suc n) (suc m) p q = ≤ℕ-antisym n m p q
 ```
+       
