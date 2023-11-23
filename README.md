@@ -39,7 +39,7 @@ Install Stack from https://docs.haskellstack.org/en/stable/install_and_upgrade/
 
 Open PowerShell, and use Stack to install the correct version of Agda:
 ``` shell
-stack config set resolver nightly-2023-05-17
+stack --resolver nightly-2023-05-17 new Agda
 stack install Agda-2.6.3
 ```
 
